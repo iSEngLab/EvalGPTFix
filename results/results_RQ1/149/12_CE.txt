@@ -1,0 +1,4 @@
+res += c.comb(hw, k);
+res -= c.comb(hw - (i * w + j + 1), k);
+res -= c.comb(i * w + j, k);
+res %= M;

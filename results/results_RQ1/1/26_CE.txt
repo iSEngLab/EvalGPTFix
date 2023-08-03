@@ -1,0 +1,1 @@
+private static java.io.PrintWriter out = new java.io.PrintWriter(System.out, true);

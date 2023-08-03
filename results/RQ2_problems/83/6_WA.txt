@@ -1,0 +1,68 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException{
+        br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out = new PrintWriter(System.out);
+        String S = nextToken();
+        int R1 = -1;
+        int R2 = -1;
+        int B1 = -1;
+        int B2 = -1;
+        int N1 = -1;
+        int N2 = -1;
+        int K = -1;
+        boolean test = true;
+        for (int i = 0; i < S.length(); i++) {
+            if (S.charAt(i)=='R'){
+               if (R1==-1) R1 = i+1;
+               else R2 = i+1; 
+            }
+            if (S.charAt(i)=='B'){
+                if (B1==-1) B1 = i+1;
+                else B2 = i+1;
+            }
+            if (S.charAt(i)=='N'){
+               if (N1==-1) N1 = i+1;
+               else N2 = i+1; 
+            }
+            if (S.charAt(i)=='K'){
+                K = i+1;
+            }
+        }
+        if (B1!=-1 && B2!=-1){
+            if ((B1+B2) % 2 == 0) test = false;
+        }
+        if (R1!=-1 && R2!=-1 && K!=-1){
+            if (!(R1 < K && K < R2)) test = false;
+        }
+        if (N1!=-1 && N2!=-1 && R1!=-1 && R2!=-1){
+            if ((Math.abs(N1-R1)==1 && Math.abs(N2-R2)==1) || (Math.abs(N1-R2)==1 && Math.abs(N2-R1)==1)) test = false;
+        }
+        if (test) out.println("YES");
+        else out.println("NO");
+        out.close();
+    }
+    static BufferedReader br;
+    static PrintWriter out;
+    static StringTokenizer in = new StringTokenizer("");
+
+    public static String nextToken() throws IOException {
+        while (!in.hasMoreTokens()) {
+            in = new StringTokenizer(br.readLine());
+        }
+        return in.nextToken();
+    }
+
+    public static int nextInt() throws IOException {
+        return Integer.parseInt(nextToken());
+    }
+}
+
+input: NQNRKBBR
+
+expect: Yes
+
+actual: YES
+

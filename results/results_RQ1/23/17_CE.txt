@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.ClassCastException: java.lang.Double cannot be cast to java.lang.Integer
+	at Main.str(Main.java:39)
+	at Main.Int(Main.java:28)
+	at Main.main(Main.java:71)

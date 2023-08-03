@@ -1,0 +1,42 @@
+import java.util.*;
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int N = sc.nextInt();
+
+        String s = sc.next();
+
+        int len = s.length();
+
+        boolean good = false;
+        boolean poor = true; // fixed initialization of boolean variables
+
+        for (int i = 0; i < len; i++) {
+            char c = s.charAt(i);
+            if (c == 'o') {
+                good = true;
+            }
+            if (c == 'x') {
+                poor = false;
+            }
+        }
+
+        if (good && poor) { //fixed logical operator
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: YES
+

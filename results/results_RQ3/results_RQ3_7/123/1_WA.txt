@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        long cnt = 0;
+        while (a != b) {
+            cnt += Math.max(0, (a - 1) / b - cnt + 1); //Fixed: Changed the way cnt is updated
+            cnt += Math.max(0, (b - 1) / a - cnt + 1);
+            if (a > b) {
+                a -= (a - 1) / b * b;
+            } else {
+                b -= (b - 1) / a * a;
+            }
+        }
+        System.out.println(cnt);
+    }
+}

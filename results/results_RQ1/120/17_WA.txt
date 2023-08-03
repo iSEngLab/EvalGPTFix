@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong(); // Changed nextInt to nextLong
+        long B = sc.nextLong(); // Changed nextInt to nextLong
+        long sum = 0;
+        while (A != 0 || B != 0) { // Changed && to ||
+            if (A < B) {
+                long tmp = A;
+                A = B;
+                B = tmp;
+            }
+            if (A % B == 0) {
+                sum += A / B;
+                A = 0;
+                B = 0;
+            } else {
+                sum += A / B;
+                A = A % B;
+            }
+        }
+        System.out.println(sum);
+    }
+
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 81970925269218255
+

@@ -1,0 +1,40 @@
+public void solve() throws Exception {
+    int h=nextInt(),w=nextInt(),k=nextInt();
+    long res=0;
+
+    int hw = h * w;
+    Comb c=new Comb(hw, M);
+
+    // calculate the total combinations
+    long totalComb = c.comb(h*w,k);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+
+            // calculate the combinations for each term
+            long comb1 = totalComb;
+            long comb2 = c.comb(j*h,k);
+            long comb3 = c.comb((w-j-1)*h,k);
+            long comb4 = c.comb(i*w,k);
+            long comb5 = c.comb((h-i-1)*w,k);
+            long comb6 = c.comb(i*j,k);
+            long comb7 = c.comb(i*(w-j-1),k);
+            long comb8 = c.comb((h-i-1)*(w-j-1),k);
+            long comb9 = c.comb((h-i-1)*j,k);
+
+            // subtract or add the terms based on their position
+            if (j > 0) res -= comb2;
+            if (j < w-1) res -= comb3;
+            if (i > 0) res -= comb4;
+            if (i < h-1) res -= comb5;
+            if (i > 0 && j > 0) res += comb6;
+            if (i > 0 && j < w-1) res += comb7;
+            if (i < h-1 && j < w-1) res += comb8;
+            if (i < h-1 && j > 0) res += comb9;
+
+            res %= M;
+        }
+    }
+    long modinv = c.modinv(totalComb, M);
+    out.println(((res*modinv+M)%M));
+}

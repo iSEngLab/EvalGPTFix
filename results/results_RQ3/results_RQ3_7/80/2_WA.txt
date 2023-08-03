@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        int countO = 0;
+        int countX = 0;
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == 'o') {
+                countO++;
+            } else if (s.charAt(i) == 'x') {
+                countX++;
+            }
+        }
+        if (countO == 0 && countX > 0) {
+            System.out.println("NO");
+        } else {
+            System.out.println("YES");
+        }
+    }
+}

@@ -1,0 +1,120 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        int ans = 0;
+        if(A>B){
+            if(A==1){
+                ans += B-1;
+            }
+            else if(B==1){
+                ans += A-1;
+            }
+            else{
+                ans += A/B;
+                A = A % B;
+                while(true){
+                    if(A==B){
+                        break;
+                    }
+                    else if(A==0){
+                        ans -= 1;
+                        A=B;
+                    }
+                    else if(B==0){
+                        ans -= 1;
+                        B=A;
+                    }
+                    else{
+                        if(A ==1){
+                            ans += B-1;
+                            break;
+                        }
+                        else if(B==1){
+                            ans += A-1;
+                            break;
+                        }
+                        else if(A>B){
+                            ans += A/B;
+                            A = A % B;
+                            if(A==0){
+                                ans -= 1;
+                                A =B;
+                            }
+                        }
+                        else if(B>A){
+                            ans += B/A;
+                            B = B % A;
+                            if(B==0){
+                                ans -= 1;
+                                B=A;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else if(A<B){
+            if(A==1){
+                ans += B-1;
+            }
+            else if(B==1){
+                ans += A-1;
+            }
+            else {
+                ans += B/A;
+                B = B % A;
+                while(true){
+                    if(A==B){
+                        break;
+                    }
+                    else if(A==0){
+                        ans -= 1;
+                        A=B;
+                    }
+                    else if(B==0){
+                        ans -= 1;
+                        B=A;
+                    }
+                    else{
+                        if(A ==1){
+                            ans += B-1;
+                            break;
+                        }
+                        else if (B==1){
+                            ans += A-1;
+                            break;
+                        }
+                        else if(A>B){
+                            ans += A/B;
+                            A = A % B;
+                            if(A==0){
+                                ans -= 1;
+                                A =B;
+                            }
+                        }
+                        else if(B>A){
+                            ans += B/A;
+                            B = B % A;
+                            if(B==0){
+                                ans -= 1;
+                                B=A;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275726
+

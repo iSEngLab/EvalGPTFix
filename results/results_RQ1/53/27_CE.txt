@@ -1,0 +1,1 @@
+static ArrayList<String> nextCharArray(){return myconv(next(), 0);}

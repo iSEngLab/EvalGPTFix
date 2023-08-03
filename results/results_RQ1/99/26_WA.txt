@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		
+		String str=scan.next();
+		int []p=new int[2];
+		int []p2=new int[2];
+		
+		int cnt=0, cnt2=0, k=0;
+
+		for(int i = 0; i<str.length(); i++) {
+			if(str.charAt(i)=='B') {
+				p[cnt]=i+1;
+				cnt++;
+				if(cnt==2) break; // stop after finding first two 'B's
+			}
+		}
+		
+		for(int i = 0; i<str.length(); i++) {
+			if(str.charAt(i)=='R') {
+				p2[cnt2]=i+1;
+				cnt2++;
+				if(cnt2==2) break; // stop after finding first two 'R's
+			}
+		}
+		
+		for(int i = 0; i<str.length(); i++) {
+			if(str.charAt(i)=='K') {
+				k=i+1;
+				break; // stop after finding first 'K'
+			}
+		}
+		
+		if(cnt!=2 || cnt2!=2 || k==0) {
+			System.out.print("No"); // if any of the pieces are missing, return "No"
+			return;
+		}
+		
+		if(p[0]%2==p[1]%2) {
+			System.out.print("No");
+			return;
+		}
+		
+		if(!(p[0]< k && k< p[1])) {
+			System.out.print("No");
+			return;
+		}
+		
+		System.out.print("Yes");
+	}
+}
+
+input: NQNRKBBR
+
+expect: Yes
+
+actual: No

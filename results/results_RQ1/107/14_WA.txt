@@ -1,0 +1,66 @@
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Main {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        PrintWriter out = new PrintWriter(System.out);
+        Output op = new Output(sc, out);
+
+        long a = op.nextLong();
+        long b = op.nextLong();
+
+        int count = 0;
+        while (a >= 1 && b >= 1) {
+            if (a > b) {
+                long temp = a;
+                a = b;
+                b = temp;
+            }
+            count += b / a;
+            b %= a;
+        }
+        op.intResult(count - 1);
+    }
+}
+
+class Output {
+    private final Scanner sc;
+    private final PrintWriter out;
+
+    Output(Scanner sc, PrintWriter out) {
+        this.sc = sc;
+        this.out = out;
+    }
+
+    public void flush() {
+        this.out.flush();
+    }
+
+    public void intResult(int x) {
+        this.out.println(x);
+        this.out.flush();
+    }
+
+    public void strResult(String x) {
+        this.out.println(x);
+        this.out.flush();
+    }
+
+    public long nextLong() {
+        return sc.nextLong();
+    }
+
+    public void close() {
+        this.sc.close();
+        this.out.close();
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275726
+

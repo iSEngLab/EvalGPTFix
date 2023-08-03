@@ -1,0 +1,34 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+public class Main{
+
+    static class InputIterator{
+        ArrayList<String> inputLine = new ArrayList<>(1024);
+        int index = 0; int max; String read;
+        InputIterator(){
+            try{
+                BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+                while((read = br.readLine()) != null){
+                    inputLine.addAll(Arrays.asList(read.split(" ")));
+                }
+            }catch(IOException e){}
+            max = inputLine.size();
+            if(max == 0){
+                throw new IndexOutOfBoundsException("Input is empty");
+            }
+        }
+        boolean hasNext(){return (index < max);}
+        String next(){
+            if(hasNext()){
+                return inputLine.get(index++);
+            }else{
+                throw new IndexOutOfBoundsException("There is no more input");
+            }
+        }
+    }
+    static HashMap<Integer, String> CONVSTR = new HashMap<>();
+    static InputIterator ii = new InputIterator();
+    static PrintWriter out = new PrintWriter(System.out);
+    static void flush(){out.flush

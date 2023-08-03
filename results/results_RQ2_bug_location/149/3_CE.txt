@@ -1,0 +1,14 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        long temp = c.comb(h * w - 1, k - 1); // Total number of ways to select k cells
+        temp -= c.comb(j * h + i + (w - j - 1) * h + (h - i - 1), k - 1); // Excluding cells in the same row or column
+        temp += c.comb(j * h + i, k - 1); // Adding back cells in the same row and column
+        temp += c.comb((w - j - 1) * h + i, k - 1);
+        temp += c.comb(j * h + (h - i - 1), k - 1);
+        temp += c.comb((w - j - 1) * h + (h - i - 1), k - 1);
+        temp -= c.comb(i * w + j, k - 1); // Excluding the current cell
+        res += temp % M;
+    }
+}
+long modinv = c.modinv(c.comb(h*w,k), M);
+out.println(((res%M)*modinv)%M);

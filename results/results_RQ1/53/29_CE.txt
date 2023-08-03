@@ -1,0 +1,31 @@
+static class InputIterator {
+    ArrayList<String> inputLine = new ArrayList<>(1024);
+    int index = 0;
+    int max;
+    String read;
+    InputIterator() {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in, "UTF-8"));
+            while ((read = br.readLine()) != null) {
+                if (!read.isEmpty()) { // Ignore empty lines
+                    inputLine.addAll(Arrays.asList(read.split(" ")));
+                }
+            }
+        } catch (IOException e) {}
+        max = inputLine.size();
+    }
+    boolean hasNext() {
+        while (index < max && inputLine.get(index).isEmpty()) {
+            // Skip empty lines
+            index++;
+        }
+        return index < max;
+    }
+    String next() {
+        if (hasNext()) {
+            return inputLine.get(index++);
+        } else {
+            throw new NoSuchElementException("There is no more input");
+        }
+    }
+}

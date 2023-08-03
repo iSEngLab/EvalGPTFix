@@ -1,0 +1,27 @@
+package to.msn.wings.selflearn.chap01;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        long d = scanner.nextLong();
+        int[] t = new int[n];
+        int ans = -1;
+        for (int i = 0; i < n; i++) {
+            t[i] = scanner.nextInt();
+        }
+        Arrays.sort(t);
+        for (int i = 0; i < n-1; i++) {
+            if (t[i+1]-t[i] <= d) {
+                ans = t[i+1];
+                break;
+            }
+        }
+        System.out.println(ans);
+    }
+
+}

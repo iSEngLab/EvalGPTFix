@@ -1,0 +1,25 @@
+public static void main(String[] args) {
+    Scanner sc      = new Scanner(System.in);
+    PrintWriter out = new PrintWriter(System.out);
+    Output op       = new Output(sc, out);
+
+    long a = op.nextLong();
+    long b = op.nextLong();
+
+    int count = 0;
+    if (a == 0 || b == 0) {
+        count = (a == 0) ? b - 1 : a - 1;
+    } else {
+        while (a > 0 && b > 0) {
+            if (a > b) {
+                count += a / b;
+                a = a % b;
+            } else {
+                count += b / a;
+                b = b % a;
+            }
+        }
+        count--;
+    }
+    System.out.println(count);
+}

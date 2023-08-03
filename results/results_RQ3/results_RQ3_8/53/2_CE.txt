@@ -1,0 +1,11 @@
+import java.util.*; 
+import java.io.*; 
+import java.math.*;
+
+public class Main{
+    static class InputIterator{
+        ArrayList<String> inputLine = new ArrayList<>(1024);
+        int index = 0; int max; String read;
+        InputIterator(){
+            try{
+                BufferedReader br = new BufferedReader(new InputStreamReader(System

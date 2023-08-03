@@ -1,0 +1,17 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        long curr = 0;
+        curr += c.comb(h*w-1, k-1);  // choose k-1 cells from h*w-1 cells
+        curr -= c.comb((j+1)*h-1, k-1);  // choose k-1 cells from the left of (i,j)
+        curr -= c.comb((w-j)*h-1, k-1);  // choose k-1 cells from the right of (i,j)
+        curr -= c.comb((i+1)*w-1, k-1);  // choose k-1 cells above (i,j)
+        curr -= c.comb((h-i)*w-1, k-1);  // choose k-1 cells below (i,j)
+        curr += c.comb(i*h+j, k-1);  // choose k-1 cells in the top-left square
+        curr += c.comb(i*(w-j-1)+j, k-1);  // choose k-1 cells in the top-right square
+        curr += c.comb((h-i-1)*j+(w-j-1)*(i+1), k-1);  // choose k-1 cells in the bottom-right square
+        curr += c.comb((h-i-1)*(w-j-1)+(w-j-1)*i, k-1);  // choose k-1 cells in the bottom-left square
+        curr %= M;
+        res += curr;
+        res %= M;
+    }
+}

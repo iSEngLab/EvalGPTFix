@@ -1,0 +1,44 @@
+@SuppressWarnings("unchecked")
+static String myconv(Object list, int no){
+    StringBuilder sb = new StringBuilder("");
+    String joinString = CONVSTR.get(no);
+    if(list instanceof String[]){
+        return String.join(joinString, (String[])list);
+    }else if(list instanceof long[]){
+        long[] tmp = (long[])list;
+        if(tmp.length == 0){
+            return "";
+        }
+        sb.append(String.valueOf(tmp[0]));
+        for(int i = 1; i < tmp.length; i++){
+            sb.append(joinString).append(String.valueOf(tmp[i]));
+        }
+        return sb.toString();
+    }else if(list instanceof int[]){
+        int[] tmp = (int[])list;
+        if(tmp.length == 0){
+            return "";
+        }
+        sb.append(String.valueOf(tmp[0]));
+        for(int i = 1; i < tmp.length; i++){
+            sb.append(joinString).append(String.valueOf(tmp[i]));
+        }
+        return sb.toString();
+    }else if(list instanceof ArrayList){
+        ArrayList tmp = (ArrayList)list;
+        if(tmp.size() == 0){
+            return "";
+        }
+        if(tmp.get(0) instanceof Integer){ // If the Object inside ArrayList is an Integer
+            sb.append(((Integer) tmp.get(0)));
+        } else if (tmp.get(0) instanceof String){ // If it's a String
+            sb.append(((String) tmp.get(0)));
+        }
+        for(int i = 1; i < tmp.size(); i++){
+            sb.append(joinString).append(tmp.get(i));
+        }
+        return sb.toString();
+    }else{
+        throw new ClassCastException("Don't join");
+    }
+}

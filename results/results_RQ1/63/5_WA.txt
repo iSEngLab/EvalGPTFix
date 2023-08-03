@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        int len = s.length();
+        String ans = "NO";
+        boolean good = false; // changed from int to boolean
+        boolean poor = true; // changed from int to boolean
+        for(int i = 0; i<len; i++){
+            char c = s.charAt(i);
+            if(c=='o') {
+                good = true;
+            }
+            if(c=='x') {
+                poor = false;
+            }
+        }
+        if(good && poor) { // simplified condition statement
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: YES
+

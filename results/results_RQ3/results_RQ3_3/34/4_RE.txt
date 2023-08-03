@@ -1,0 +1,47 @@
+package onlinejudge;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.StringTokenizer;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			PrintWriter out = new PrintWriter(System.out);
+			StringBuilder sb = new StringBuilder();
+			
+			
+			StringTokenizer st1 = new StringTokenizer(br.readLine());
+			int n = Integer.parseInt(st1.nextToken());
+			int d = Integer.parseInt(st1.nextToken());
+			
+			StringTokenizer st2 = new StringTokenizer(br.readLine());
+			int[] t = new int[n];
+			for(int i = 0; i < n; i++) {
+				t[i] = Integer.parseInt(st2.nextToken());
+			}
+			
+			int ans = -1;
+			for(int i = 1; i < n; i++) {
+ 				if(t[i] - t[i - 1] <= d) {
+ 					ans = t[i];
+ 					break;
+ 				}
+ 			}
+			
+ 			sb.append(ans);
+ 			
+			out.println(sb.toString());
+			out.flush();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+}

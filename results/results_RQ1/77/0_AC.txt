@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        
+        String hyoka = sc.next();
+        boolean hasX = false;
+        boolean hasO = false;
+        for (int i = 0; i < n; i++) {
+            if (hyoka.charAt(i) == 'x') {
+                hasX = true;
+            } else if (hyoka.charAt(i) == 'o') {
+                hasO = true;
+            }
+        }
+        if (hasO && !hasX) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+
+    }
+
+}

@@ -1,0 +1,29 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine()); //Fixed by using sc.nextLine() instead of sc.next()
+        String s = sc.nextLine(); //Fixed by using sc.nextLine() instead of sc.next()
+        char[] chars = s.toCharArray(); //toString() is not needed as s is already a String
+
+        int cnt = 0;
+        boolean disabled = false;
+        for (int i = 0; i < chars.length; i++) { // Fixed the for loop condition
+            char c = chars[i];
+            if (c == 'o') {
+                cnt++;
+            }
+
+            if (c == 'x') {
+                disabled = true;
+                break;
+            }
+        }
+
+        if (!disabled && cnt > 0) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

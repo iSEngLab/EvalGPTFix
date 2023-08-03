@@ -1,0 +1,39 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean flag = false;
+
+        // checking if any 'o' is present
+        for(int i=0;i<n;++i){
+            if(s.charAt(i) == 'o') {
+                flag = true;
+                break; // stopping loop if atleast one 'o' is present
+            }
+        }
+
+        // if no 'o' is present, then Output NO 
+        if(!flag) {
+            System.out.println("No");
+            return;
+        }
+
+        // else count the number of 'x' and 'o' and find if it meets the desired condition
+        int countX = 0;
+        int countO = 0;
+        for(int i=0;i<n;++i){
+            if(s.charAt(i) == 'x'){
+                countX++;
+            } else if(s.charAt(i) == 'o'){
+                countO++;
+            }
+        }
+        if(countO >= 1 && countX <= 7-(countO-1)*3) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

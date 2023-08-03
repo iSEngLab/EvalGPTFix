@@ -1,0 +1,36 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        String s = sc.next();
+        int len = s.length();
+        boolean good = false; // fix: using boolean instead of int
+        boolean poor = true; // fix: using boolean instead of int
+
+        for (int i = 0; i < len; i++) {
+            char c = s.charAt(i);
+            if (c == 'o') {
+                good = true; // fix: assign true instead of 1
+            }
+            if (c == 'x') {
+                poor = false; // fix: assign false instead of 0
+            }
+        }
+
+        if (good && poor) { // fix: using boolean instead of int
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: YES
+

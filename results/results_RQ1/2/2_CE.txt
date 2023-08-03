@@ -1,0 +1,12 @@
+if (type == 2) {
+    long f = d.pollFirst();
+    f *= c[length-1];
+    f %= mod;
+    current -= f;
+    while(current < 0) {
+        current += mod;
+    }
+    current %= mod;
+    length -= 1; // Update the length variable
+    continue;
+}

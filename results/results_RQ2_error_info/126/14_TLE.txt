@@ -1,0 +1,51 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        
+            String[] s1 = br.readLine().split(" ");
+            long a = Long.parseLong(s1[0]);
+            long b = Long.parseLong(s1[1]);
+            int ans=0;
+            
+            while(a!=0 && b!=0) { // Fixed: Exits the loop when a or b is zero (0)
+                
+                if(a==b) { // Fixed: Checks if a and b are equal
+                    break;
+                }
+                
+                if(a<b) {
+                    long dif=b-a;
+                    ans+=(dif/a);
+                    if(dif%a==0) { // Fixed: Computes modular division
+                        ans++;
+                        b-=a;
+                        continue;
+                    }
+                    b-=((dif/a)*a);
+                } else {
+                    long dif = a-b;
+                    ans+=(dif/b);
+                    if(dif%b==0) { // Fixed: Computes modular division
+                        ans++;
+                        a-=b;
+                        continue;
+                    }
+                    a-=((dif/b)*b);
+                }
+                
+            }
+            
+            System.out.println(ans);
+        
+        
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

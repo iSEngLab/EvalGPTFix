@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        long cnt = 0;
+        long gcd = gcd(a, b);
+        a /= gcd;
+        b /= gcd;
+        while (a != 1 || b != 1) {
+            if (b > a) {
+                cnt += b / a;
+                b %= a;
+                gcd = gcd(a, b);
+            } else {
+                cnt += a / b;
+                a %= b;
+                gcd = gcd(a, b);
+            }
+            a /= gcd;
+            b /= gcd;
+        }
+        System.out.println(cnt * gcd);
+    }
+
+    static long gcd(long a, long b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+}

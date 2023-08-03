@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int x = s.indexOf('B'), y = s.indexOf('B', x + 1);
+        if((x + y) % 2 != 1) { // fixed bug by adding x and y instead of finding their mod
+            System.out.println("NO");
+            return;
+        }
+        x = s.indexOf('R');
+        y = s.indexOf('R', x + 1);
+        int z = s.indexOf('K');
+        if(x < z && z < y && (y-z)%2 != (z-x)%2){ // corrected the condition
+            System.out.println("NO"); // fixed output statement
+            return;
+        }
+        System.out.println("YES"); // fixed output statement
+    }
+}

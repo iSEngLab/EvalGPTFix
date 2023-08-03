@@ -1,0 +1,26 @@
+public void solve() throws Exception {
+        int h = nextInt(), w = nextInt(), k = nextInt();
+        long res = 0;
+
+        int hw = h * w;
+        Comb c = new Comb(hw, M);
+        long comb = c.comb(hw, k);
+
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                // combinations involving i and j
+                long waysRow = c.comb((i + 1) * w - 1 - j, k - 1);
+                long waysCol = c.comb((j + 1) * h - 1 - i, k - 1);
+                long waysRowCol = c.comb(i * w + j, k - 1);
+
+                // add to res the contribution of cell (i,j) to all rectangles
+                res += waysRow * (w - j) % M * c.comb(i * w + w - j - 1, k - 1) % M;
+                res += waysCol * (h - i) % M * c.comb(j * h + h - i - 1, k - 1) % M;
+                res += waysRowCol * (h - i) % M * (w - j) % M;
+                res %= M;
+            }
+        }
+
+        long modinv = c.modinv(comb, M);
+        out.println((res * modinv) % M);
+    }

@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter pw = new PrintWriter(System.out);
+
+        int N = Integer.parseInt(r.readLine());
+        boolean[][] A = new boolean[N][N];
+        boolean[][] B = new boolean[N][N];
+
+        try {
+            for (int i=0; i<N; i++) {
+                StringTokenizer st = new StringTokenizer(r.readLine());
+                for (int j=0; j<N; j++) {
+                    A[i][j] = st.nextToken().equals("1");
+                }
+            }
+
+            for (int i=0; i<N; i++) {
+                StringTokenizer st = new StringTokenizer(r.readLine());
+                for (int j=0; j<N; j++) {
+                    B[i][j] = st.nextToken().equals("1");
+                }
+            }
+
+            boolean[] works = new boolean[]{true, true, true, true};
+            for (int i=0; i<N; i++) {
+                for (int j=0; j<N; j++) {
+                    if (A[i][j]){
+                        if (!B[i][j]) works[0] = false;
+                        if (!B[N-j-1][i]) works[1] = false;
+                        if (!B[N-i-1][N-j-1]) works[2] = false;
+                        if (!B[j][N-i-1]) works[3] = false;
+                    }
+                }
+            }
+
+            pw.println((works[0]||works[1]||works[2]||works[3])?"YES":"NO");
+        } finally {
+            r.close();
+            pw.close();
+        }
+    }
+}
+
+input: 3
+0 1 1
+1 0 0
+0 1 0
+1 1 0
+0 0 1
+1 1 1
+
+expect: Yes
+
+actual: YES
+

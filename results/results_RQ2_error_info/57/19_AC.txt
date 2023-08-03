@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		String S = sc.next();
+
+		boolean hasGood = false; 
+		boolean hasBad = false; 
+		
+		for (int i = 0; i < S.length(); i++) { // Fixed the for loop to use S.length() instead of N
+			if (S.charAt(i) == 'o') {
+				hasGood = true; 
+			} else if (S.charAt(i) == 'x') {
+				hasBad = true; 
+			}
+		}
+		if (hasGood && !hasBad) {
+			System.out.println("Yes"); // Changed "合格" to "Yes"
+		} else {
+			System.out.println("No"); // Changed "不合格" to "No"
+		}
+	}
+}

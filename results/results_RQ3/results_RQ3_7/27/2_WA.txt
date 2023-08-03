@@ -1,0 +1,62 @@
+import java.util.*;
+
+public class Main {
+
+    private static class Pair implements Comparable<Pair> {
+        int x;
+        long score;
+
+        public Pair(int x,long score) {
+            this.x = x;
+            this.score = score;
+        }
+
+        public String toString() {
+            return "["+this.x+","+this.score+"]";
+        }
+
+        @Override
+        public int compareTo(Pair other) {
+            if(this.score > other.score) //compare scores using the ">" and "<" operators
+                return -1;
+            if(this.score < other.score)
+                return 1;
+            return this.x - other.x; //if the scores are equal, sort by x in ascending order
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        Map<Integer, Long> rows = new HashMap<>();
+        Map<Integer, Long> cols = new HashMap<>();
+        Map<Integer, Map<Integer, Integer>> val = new HashMap<>();
+        for(int i = 0; i < n; i++) {
+            int r = sc.nextInt();
+            int c = sc.nextInt();
+            int x = sc.nextInt();
+            rows.put(r, rows.getOrDefault(r, 0L) + x);
+            cols.put(c, cols.getOrDefault(c, 0L) + x);
+            Map<Integer, Integer> hm = val.getOrDefault(r, new HashMap<>());
+            hm.put(c, x);
+            val.put(r, hm);
+        }
+
+        List<Pair> lcols = new ArrayList<>();
+        for(Map.Entry<Integer, Long> entry : cols.entrySet())
+            lcols.add(new Pair(entry.getKey(), entry.getValue()));
+        Collections.sort(lcols);
+
+        long ans = lcols.get(0).score;
+        for(Map.Entry<Integer, Long> entry : rows.entrySet()) {
+            int i = 0;
+            while(i < lcols.size() && val.get(entry.getKey()).containsKey(lcols.get(i).x))
+                i++;
+            if(i > 0 && i < lcols.size()) { //check if i is inside the bounds of the list
+                ans = Math.max(ans, lcols.get(i).score + rows.get(entry.getKey()));
+            }
+        }
+        System.out.println(ans);
+    }
+}

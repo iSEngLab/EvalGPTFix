@@ -1,0 +1,39 @@
+import java.util.*;
+class Main {
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        long a = A, b = B;
+        int cnt = 0;
+        while(a!=b){
+            if(a>b){
+                long div = a/b;
+                a = a-b*div;
+                if(a==0){
+                    div += -1;
+                    cnt += div;
+                    break;
+                }
+                cnt += div;
+            }else if(a<b){
+                long div = b/a;
+                b = b-a*div;
+                if(b==0){
+                    div += -1;
+                    cnt += div;
+                    break;
+                }
+                cnt += div;
+            }
+        }
+        System.out.println(cnt + Math.abs(A-B)/a);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 737738328674239939
+

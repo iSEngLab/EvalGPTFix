@@ -1,0 +1,3 @@
+void sl(long x) {
+    printOut.println(Long.toString(x));
+}

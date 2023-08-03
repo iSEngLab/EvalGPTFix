@@ -1,0 +1,16 @@
+private static void solve() {
+    int n = ni();
+    int l = ni();
+    int r = ni();
+    int[] a = na(n);
+
+    int g = 0;
+    for (int v : a) {
+      g ^= g(v, l, r);
+    }
+    if (g == 0) {
+      System.out.println("Second");
+    } else {
+      System.out.println("First");
+    }
+  }

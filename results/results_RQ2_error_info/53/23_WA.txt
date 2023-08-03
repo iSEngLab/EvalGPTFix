@@ -1,0 +1,116 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+    static Scanner scan = new Scanner(System.in);
+    static PrintWriter out = new PrintWriter(System.out);
+
+    static void flush() {
+        out.flush();
+    }
+
+    static void myout(Object t) {
+        out.println(t);
+    }
+
+    static void myerr(Object... t) {
+        System.err.print("debug:");
+        System.err.println(Arrays.deepToString(t));
+    }
+
+    static boolean hasNext() {
+        return scan.hasNext();
+    }
+
+    static int nextInt() {
+        return scan.nextInt();
+    }
+
+    static ArrayList<Integer> nextIntArray(int size) {
+        ArrayList<Integer> ret = new ArrayList<>(size);
+        for (int i = 0; i < size; i++) {
+            ret.add(nextInt());
+        }
+        return ret;
+    }
+
+    public static void main(String[] args) {
+        solve();
+        flush();
+    }
+
+    static void solve() {
+        int N = nextInt();
+        int Q = nextInt();
+        HashSet<Integer>[] map = new HashSet[N + 1];
+        ArrayList<Integer>[] list = new ArrayList[N + 1];
+        for (int i = 1; i <= N; i++) {
+            list[i] = new ArrayList<Integer>();
+            map[i] = new HashSet<Integer>();
+        }
+        for (int i = 0; i < Q; i++) {
+            int t = nextInt();
+            if (t == 1) {
+                int V = nextInt();
+                int U = nextInt();
+                map[V].add(U);
+                list[U].add(V);
+            } else if (t == 2) {
+                int V = nextInt();
+                ArrayList<Integer> output = list[V];
+                Collections.sort(output);
+                for (int j = 0; j < output.size(); j++) {
+                    if (j > 0) {
+                        myout(" " + output.get(j));
+                    } else {
+                        myout(output.get(j));
+                    }
+                }
+                myout("");
+            } else {
+                int V = nextInt();
+                ArrayList<Integer> output = new ArrayList<>(map[V]);
+                Collections.sort(output);
+                for (int j = 0; j < output.size(); j++) {
+                    if (j > 0) {
+                        myout(" " + output.get(j));
+                    } else {
+                        myout(output.get(j));
+                    }
+                }
+                myout("");
+            }
+        }
+    }
+}
+
+input: 5
+8
+1 1 1
+1 2 4
+1 1 4
+2 4
+1 1 4
+2 4
+3 1
+3 2
+
+expect: 1 2
+1 1 2
+1 4
+4
+
+actual: 1
+ 2
+
+1
+ 1
+ 2
+
+1
+ 4
+
+4
+
+

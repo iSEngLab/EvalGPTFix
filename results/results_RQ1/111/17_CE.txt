@@ -1,0 +1,16 @@
+public static void main(String[] args) {
+    FastReader reader = new FastReader();
+    long a = reader.nextLong();
+    long b = reader.nextLong();
+    long cnt = 0;
+    while (a != 0 && b != 0) { // Check for 0 at the beginning
+        if (a > b) {
+            cnt += a / b;
+            a %= b;
+        } else {
+            cnt += b / a;
+            b %= a;
+        }
+    }
+    System.out.println(cnt - 1); // Decrement cnt once we exit the loop
+}

@@ -1,0 +1,10 @@
+TreeSet<Long> a = new TreeSet<>();
+for (int i = 0; i < f.length; ++i) a.add(f[i]);
+TreeSet<Long> r = new TreeSet<>();
+while (r.size() < tot && a.first() <= tot - r.size()) {
+    long x = a.first();
+    r.add(x);
+    a.remove(x);
+    for (long t : f) a.add(x + t);
+}
+sl(r.last());

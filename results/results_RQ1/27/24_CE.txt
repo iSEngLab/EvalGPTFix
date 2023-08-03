@@ -1,0 +1,10 @@
+@Override
+public int compareTo(Pair other) {
+    if(this.score > other.score) {
+        return -1;
+    } else if(this.score < other.score) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int x = s.indexOf('B');
+        int y = s.indexOf('B', x + 1);
+
+        if (((x + y) % 2 == 0) && ((y >= 0) && (y % 2 != x % 2))) { // Fix: check if they are on opposite colored squares
+            int z = s.indexOf('K');
+            if (z > x && z < y) { // Fix: check if K is between the two R's
+                x = s.indexOf('R');
+                y = s.indexOf('R', x + 1);
+                if (y > 0 && y > z) { 
+                    System.out.println("YES");  // Fix: output YES only if K is on the right of the second R
+                    return;
+                }
+            }
+        }
+        System.out.println("NO");
+    }
+}

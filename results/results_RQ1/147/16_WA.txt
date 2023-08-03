@@ -1,0 +1,152 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    void go() {
+        int n = nextInt();
+        long tot = nextInt();
+        long[] f = new long[n];
+        for (int i = 0; i < f.length; ++i) f[i] = nextInt();
+        Arrays.sort(f);
+        if (f[0] == 1) {
+            sl(tot);
+            return;
+        } else if (n == 1) {
+            sl(n * f[0]);
+            return;
+        }
+        TreeSet<Long> a = new TreeSet<>();
+        for (int i = 0; i < f.length; ++i) a.add(f[i]);
+        TreeSet<Long> r = new TreeSet<>();
+        while (r.size() < tot) {
+            long x = a.first();
+            r.add(x);
+            a.remove(x);
+            for (long t : f) a.add(x + t);
+        }
+        sl(r.last());
+    }
+
+    
+    boolean MULTI_CASE = false;
+    long M = 998244353L;
+
+    
+    InputStream inStream;
+    byte[] inBuff = new byte[1024];
+    int inBuffCursor = 0;
+    int inBuffLen = 0;
+
+    boolean isVisibleChar(int c) {
+        return 33 <= c && c <= 126;
+    }
+
+    boolean hasNextByte() {
+        if (inBuffCursor < inBuffLen) return true;
+        inBuffCursor = 0;
+        try {
+            inBuffLen = inStream.read(inBuff);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return inBuffLen > 0;
+    }
+
+    boolean hasNext() {
+        while (hasNextByte() && !isVisibleChar(inBuff[inBuffCursor])) inBuffCursor++;
+        return hasNextByte();
+    }
+
+    int nextByte() {
+        return hasNextByte() ? inBuff[inBuffCursor++] : -1;
+    }
+
+    String next() {
+        if (!hasNext()) throw new RuntimeException("no next.");
+        StringBuilder sb = new StringBuilder();
+        int b = nextByte();
+        while (isVisibleChar(b)) {
+            sb.appendCodePoint(b);
+            b = nextByte();
+        }
+        return sb.toString();
+    }
+
+    long nextLong() {
+        if (!hasNext()) throw new RuntimeException("no next.");
+        long result = 0;
+        boolean negative = false;
+        int b = nextByte();
+        if (b < '0') {
+            if (b == '-') negative = true;
+            else if (b != '+') throw new RuntimeException("long number must start with +/-.");
+            b = nextByte();
+        }
+        while (isVisibleChar(b)) {
+            if (b < '0' || b > '9') throw new RuntimeException("wrong digit in long:" + (char) b);
+            
+            result = result * 10 + (b - '0');
+            b = nextByte();
+        }
+        return negative ? -result : result;
+    }
+
+    int nextInt() {
+        long x = nextLong();
+        if (x < Integer.MIN_VALUE || x > Integer.MAX_VALUE)
+            throw new RuntimeException("int overflow:" + x);
+        return (int) x;
+    }
+
+    double nextDouble() {
+        return Double.parseDouble(next());
+    }
+
+
+    
+    PrintWriter printOut = new PrintWriter(System.out);
+
+    void so(Object obj) {
+        printOut.print(obj);
+    }
+
+    void sl(Object obj) {
+        printOut.println((Object)obj);
+    }
+
+    void sl() {
+        printOut.println();
+    }
+
+    
+    void mainGo() {
+        try {
+            inStream = new FileInputStream("src/main.in");
+        } catch (Exception e) {
+            inStream = System.in;
+        }
+        while (hasNext()) {
+            if (MULTI_CASE) {
+                int T = nextInt();
+                for (int i = 0; i < T; ++i) {
+                    go();
+                }
+            } else {
+                go();
+            }
+        }
+        printOut.flush();
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().mainGo();
+    }
+}
+
+input: 1 200000
+1000000000
+
+expect: 200000000000000
+
+actual: 1000000000
+

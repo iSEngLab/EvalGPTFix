@@ -1,0 +1,25 @@
+public void solve() throws Exception {
+    int h=nextInt(),w=nextInt(),k=nextInt();
+    long res=0;
+
+    int hw = h * w;
+    Comb c=new Comb(hw, M);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            res += c.comb(hw-1, k-1); // choose k-1 points out of hw-1
+            res -= c.comb(i*w+j, k-1); // choose k-1 points out of i*w+j
+            res -= c.comb((h-i-1)*w+(w-j-1), k-1); // choose k-1 points out of (h-i-1)*w+(w-j-1)
+            res -= c.comb((h-i-1)*w+j, k-1); // choose k-1 points out of (h-i-1)*w+j
+            res -= c.comb(i*w+(w-j-1), k-1); // choose k-1 points out of i*w+(w-j-1)
+            res += c.comb(i*w,j,k-2); // choose k-2 points out of i*w+j
+            res += c.comb(i*(w-j-1),j,k-2); // choose k-2 points out of i*(w-j-1)
+            res += c.comb((h-i-1)*(w-j-1),j,k-2); // choose k-2 points out of (h-i-1)*(w-j-1)
+            res += c.comb((h-i-1)*j,w-j,k-2); // choose k-2 points out of (h-i-1)*j
+
+            res = (res % M + M) % M;
+        }
+    }
+    long modinv = c.modinv(c.comb(h*w,k), M);
+    out.println(((res*modinv+M)%M));
+}

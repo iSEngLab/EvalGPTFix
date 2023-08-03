@@ -1,0 +1,41 @@
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        try {
+            int N = sc.nextInt();
+            String S = sc.next();
+
+            boolean hasGood = false;
+            boolean hasBad = false;
+
+            for (int i = 0; i < N; i++) {
+                if (S.charAt(i) == 'o') {
+                    hasGood = true;
+                } else if (S.charAt(i) == 'x') {
+                    hasBad = true;
+                }
+            }
+            if (hasGood && !hasBad) {
+                System.out.println("合格");
+            } else {
+                System.out.println("不合格");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+        } catch (NoSuchElementException e) {
+            System.out.println("Invalid input. Please enter both integer and string values.");
+        }
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: 合格
+

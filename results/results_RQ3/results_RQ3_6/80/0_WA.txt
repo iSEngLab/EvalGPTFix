@@ -1,0 +1,20 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean flag = false;
+        boolean foundX = false; // adding new variable to keep track of 'x' in input string
+        for(int i=0;i<n;++i){
+            if(s.charAt(i) == 'o') {
+                flag = true;
+            }else if(s.charAt(i) == 'x'){
+                foundX = true;
+            }
+        }
+        if(!foundX && flag) System.out.println("YES"); // checking if 'x' was found and setting the correct output
+        else System.out.println("NO");
+    }
+}

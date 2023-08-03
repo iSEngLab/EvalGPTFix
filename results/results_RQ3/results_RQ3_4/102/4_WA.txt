@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int x = s.indexOf('B'), y = s.indexOf('B', x + 1);
+        if(x == -1 || y == -1 || Math.abs(y-x) % 2 == 0) { // fixed condition for checking odd-even indices
+            System.out.println("NO");
+            return;
+        }
+        x = s.indexOf('R'); y = s.indexOf('R', x + 1);
+        int z = s.indexOf('K');
+        if(x == -1 || y == -1 || z == -1 || x >= z || y <= z){ // fixed condition for R, K, B positions
+            System.out.println("NO");
+            return;
+        }
+        System.out.println("YES");
+    }
+}

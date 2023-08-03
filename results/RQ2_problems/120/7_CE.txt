@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int A = sc.nextInt();
+        int B = sc.nextInt();
+        int count = 0;
+        while (A != B) {
+            if (A % 2 == 0 && B % 2 == 0) {
+                A /= 2;
+                B /= 2;
+                count++;
+            } else if (A % 2 == 0 && B % 2 == 1) {
+                A /= 2;
+            } else if (A % 2 == 1 && B % 2 == 0) {
+                B /= 2;
+            } else {
+                int tmp = A;
+                A = B;
+                B = tmp-B;
+                count++;
+            }
+        }
+        System.out.println(count);
+    }
+}
+ ```
+The bug in the original program is that it uses `long` type for input but the problem statement specifies that the input is positive integers which are not larger than 10^9. Therefore, `int` type should be used instead. The fixed program also adds additional conditions to handle the cases where both A and B are even, one of them is even, and neither of them is even. Additionally, the fixed program uses a variable `count` to keep track of the number of operations performed instead of calculating the result directly in the `while` loop.

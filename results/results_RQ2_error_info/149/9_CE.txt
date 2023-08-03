@@ -1,0 +1,116 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Comb {
+
+    BigInteger[][] choose;
+    BigInteger[] fact;
+    BigInteger[] invfact;
+    BigInteger mod;
+
+    public Comb(int n, BigInteger mod) {
+        this.mod = mod;
+        choose = new BigInteger[n+1][n+1];
+        fact = new BigInteger[n+1];
+        invfact = new BigInteger[n+1];
+        fact[0] = BigInteger.ONE;
+        invfact[0] = BigInteger.ONE;
+        for (int i = 1; i <= n; i++) {
+            fact[i] = fact[i - 1].multiply(BigInteger.valueOf(i)).mod(mod);
+            invfact[i] = fact[i].modInverse(mod);
+        }
+        for (int i = 0; i <= n; i++) {
+            choose[i][0] = BigInteger.ONE;
+            for (int j = 1; j <= i; j++) {
+                choose[i][j] = choose[i-1][j-1].add(choose[i-1][j]).mod(mod);
+            }
+        }
+    }
+
+    public BigInteger choose(int n, int r) {
+        if (n < r) return BigInteger.ZERO;
+        return choose[n][r];
+    }
+
+    public BigInteger perm(int n, int r) {
+        if (n < r) return BigInteger.ZERO;
+        return fact[n].multiply(invfact[n-r]).mod(mod);
+    }
+
+}
+
+public class Main {
+
+    static BigInteger M=BigInteger.valueOf(998244353);
+
+    public void solve() throws Exception {
+        int h=nextInt(),w=nextInt(),k=nextInt();
+        BigInteger res=BigInteger.ZERO;
+
+        int hw = h * w;
+        Comb c=new Comb(hw, M);
+
+        BigInteger[] pow2 = new BigInteger[k+1];
+        pow2[0] = BigInteger.ONE;
+        for (int i = 1; i <= k; i++) {
+            pow2[i] = pow2[i-1].multiply(BigInteger.valueOf(2)).mod(M);
+        }
+
+        BigInteger chooseAll = c.choose(hw, k);
+
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                BigInteger chooseHere = c.choose(i*w+j, k);
+                BigInteger chooseLeft = j > 0 ? c.choose(i*w+j-1, k) : BigInteger.ZERO;
+                BigInteger chooseRight = j < w-1 ? c.choose(i*w+j+1, k) : BigInteger.ZERO;
+                BigInteger chooseTop = i > 0 ? c.choose((i-1)*w+j, k) : BigInteger.ZERO;
+                BigInteger chooseBot = i < h-1 ? c.choose((i+1)*w+j, k) : BigInteger.ZERO;
+                BigInteger chooseTopLeft = i > 0 && j > 0 ? c.choose((i-1)*w+j-1, k) : BigInteger.ZERO;
+                BigInteger chooseTopRight = i > 0 && j < w-1 ? c.choose((i-1)*w+j+1, k) : BigInteger.ZERO;
+                BigInteger chooseBotLeft = i < h-1 && j > 0 ? c.choose((i+1)*w+j-1, k) : BigInteger.ZERO;
+                BigInteger chooseBotRight = i < h-1 && j < w-1 ? c.choose((i+1)*w+j+1, k) : BigInteger.ZERO;
+
+                BigInteger term = chooseAll.subtract(chooseLeft).subtract(chooseRight).subtract(chooseTop).subtract(chooseBot)
+                        .add(chooseTopLeft).add(chooseTopRight).add(chooseBotLeft).add(chooseBotRight);
+                term = term.multiply(pow2[k]).multiply(c.invfact[k]).mod(M);
+
+                res = res.add(term).mod(M);
+            }
+        }
+        BigInteger modinv = c.invfact[k];
+        res = res.multiply(modinv).mod(M);
+        out.println(((res+M)%M));
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().solve();
+    }
+
+    static PrintWriter out = new PrintWriter(System.out, true);
+    static InputReader in = new InputReader(System.in);
+    static String next() { return in.next(); }
+    static int nextInt() { return Integer.parseInt(in.next()); }
+    static long nextLong() { return Long.parseLong(in.next()); }
+    static class InputReader {
+        public BufferedReader reader;
+        public StringTokenizer tokenizer;
+
+        public InputReader(InputStream stream) {
+            reader = new BufferedReader(new InputStreamReader(stream), 32768);
+            tokenizer = null;
+        }
+
+        public String next() {
+            while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+                try {
+                    tokenizer = new StringTokenizer(reader.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return tokenizer.nextToken();
+        }
+    }
+}

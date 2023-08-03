@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String args[]) {
+		Scanner stdin = new Scanner(System.in);
+		System.out.println("Please enter the length of the string:");
+		
+		int num = stdin.nextInt();
+		System.out.println("Please enter the string:");
+		String values = stdin.next();
+		
+		if(values.contains("x")) {
+			System.out.println("No");
+			return;
+		} else if (values.contains("o")) {
+			System.out.println("Yes");
+			return;
+		} else {
+			System.out.println("No");
+			return;
+		}		
+	}
+}

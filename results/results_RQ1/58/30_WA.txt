@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        String S = sc.next();
+
+        boolean hasGood = false; 
+        boolean hasBad = false; 
+        boolean hasOther = false;
+
+        for (int i = 0; i < N; i++) {
+            char c = S.charAt(i);
+            if (c == 'o') {
+                hasGood = true; 
+            } else if (c == 'x') {
+                hasBad = true; 
+            } else {
+                hasOther = true;
+                break; // no need to check further
+            }
+        }
+
+        if (hasOther) {
+            System.out.println("不合格");
+        } else if (hasGood) {
+            System.out.println("合格");
+        } else { // no 'o' characters
+            System.out.println("不合格");
+        }
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: 合格
+

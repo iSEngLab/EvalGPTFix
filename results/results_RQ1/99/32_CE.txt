@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		
+		String str=scan.next();
+		int []p=new int[2];
+		int []p2=new int[2];
+		
+		//Fixed variable initialization, p and p2 indexes
+		int cnt=0, cnt2=0;
+
+		for(int i = 0; i<str.length();i++) {
+			if(str.charAt(i)=='B') {
+				
+				//Alternate indexes were being assigned to p, which is incorrect
+				//Fixed by checking the variable cnt instead of cnt % 2
+				if(cnt <= 1) {
+					p[cnt]=i+1;
+					cnt++;
+				} else {
+					System.out.print("No");
+					return;
+				}
+				
+			} else if(str.charAt(i)=='R') {
+				
+				//Same as above
+				if(cnt2 <= 1) {
+					p2[cnt2]=i+1;
+					cnt2++;
+				} else {
+					System.out.print("No");
+					return;
+				}
+				
+			} else if(str.charAt(i)=='K') {
+				
+				//Same as above
+				k=i+1;
+				
+			}
+		}
+		
+		if(cnt != 2 || cnt2 != 2) {
+			System.out.print("No");
+			return;
+		}
+		
+		if(p[0]%2==p[1]%2) {
+			System.out.print("No");
+			return;
+		}
+		
+		if(!(p[0]< k && k< p[1])) {
+			System.out.print("No");
+			return;
+		}
+		
+		System.out.print("Yes");
+	}
+}

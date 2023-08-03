@@ -1,0 +1,24 @@
+for (int mask = 0; mask < (1 << hw); mask++) {
+    if (Integer.bitCount(mask) != k) continue;
+    long sign = 1;
+    long prod = 1;
+    int bitCount = 0;
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            int bit = i * w + j;
+            if ((mask & (1 << bit)) != 0) {
+                bitCount++;
+                if (i > 0 && (mask & (1 << (bit - w))) != 0)
+                    prod = prod * c.perm(w, 2) % M;
+                if (j > 0 && (mask & (1 << (bit - 1))) != 0)
+                    prod = prod * c.perm(h, 2) % M;
+            }
+        }
+    }
+    if (bitCount == k) {
+        res += sign * prod;
+        res %= M;
+    }
+}
+long modinv = c.modinv(c.comb(h*w,k), M);
+out.println((res*modinv%M));

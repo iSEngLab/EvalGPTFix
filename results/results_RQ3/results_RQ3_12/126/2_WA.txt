@@ -1,0 +1,35 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=0;
+        
+        while(a!=b) {
+            
+            if(b%a==0){
+                ans+=b/a;
+                break;  
+            }
+            
+            long q = b/a;
+            ans += q;
+            b -= q*a;
+            if(a>b) {
+                long tmp = a;
+                a = b;
+                b = tmp;
+            }
+        }
+        
+        System.out.println(ans);
+        
+        
+    }
+}

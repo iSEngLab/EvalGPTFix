@@ -1,0 +1,111 @@
+import java.io.*;
+import java.util.*;
+
+@SuppressWarnings("unused")
+public class Main {
+
+  private static void solve() {
+    int n = ni();
+    int l = ni();
+    int r = ni();
+    int[] a = na(n);
+
+    int g_xor = 0; // XOR of all the g values
+    int[] g = new int[n];
+    for (int i = 0; i < n; i++) {
+        g[i] = g(a[i], l, r);
+        g_xor ^= g[i];
+    }
+
+    if (g_xor == 0) {
+      System.out.println("Second");
+    } else {
+      // find the index of the first non-zero g value
+      int first_non_zero = -1;
+      for (int i = 0; i < n; i++) {
+          if (g[i] != 0) {
+              first_non_zero = i;
+              break;
+          }
+      }
+
+      // compute the answer based on the first non-zero g value
+      if ( ((n - first_non_zero - 1) % 2) == 0 ) {
+          System.out.println("First");
+      } else {
+          System.out.println("Second");
+      }
+    }
+  }
+
+  private static int g(int v, int l, int r) {
+    int x = v % (l + r);
+    if (x > r) {
+        return r - l + 1;
+    } else {
+        return Math.max(0, x - l);
+    }   
+  }
+
+  public static void main(String[] args) {
+    new Thread(null, new Runnable() {
+      @Override
+      public void run() {
+        long start = System.currentTimeMillis();
+        String debug = args.length > 0 ? args[0] : null;
+        if (debug != null) {
+          try {
+            is = new FileInputStream(debug);
+          } catch (Exception e) {
+            throw new RuntimeException(e);
+          }
+        }
+        reader = new BufferedReader(new InputStreamReader(is), 32768);
+        solve();
+        out.flush();
+        out.close(); // close the PrintWriter object
+        tr((System.currentTimeMillis() - start) + "ms");
+      }
+    }, "", 64000000).start();
+  }
+
+  private static InputStream is = System.in;
+  private static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+  private static StringTokenizer tokenizer = null;
+  private static BufferedReader reader;
+
+  public static String next() {
+    while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+      try {
+        tokenizer = new StringTokenizer(reader.readLine());
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+    return tokenizer.nextToken();
+  }
+
+  private static double nd() {
+    return Double.parseDouble(next());
+  }
+
+  private static long nl() {
+    return Long.parseLong(next());
+  }
+
+  private static int[] na(int n) {
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++)
+      a[i] = ni();
+    return a;
+  }
+
+  private static char[] ns() {
+    return next().toCharArray();
+  }
+
+  private static long[] nal(int n) {
+    long[] a = new long[n];
+    for (int i = 0; i < n; i++)
+      a[i] = nl();
+   

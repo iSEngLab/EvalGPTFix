@@ -1,0 +1,10 @@
+private static int g(int v, int l, int r) {
+  int x = v % (l + r);
+  if (x < l) {
+    return l - x;
+  } else if (x > r) {
+    return x - r;
+  } else {
+    return 0;
+  }
+}

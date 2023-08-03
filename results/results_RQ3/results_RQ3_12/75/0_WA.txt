@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String args[]) {
+		Scanner stdin = new Scanner(System.in);
+		System.out.println("Please enter the length of the string:");
+		
+		int num = stdin.nextInt();
+		System.out.println("Please enter the string:");
+		String values = stdin.next();
+		List<String> value = new ArrayList<String>(); //Fixed declaration as ArrayList<String>()
+		
+		for (int i = 0; i <values.length(); i++){ //Fixed looping through the string and not num since values may have less characters
+			String str = String.valueOf(values.charAt(i));
+			value.add(str);
+		}
+		
+		if(value.contains("x")) {
+			System.out.println("No");
+			return;
+		} else if (value.contains("o")) {
+			System.out.println("Yes");
+			return;
+		} else {
+			System.out.println("No");
+			return;
+		}		
+	}
+}

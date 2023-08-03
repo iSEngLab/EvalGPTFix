@@ -1,0 +1,133 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Comb {
+    BigInteger[] p;
+    BigInteger[] pi;
+    long mod;
+
+    public Comb(int n, long mod) {
+        this.mod = mod;
+        p = new BigInteger[n + 1];
+        pi = new BigInteger[n + 1];
+        p[0] = BigInteger.ONE;
+        pi[0] = BigInteger.ONE;
+        for (int i = 1; i <= n; i++) {
+            p[i] = p[i - 1].multiply(BigInteger.valueOf(i)).mod(BigInteger.valueOf(mod));
+        }
+        pi[n] = BigInteger.valueOf(mod).modInverse(p[n]);
+        for (int i = n; i > 1; i--) {
+            pi[i - 1] = pi[i].multiply(BigInteger.valueOf(i)).mod(BigInteger.valueOf(mod));
+        }
+    }
+
+    public long comb(int n, int r) {
+        if (n < r)
+            return 0;
+        return p[n].multiply(pi[r]).mod(BigInteger.valueOf(mod)).multiply(pi[n - r]).mod(BigInteger.valueOf(mod)).longValue();
+    }
+
+    public long perm(int n, int r) {
+        if (n < r)
+            return 0;
+        return p[n].multiply(pi[n - r]).mod(BigInteger.valueOf(mod)).longValue();
+    }
+
+    BigInteger modinv(BigInteger a, BigInteger m) {
+        BigInteger b = m;
+        BigInteger u = BigInteger.ONE;
+        BigInteger v = BigInteger.ZERO;
+        BigInteger tmp = BigInteger.ZERO;
+
+        while (b.compareTo(BigInteger.ZERO) > 0) {
+            BigInteger t = a.divide(b);
+            a = a.subtract(t.multiply(b));
+            tmp = a;
+            a = b;
+            b = tmp;
+
+            u = u.subtract(t.multiply(v));
+            tmp = u;
+            u = v;
+            v = tmp;
+        }
+
+        u = u.mod(m);
+        if (u.compareTo(BigInteger.ZERO) < 0)
+            u = u.add(m);
+        return u;
+    }
+}
+
+public class Main {
+
+    static long M = 998244353;
+
+    public void solve() throws Exception {
+        int h = nextInt(), w = nextInt(), k = nextInt();
+        long res = 0;
+
+        int hw = h * w;
+        Comb c = new Comb(hw, M);
+
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < w; j++) {
+                res += c.comb(h * w - 1, k - 1);
+                res -= c.comb(i * w + j, k - 1);
+                res -= c.comb(i * w + w - j - 1, k - 1);
+                res -= c.comb(i * w + j + hw, k - 1);
+                res -= c.comb(j * h + i + hw, k - 1);
+                res += c.comb(i * w + j + i * (w - j - 1), k - 1);
+                res += c.comb((h - i - 1) * w + j + i * (w - j - 1), k - 1);
+                res += c.comb((h - i - 1) * w + w - j - 1 + i * (w - j - 1), k - 1);
+                res += c.comb(j * h + w - j - 1 + (h - i - 1) * w, k - 1);
+
+                res %= M;
+            }
+        }
+        long modinv = c.modinv(c.comb(h * w, k), BigInteger.valueOf(M)).longValue();
+        out.println(((res * modinv + M) % M));
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().solve();
+    }
+
+    static PrintWriter out = new PrintWriter(System.out, true);
+    static InputReader in = new InputReader(System.in);
+
+    static String next() {
+        return in.next();
+    }
+
+    static int nextInt() {
+        return Integer.parseInt(in.next());
+    }
+
+    static long nextLong() {
+        return Long.parseLong(in.next());
+    }
+
+    static class InputReader {
+        public BufferedReader reader;
+        public StringTokenizer tokenizer;
+
+        public InputReader(InputStream stream) {
+            reader = new BufferedReader(new InputStreamReader(stream), 32768);
+            tokenizer = null;
+        }
+
+        public String next() {
+            while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+                try {
+                    tokenizer = new StringTokenizer(reader.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return tokenizer.nextToken();
+        }
+    }
+}

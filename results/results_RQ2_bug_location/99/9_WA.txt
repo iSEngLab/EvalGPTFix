@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        String str = scan.next();
+        int[] p = new int[2];
+        int[] p2 = new int[2];
+        
+        int cnt = 0;
+        int cnt2 = 0;
+        int k = 0; // moved variable initialization
+
+        for(int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            
+            if(ch == 'B') {
+                p[cnt] = i + 1;
+                cnt++;
+            } else if(ch == 'R') { // replaced "if" with "else if"
+                p2[cnt2] = i + 1;
+                cnt2++;
+            } else if(ch == 'K') { // replaced "if" with "else if"
+                k = i + 1;
+            }
+        }
+        
+        if(p[0] % 2 == p[1] % 2) {
+            System.out.print("No");
+            return;
+        }
+        
+        if(k <= p[0] || k >= p[1]) { // corrected inequality condition
+            System.out.print("No");
+            return;
+        }
+        
+        System.out.print("Yes");
+    }
+}
+
+input: NQNRKBBR
+
+expect: Yes
+
+actual: No

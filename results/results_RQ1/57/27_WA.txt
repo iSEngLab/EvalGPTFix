@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    
+    int N, i;
+    String S;
+    boolean hasGood = false;
+    boolean hasBad = false;
+    
+    try {
+      System.out.print("Enter N: ");
+      N = sc.nextInt();
+      sc.nextLine();
+      
+      System.out.print("Enter S: ");
+      S = sc.nextLine();
+    } catch (Exception e) {
+      System.out.println("Error: Invalid input format.");
+      return;
+    }
+
+    if (S.length() != N) {
+      System.out.println("Error: S must be of length N.");
+      return;
+    }
+
+    for (i = 0; i < N; i++) {
+      if (S.charAt(i) == 'o') {
+        hasGood = true;
+      } else if (S.charAt(i) == 'x') {
+        hasBad = true;
+      }
+    }
+
+    if (hasGood && !hasBad) {
+      System.out.println("合格");
+    } else {
+      System.out.println("不合格");
+    }
+  }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: Enter N: Enter S: 合格
+

@@ -1,0 +1,49 @@
+package onlinejudge;
+
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Main {
+    
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        PrintWriter out = new PrintWriter(System.out);
+        StringBuilder sb = new StringBuilder();
+        
+        try {
+            String[] nd = sc.nextLine().split(" ");
+            int n = Integer.parseInt(nd[0]);
+            int d = Integer.parseInt(nd[1]);
+            
+            int[] t = new int[n];
+            int i = 0;
+            while (i < n && sc.hasNextInt()) { // check for available integers
+                t[i] = sc.nextInt();
+                i++;
+            }
+            
+            int ans = Integer.MAX_VALUE;
+            for (i = 1; i < n; i++) {
+                if (t[i] - t[i - 1] <= d) {
+                    ans = Math.min(ans, t[i]);
+                }
+            }
+            
+            if (ans == Integer.MAX_VALUE) {
+                sb.append("NO");
+            } else {
+                sb.append(ans);
+            }
+            
+            out.println(sb.toString());
+            out.flush();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            sc.close();
+            out.close();
+        }
+    }
+}

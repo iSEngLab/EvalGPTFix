@@ -1,0 +1,2 @@
+Arrays.sort(a);
+long result = a[n-1];

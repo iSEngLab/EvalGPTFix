@@ -1,0 +1,66 @@
+import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		try(Scanner sc = new Scanner(System.in)){
+			
+			PrintWriter out = new PrintWriter(System.out);
+			StringBuilder sb = new StringBuilder();
+			
+			
+			int n = sc.nextInt();
+			long k = sc.nextLong();
+			long[] a = new long[n];
+			
+			Set<Long> set = new HashSet<>();
+			PriorityQueue<Long> que = new PriorityQueue<>();
+			
+			for(int i = 0; i < n; i++) {
+				a[i] = sc.nextLong();
+				set.add(a[i]);
+				que.add(a[i]);
+			}
+			
+			long ans = 0;
+			for(int i = 0; i < k; i++) {
+				ans = que.poll();
+				
+				for(int j = 0; j < n; j++) {
+					long val = ans + a[j];
+					if(set.contains(val)) continue;
+					
+					if (que.size() == k) {
+						if (val < ans + que.peek()) {
+							set.remove(ans + que.remove());
+							set.add(val);
+							que.add(val - ans);
+						}
+					} else {
+						set.add(val);
+						que.add(val - ans);
+					}
+				}
+			}
+			
+			sb.append(ans * k);
+			out.println(sb.toString());
+			out.flush();
+			
+		}
+
+	}
+
+}
+
+
+input: 10 200000
+554711317 806584789 280018632 62735624 328505817 16801479 685959884 161803065 709816353 611785786
+
+expect: 2271400318
+

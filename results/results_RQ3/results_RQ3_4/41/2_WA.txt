@@ -1,0 +1,27 @@
+import java.util.*;
+
+class Main{
+  public static void main(String[] args){  
+    Scanner sc=new Scanner(System.in);
+    int n=sc.nextInt();
+    int d=sc.nextInt();
+    int a[]=new int[n];
+    for(int i=0;i<n;i++)
+    {
+      a[i]=sc.nextInt();
+    }
+    int c=-1;
+    for(int i=1;i<n;i++)
+    {
+      if(a[i]-a[i-1]<=d)
+      {
+        if(c==-1 || i-c<=1) {  // updated condition to check if the last updated index is adjacent to the current index
+          c=i;
+        } else {
+          break;
+        }
+      }
+    }
+    System.out.println(c==-1?-1:a[c]); 
+  }
+}

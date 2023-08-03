@@ -1,0 +1,83 @@
+import java.util.*;
+
+public class Main {
+
+    private static class Pair implements Comparable<Pair> {
+        int x;
+        long score;
+
+        public Pair(int x, long score) {
+            this.x = x;
+            this.score = score;
+        }
+
+        public String toString() {
+            return "[" + this.x + "," + this.score + "]";
+        }
+
+        @Override
+        public int compareTo(Pair other) {
+            return Long.compare(other.score, this.score);
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        Map<Integer, Long> rows = new HashMap<>();
+        Map<Integer, Long> cols = new HashMap<>();
+        Map<Integer, Map<Integer, Integer>> val = new HashMap<>();
+
+        int minRow = Integer.MAX_VALUE;
+        int minCol = Integer.MAX_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            int r = sc.nextInt();
+            int c = sc.nextInt();
+            int x = sc.nextInt();
+
+            rows.put(r, rows.getOrDefault(r, 0L) + x);
+            cols.put(c, cols.getOrDefault(c, 0L) + x);
+
+            Map<Integer, Integer> hm = val.getOrDefault(r, new HashMap<>());
+            hm.put(c, x);
+            val.put(r, hm);
+
+            minRow = Math.min(minRow, r);
+            minCol = Math.min(minCol, c);
+        }
+
+        List<Pair> rowPairs = new ArrayList<>();
+        List<Pair> colPairs = new ArrayList<>();
+
+        for (int r : rows.keySet()) {
+            int rowScore = 0;
+            for (int c : val.get(r).keySet()) {
+                rowScore += val.get(r).get(c);
+            }
+            rowPairs.add(new Pair(r, rowScore));
+        }
+
+        for (int c : cols.keySet()) {
+            colPairs.add(new Pair(c, cols.get(c)));
+        }
+
+        Collections.sort(rowPairs);
+        Collections.sort(colPairs);
+
+        long ans = rowPairs.get(0).score;
+        int i = 0;
+
+        while (i < colPairs.size() && val.get(rowPairs.get(0).x).containsKey(colPairs.get(i).x))
+            i++;
+
+        if (i < colPairs.size())
+            ans = Math.max(ans, colPairs.get(i).score + rowPairs.get(0).score);
+        else
+            ans = Math.max(ans, colPairs.get(0).score + rowPairs.get(1).score);
+
+        System.out.println(ans);
+    }
+}

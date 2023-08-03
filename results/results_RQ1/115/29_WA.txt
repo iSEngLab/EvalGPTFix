@@ -1,0 +1,32 @@
+import java.util.*;
+class Main {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        int cnt = 0;
+        
+        while(A != 0 && B != 0) { // fixed the condition to check if A or B is 0
+            if(A > B) {
+                long div = A / B;
+                A = A - B * div;
+                cnt += div;
+            } else if(A < B) {
+                long div = B / A; // fixed the division operator to divide B by A
+                B = B - A * div;
+                cnt += div;
+            } else {
+                break; // added break statement to exit while loop if A == B
+            }
+        }
+        
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275727
+

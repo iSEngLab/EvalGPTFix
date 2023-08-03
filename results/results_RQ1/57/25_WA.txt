@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		
+		// Create a new Scanner object to read user input from the console
+		Scanner sc = new Scanner(System.in);
+		
+		// Read the value of N from the user
+		int N = sc.nextInt();
+		
+		// Read the value of S from the user
+		String S = sc.next();
+
+		// Initialize two variables to track if the string S has 'good' or 'bad' characters
+		boolean hasGood = false; 
+		boolean hasBad = false; 
+
+		// Loop through each character in the string S
+		for (int i = 0; i < N; i++) {
+			// If the character is 'o', set the hasGood variable to true
+			if (S.charAt(i) == 'o') {
+				hasGood = true; 
+			} 
+			// If the character is 'x', set the hasBad variable to true
+			else if (S.charAt(i) == 'x') {
+				hasBad = true; 
+			}
+		}
+		
+		// If the string has at least one 'good' character and no 'bad' characters, print '合格'
+		if (hasGood && !hasBad) {
+			System.out.println("合格");
+		} 
+		// Otherwise, print '不合格'
+		else {
+			System.out.println("不合格");
+		}
+	}
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: 合格
+

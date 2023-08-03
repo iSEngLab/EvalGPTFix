@@ -1,0 +1,5 @@
+case 2:
+    int upper = deque.pollFirst();
+    int l = deque.size();
+    number = (number - upper * modPow(10, l+1, mod) % mod + mod) % mod;
+    break;

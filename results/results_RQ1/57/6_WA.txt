@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+
+		// input validation for N
+		int N = 0;
+		while (N <= 0) {
+			System.out.print("Enter a positive integer N: ");
+			if (sc.hasNextInt()) {
+				N = sc.nextInt();
+			} else {
+				System.out.println("Invalid input. Please enter a positive integer.");
+				sc.next(); // consume invalid input
+			}
+		}
+
+		// input validation for S
+		String S = "";
+		while (S.isEmpty() || !S.matches("[ox]+")) {
+			System.out.print("Enter a string S consisting of only 'o' and 'x': ");
+			if (sc.hasNext()) {
+				S = sc.next();
+			} else {
+				System.out.println("Invalid input. Please enter a string.");
+				sc.next(); // consume invalid input
+			}
+		}
+
+		boolean hasGood = false; 
+		boolean hasBad = false; 
+
+		
+		for (int i = 0; i < N; i++) {
+			if (S.charAt(i) == 'o') {
+				hasGood = true; 
+			} else if (S.charAt(i) == 'x') {
+				hasBad = true; 
+			}
+		}
+		if (hasGood && !hasBad) {
+			System.out.println("合格");
+		} else {
+			System.out.println("不合格");
+		}
+	}
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: Enter a positive integer N: Enter a string S consisting of only 'o' and 'x': 合格
+

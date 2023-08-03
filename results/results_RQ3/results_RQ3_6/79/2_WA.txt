@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean flag = false;
+        for(int i=0; i<n; ++i) {
+            if(s.charAt(i) == 'o') {
+                flag = true;
+            }else if(s.charAt(i) != 'x' && s.charAt(i) != '_') { // Added condition to check if character is neither 'x' nor '_'
+                System.out.println("NO");
+                return;
+            }
+        }
+        if(flag || !s.contains("o")) { //Added condition to check if the input does contain 'o'
+            System.out.println("YES");
+        }else{
+            System.out.println("NO");
+        }
+    }
+}

@@ -1,0 +1,12 @@
+else if (k == 2) {
+    if (chu < list.size()) { // Fix: added check for chu < list.size()
+        int le = list.size() - chu;
+        long jian = list.get(chu) * bs[le];
+        jian %= mod;
+        ans -= jian + mod;
+        ans %= mod;
+        chu++;
+    }
+} else {
+    out.println(ans);
+}

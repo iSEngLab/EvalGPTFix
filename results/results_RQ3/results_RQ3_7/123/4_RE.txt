@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        if (a > b) { // Fixed: swap a and b if a > b
+            long temp = b;
+            b = a;
+            a = temp;
+        }
+        long cnt = 0;
+        while (a != 1) { // Fixed: Change termination condition to a == 1
+            cnt += b / a; // Fixed: Optimization to avoid iterations
+            b %= a;
+            long temp = b;
+            b = a;
+            a = temp;
+        }
+        System.out.println(cnt + b - 1); // Fixed: Add b - 1 since we changed termination condition
+    }
+}

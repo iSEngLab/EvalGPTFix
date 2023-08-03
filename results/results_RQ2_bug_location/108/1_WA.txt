@@ -1,0 +1,89 @@
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        PrintWriter out = new PrintWriter(System.out);
+        Output op = new Output(sc, out);
+
+        long a = op.nextLong();
+        long b = op.nextLong();
+
+        int count = 0;
+        while (a > 0 && b > 0) {
+            if (a > b) {
+                count += a / b;
+                a = a % b;
+            } else {
+                count += b / a;
+                b = b % a;
+            }
+        }
+        op.strResult(String.valueOf(count - 1)); // need to use op object to print the result
+    }
+}
+
+class Output {
+    private final Scanner sc;
+    private final PrintWriter out;
+
+    Output(Scanner sc, PrintWriter out) {
+        this.sc = sc;
+        this.out = out;
+    }
+
+    public void flush() {
+        this.out.flush();
+    }
+
+    public void outPutInt(int x) {
+        this.out.println(x);
+    }
+
+    public void outPutString(String x) {
+        this.out.println(x);
+    }
+
+    public int nextInt() {
+        return Integer.parseInt(sc.next());
+    }
+
+    public char nextChar() {
+        return sc.next().charAt(0);
+    }
+
+    public char[] nextCharArray() {
+        return sc.next().toCharArray();
+    }
+
+    public long nextLong() {
+        return Long.parseLong(sc.next());
+    }
+
+    public double nextDouble() {
+        return Double.parseDouble(sc.next());
+    }
+
+    public String next() {
+        return sc.next();
+    }
+
+    public void intResult(int value) {
+        out.println(value);
+        out.flush();
+    }
+
+    public void strResult(String value) {
+        this.out.println(value);
+        this.out.flush();
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275726
+

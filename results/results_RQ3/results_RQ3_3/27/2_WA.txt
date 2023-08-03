@@ -1,0 +1,92 @@
+import java.util.*;
+
+public class Main {
+
+    private static class Pair implements Comparable<Pair> {
+        int x;
+        long score;
+
+        public Pair(int x,long score) {
+            this.x=x;
+            this.score=score;
+        }
+
+        public String toString() {
+            return "["+this.x+","+this.score+"]";
+        }
+
+        @Override
+        public int compareTo(Pair other) {
+            if(this.score>other.score)
+                return -1;
+            else if(this.score<other.score)
+                return 1;
+            else if(this.x<other.x)
+                return -1;
+            else if(this.x>other.x)
+                return 1;
+            else
+                return 0;
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        HashMap<Integer, Long> rows=new HashMap<Integer, Long>();
+        HashMap<Integer, Long> cols=new HashMap<Integer, Long>();
+        HashMap<Integer, HashMap<Integer, Integer>> val=new HashMap<Integer, HashMap<Integer, Integer>>();
+        for(int i=0;i<n;i++) {
+            int r=sc.nextInt();
+            int c=sc.nextInt();
+            int x=sc.nextInt();
+            rows.put(r,rows.getOrDefault(r,0L)+x);
+            cols.put(c,cols.getOrDefault(c,0L)+x);
+            HashMap<Integer, Integer> hm=val.getOrDefault(r,new HashMap<Integer, Integer>());
+            hm.put(c,x);
+            val.put(r,hm);
+        }
+
+        ArrayList<Pair> lcols=new ArrayList<Pair>();
+        for(Integer x:cols.keySet())
+            lcols.add(new Pair(x,cols.get(x)));
+        Collections.sort(lcols);
+
+        long ans = lcols.get(0).score;
+        boolean ansFound = false;
+        for (Map.Entry<Integer, Long> row : rows.entrySet()) {
+            int r = row.getKey();
+
+            if (val.get(r).containsKey(lcols.get(0).x)) {
+                continue;
+            }
+
+            int i = 0;
+            while (i < lcols.size()) {
+                if (val.get(r).containsKey(lcols.get(i).x)) {
+                    break;
+                }
+                i++;
+            }
+
+            if (i >= lcols.size()) {
+                if (!ansFound) {
+                    ansFound = true;
+                }
+
+                continue;
+            }
+
+            if (!ansFound) {
+                ansFound = true;
+                ans = Math.max(ans, rows.get(r) + lcols.get(i).score);
+            } else {
+                ans = Math.max(ans, rows.get(r) + lcols.get(i).score);
+            }
+
+        }
+
+        System.out.println(ans);
+    }
+}

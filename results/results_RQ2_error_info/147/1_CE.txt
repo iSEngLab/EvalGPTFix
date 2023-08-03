@@ -1,0 +1,32 @@
+void go() {
+    int n = nextInt();
+    long tot = nextInt();
+    long[] f = new long[n];
+    for (int i = 0; i < f.length; ++i) f[i] = nextInt();
+    Arrays.sort(f);
+    if (f[0] == 1) {
+        sl(tot);
+        return;
+    } else if (n == 1) {
+        sl(n * f[0]);
+        return;
+    }
+    TreeSet<Long> a = new TreeSet<>();
+    for (int i = 0; i < f.length; ++i) a.add(f[i]);
+    TreeSet<Long> r = new TreeSet<>();
+    while (r.size() < tot && !a.isEmpty()) { // added check for a.isEmpty()
+        long x = a.pollFirst(); // use pollFirst() instead of first() and remove()
+        r.add(x);
+        for (long t : f) {
+            if (x + t <= f[n-1] * tot) { // added check for upper bound
+                a.add(x + t);
+            }
+        }
+    }
+    long sum = 0;
+    Iterator<Long> it = r.descendingIterator();
+    while (tot-- > 0 && it.hasNext()) { // use Iterator to get last elements
+        sum += it.next();
+    }
+    sl(sum);
+}

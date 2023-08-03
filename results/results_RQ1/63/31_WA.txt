@@ -1,0 +1,30 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int N=sc.nextInt();
+        String s=sc.next();
+        int len=s.length();
+        boolean good=false; //declare good as boolean
+        boolean poor=true; //declare poor as boolean
+        for(int i=0;i<len;i++){
+            char c=s.charAt(i);
+            if(c=='o')
+            good=true; //set good to true if there is an 'o'
+            if(c=='x')
+            poor=false; //set poor to false if there is an 'x'
+        }
+        if(good && poor)
+        System.out.println("YES");
+        else
+        System.out.println("NO");
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: YES
+

@@ -1,0 +1,10 @@
+private static int Int() {
+    try {
+        st.nextToken();
+        
+    } catch (IOException e) {
+
+        e.printStackTrace();
+    }
+    return (int) st.nval; // fix: cast to int directly
+}

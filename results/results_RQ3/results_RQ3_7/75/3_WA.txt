@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please type...");
+        int num = scanner.nextInt();
+        String values = scanner.next();
+        boolean found = false;
+
+        for (int i = 0; i < num; i++) {
+            if (values.charAt(i) == 'o') {
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

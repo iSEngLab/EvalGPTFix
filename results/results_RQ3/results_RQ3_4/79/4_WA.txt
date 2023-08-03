@@ -1,0 +1,28 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n=sc.nextInt();
+        String s=sc.next();
+        int oCount = 0;
+        int xCount = 0;
+        for(int i=0;i<n;i++){
+            if(s.charAt(i)=='o')
+                oCount++;
+            else
+                xCount++;
+        }
+        if(oCount == 0){
+            System.out.println("No");
+            return;
+        }
+        boolean output=false;
+        int diff=xCount-(7-oCount%7)*(oCount/7+1);
+        if(diff%3==0 && diff>=0)
+            output=true;
+        if(output==true)
+            System.out.println("Yes");
+        else
+            System.out.println("No");
+    }
+}

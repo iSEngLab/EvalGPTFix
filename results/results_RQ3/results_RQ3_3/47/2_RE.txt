@@ -1,0 +1,26 @@
+package to.msn.wings.selflearn.chap01;
+
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        BigInteger d = new BigInteger(scanner.next()); // changed data type to BigInteger
+        int[] t = new int[n];
+        int ans = -1;
+        for (int i = 0; i < n; i++) {
+            t[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < n-1; i++) {
+            BigInteger diff = BigInteger.valueOf(t[i+1]).subtract(BigInteger.valueOf(t[i])); // calculate difference with BigInteger
+            if (diff.compareTo(d) > 0) { // changed condition to use compareTo
+                ans = t[i+1];
+                break;
+            }
+        }
+        System.out.println(ans);
+    }
+}

@@ -1,0 +1,70 @@
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		try(Scanner sc = new Scanner(System.in)){
+			
+			PrintWriter out = new PrintWriter(System.out);
+			StringBuilder sb = new StringBuilder();
+			
+			int n = Integer.parseInt(sc.next());
+			
+			Map<Integer, Long> rmap = new HashMap<Integer, Long>();
+			Map<Integer, Long> cmap = new HashMap<Integer, Long>();
+			Map<Map.Entry<Integer, Integer>, Long> pmap = new HashMap<Map.Entry<Integer,Integer>, Long>();
+			
+			for(int i = 0; i < n; i++) {
+				int r = Integer.parseInt(sc.next());
+				int c = Integer.parseInt(sc.next());
+				Long x = Long.parseLong(sc.next());
+				
+				rmap.merge(r, x, Long::sum);
+				cmap.merge(c, x, Long::sum);
+				
+				Map.Entry<Integer, Integer> tmp = Map.entry(r, c);
+				
+				pmap.put(tmp, x);
+			}
+			
+			List<Map.Entry<Integer, Long>> list = new ArrayList<Map.Entry<Integer, Long>>(cmap.entrySet());
+			list.sort(Map.Entry.comparingByValue());
+			
+			long ans = 0L;
+			for(Map.Entry<Integer, Long> row : rmap.entrySet()) {
+				for(int i = list.size() - 1;  i >= 0; i--) {
+					Map.Entry<Integer, Long> cmax = list.get(i);
+					
+					Map.Entry<Integer, Integer> tmp = Map.entry(row.getKey(), cmax.getKey());
+					
+					Long v = pmap.get(tmp);
+					
+					if(v == null) {
+						ans = Math.max(ans, row.getValue() + cmax.getValue());
+						break;
+					} else {
+						ans = Math.max(ans, row.getValue() + cmax.getValue() - v);
+					}
+				}
+				
+				
+				
+				
+				
+			}
+			
+			sb.append(ans);
+			
+			out.println(sb.toString());
+			out.flush();
+			
+		}
+	}
+}

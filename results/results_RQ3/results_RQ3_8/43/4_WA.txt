@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String args[]) {
+        ArrayList<Integer> numlist = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int count = sc.nextInt();
+        int distance = sc.nextInt();
+
+        for(int i = 0; i < count; i++) {
+            int num = sc.nextInt();
+            numlist.add(num);
+        }
+
+        int counter = 0;
+
+        for(int i = 0; i < count - 1; i++) { // fixed the loop condition and modified counter values
+            int x1 = numlist.get(i);
+            int x2 = numlist.get(i + 1);
+            int dis = x2 - x1;
+
+            if(dis >= distance) {
+                counter = 0;
+            } else {
+                counter++;
+            }
+            if(counter == 2 && i + 1 == count - 1) { // modified condition for the last element
+                System.out.println(x2);
+                return;
+            }
+        }
+        System.out.println(-1);
+    }
+}

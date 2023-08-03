@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int x = s.indexOf('B');
+        int y = s.indexOf('B', x + 1);
+
+        if (x >= 0 && y >= 0 && ((x + y) % 2 == 0) && ((y >= 0) && (y % 2 != x % 2))) {
+          int z = s.indexOf('K');
+          if (z >= 0 && ((z > x && z < y) || (z > y))) {
+            x = s.indexOf('R');
+            y = s.indexOf('R', x + 1);
+            if (x >= 0 && y >= 0 && y > z) {
+              System.out.println("YES");
+              return;
+            }
+          }
+        }
+
+        System.out.println("NO");
+    }
+}

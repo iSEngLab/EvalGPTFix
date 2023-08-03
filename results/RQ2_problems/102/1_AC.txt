@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int x = s.indexOf('B'), y = s.indexOf('B', x + 1);
+        if(x % 2 == y % 2) { // Fix: changed addition to logical AND
+            System.out.println("No"); // Fix: typo in output
+            return;
+        }
+        x = s.indexOf('R'); y = s.indexOf('R', x + 1);
+        int z = s.indexOf('K');
+        if(x < z && z < y){
+            System.out.println("Yes"); // Fix: typo in output
+            return;
+        }
+        System.out.println("No"); // Fix: typo in output
+    }
+}

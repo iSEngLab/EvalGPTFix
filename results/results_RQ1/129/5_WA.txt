@@ -1,0 +1,59 @@
+import java.util.*;
+public class Main {
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[][] a = new int[n][n];
+    int[][] b = new int[n][n];
+    boolean flg = true; //Fix: initialize to true
+    for(int i = 0; i < n; i++){
+      for(int j = 0; j < n; j++){
+        a[i][j] = sc.nextInt();
+      }
+    }
+    for(int i = 0; i < n; i++){
+      for(int j = 0; j < n; j++){
+        b[i][j] = sc.nextInt();
+      }
+    }
+    for(int k = 0; k < 4; k++){
+      if(!flg) //Fix: check if flg is false
+        break;
+      boolean currentFlg = true; //Fix: add a new variable
+      for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+          if (a[i][j] == 1 && b[i][j] != 1) {
+            flg = false;
+            currentFlg = false; //Fix: set currentFlg to false
+            break;
+          }
+        }
+        if(!currentFlg)
+          break; //Fix: break from outer loop too
+      }
+      if (currentFlg) {
+        flg = true;
+      }
+      int[][] c = new int[n][n];
+      for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+          c[i][j] = a[n - 1 - j][i];
+        }
+      }
+      a = c;
+    }
+    System.out.print(flg? "Yes" : "No");
+  }
+}
+
+input: 3
+0 1 1
+1 0 0
+0 1 0
+1 1 0
+0 0 1
+1 1 1
+
+expect: Yes
+
+actual: No

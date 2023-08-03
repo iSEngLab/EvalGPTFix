@@ -1,0 +1,40 @@
+import java.util.*;
+class Main {
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        int cnt = 0;
+        while(A!=B){
+            if(A>B){
+                double div = (double)A/B;
+                A = (long)(A - B*Math.floor(div));
+                if(A==0){
+                    div += -1;
+                    cnt += (int)div;
+                    break;
+                }
+                cnt += (int)Math.floor(div);
+                continue;
+            }else if(A<B){
+                double div = (double)B/A;
+                B = (long)(B - A*Math.floor(div));
+                if(B==0){
+                    div += -1;
+                    cnt += (int)div;
+                    break;
+                }
+                cnt += (int)Math.floor(div);
+                continue;
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 2147483647
+

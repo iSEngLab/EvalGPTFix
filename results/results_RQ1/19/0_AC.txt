@@ -1,0 +1,50 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+public class Main {
+    public static void main(String args[] ) throws Exception {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int Q = Integer.parseInt(br.readLine().trim());
+
+        long v = 1; 
+        long mod = 998244353L;
+        long b = 1;
+        
+		// Compute the modular inverse of 10
+        BigInteger bMod = BigInteger.TEN.modInverse(BigInteger.valueOf(mod));
+        long bx = bMod.longValue();
+
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+
+        for (int i = 0; i < Q; i++) {
+            String S = br.readLine().trim();
+            switch(S.charAt(0)) {
+                case '1':
+                    String[] ss = S.split(" ");
+                    int r = Integer.parseInt(ss[1]);
+                    list.add(r);
+
+                    b = (b * 10) % mod;
+                    v = (v * 10 + r) % mod;
+                    break;
+
+                case '2':
+                    int c = list.remove(0);
+                    v -= (b * c) % mod;
+                    v = (v + mod) % mod;
+
+                    b = (b * bx) % mod;
+                    break;
+
+                case '3':
+                    System.out.println(v);
+                    break;
+            }
+        }
+
+        br.close();
+    }
+}

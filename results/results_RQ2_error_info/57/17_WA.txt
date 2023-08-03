@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		String S = sc.next();
+
+		boolean hasBad = false; 
+
+		for (int i = 0; i < S.length(); i++) {
+			if (S.charAt(i) == 'x') {
+				hasBad = true; 
+			}
+		}
+		if (!hasBad) {
+			System.out.println("Yes");
+		} else {
+			System.out.println("No");
+		}
+	}
+}
+
+input: 3
+---
+
+expect: No
+
+actual: Yes
+

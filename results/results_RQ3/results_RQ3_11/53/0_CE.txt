@@ -1,0 +1,33 @@
+static void solve(){
+    int N = nextInt();
+    int Q = nextInt();
+    HashMap<Integer, HashSet<Integer>> map = new HashMap<>();
+    ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+    for(int i = 1; i <= 200000; i++){
+        list.add(new ArrayList<Integer>());
+        map.put(i, new HashSet<Integer>());
+    }
+    for(int i = 0; i < Q; i++){
+        int t = nextInt();
+        if(t == 1){
+            int V = nextInt();
+            int U = nextInt();
+            map.get(V).add(U);
+            list.get(U).add(V);
+        }else if(t == 2){
+            int V = nextInt();
+            ArrayList<Integer> output = list.get(V);
+            Collections.sort(output);
+            myout(myconv(output, 8));
+        }else if(t == 3){
+            int V = nextInt();
+            if(V > 200000) {
+                myout("");
+                continue;
+            }
+            ArrayList<Integer> output = new ArrayList<>(map.get(V));
+            Collections.sort(output);
+            myout(myconv(output, 8));
+        }
+    }
+}

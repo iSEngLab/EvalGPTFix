@@ -1,0 +1,59 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter pw = new PrintWriter(System.out);
+
+        int N = Integer.parseInt(r.readLine());
+        boolean[][] A = new boolean[N][N];
+        boolean[][] B = new boolean[N][N];
+
+       // Fixed input reading for matrix A
+        for (int i=0; i<N; i++) {
+            String[] values = r.readLine().split(" "); // split by space
+            for (int j=0; j<N; j++) {
+                A[i][j] = values[j].equals("1");
+            }
+        }
+
+       // Fixed input reading for matrix B
+        for (int i=0; i<N; i++) {
+            String[] values = r.readLine().split(" "); // split by space
+            for (int j=0; j<N; j++) {
+                B[i][j] = values[j].equals("1");
+            }
+        }
+
+        boolean[] works = new boolean[]{false, false, false, false}; // Fixed initial values to false
+        for (int i=0; i<N; i++) {
+            for (int j=0; j<N; j++) {
+                if (A[i][j]){
+                    if (B[i][j]) works[0] = true; // Fixed "not" operator in this line
+                    if (B[N-j-1][i]) works[1] = true; // Fixed second index of B matrix
+                    if (B[N-i-1][N-j-1]) works[2] = true; // Fixed both indices of B matrix
+                    if (B[j][N-i-1]) works[3] = true; // Fixed indices of B matrix
+                }
+            }
+        }
+
+        pw.println((works[0]||works[1]||works[2]||works[3])?"YES":"NO");
+
+        pw.close();
+    }
+}
+
+input: 3
+0 1 1
+1 0 0
+0 1 0
+1 1 0
+0 0 1
+1 1 1
+
+expect: Yes
+
+actual: YES
+

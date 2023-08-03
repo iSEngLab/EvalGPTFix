@@ -1,0 +1,44 @@
+import java.io.PrintWriter;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc      = new Scanner(System.in);
+        PrintWriter out = new PrintWriter(System.out);
+        Output op       = new Output(sc, out);
+
+        try {
+            long a = op.nextLong();
+            long b = op.nextLong();
+
+            int count = 0;
+            while (a > 0 && b > 0) {
+                if (a > b) {
+                    count += a / b;
+                    a = a % b;
+                } else {
+                    count += b / a;
+                    b = b % a;
+                }
+            }
+            System.out.println(count - 1);
+
+        } catch (NoSuchElementException e) {
+            System.err.println("Invalid input: " + e.getMessage());
+        }
+    }
+}
+
+class Output {
+    private final Scanner sc;
+    private final PrintWriter out;
+
+    Output(Scanner sc, PrintWriter out) {
+        this.sc = sc;
+        this.out = out;
+    }
+
+    // other methods
+}

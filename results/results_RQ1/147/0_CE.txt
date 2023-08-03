@@ -1,0 +1,19 @@
+long nextLong() {
+    if (!hasNext()) throw new RuntimeException("no next.");
+    long result = 0;
+    boolean negative = false;
+    int b = nextByte();
+    if (b == '-') {
+        negative = true;
+        b = nextByte();
+    } else if (b == '+') {
+        b = nextByte();
+    }
+    while (isVisibleChar(b)) {
+        if (b < '0' || b > '9') throw new RuntimeException("wrong digit in long:" + (char) b);
+        
+        result = result * 10 + (b - '0');
+        b = nextByte();
+    }
+    return negative ? -result : result;
+}

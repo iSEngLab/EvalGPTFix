@@ -1,0 +1,53 @@
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        int cnt = 0;
+        
+        // Fix: Use GCD to find the greatest common divisor of A and B.
+        long gcd = findGcd(Math.max(A,B), Math.min(A,B));
+        // Divide A and B by the GCD to get the reduced form.
+        A /= gcd;
+        B /= gcd;
+        
+        while(A!=B){
+            if(A>B){
+                long div = A/B;
+                A = A-B*div;
+                if(A==0){
+                    div += -1;
+                    cnt += div;
+                    break;
+                }
+                cnt += div;
+            }else{
+                long div = B/A;
+                B = B-A*div;
+                if(B==0){
+                    div += -1;
+                    cnt += div;
+                    break;
+                }
+                cnt += div;
+            }
+        }
+        System.out.println(cnt);
+    }
+    
+    // Helper method to find the greatest common divisor using Euclid's algorithm.
+    private static long findGcd(long a, long b) {
+        if(b == 0)
+            return a;
+        return findGcd(b, a % b);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275726
+

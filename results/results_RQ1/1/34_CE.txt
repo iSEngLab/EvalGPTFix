@@ -1,0 +1,2 @@
+private static java.util.StringTokenizer tokenizer = null; // add this line
+private static java.io.BufferedReader reader;

@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        String S = sc.next();
+
+        int countGood = 0;
+        int countBad = 0;
+        int firstO = -1;
+        int seventhX = -1;
+
+        for (int i = 0; i < N; i++) {
+            if (S.charAt(i) == 'o') {
+                countGood++;
+                if (firstO == -1) {
+                    firstO = i;
+                }
+            } else if (S.charAt(i) == 'x') {
+                countBad++;
+                if (countBad == 7 && countGood == 0) {
+                    System.out.println("No");
+                    return;
+                }
+                if (countBad == 7 && firstO != -1) {
+                    seventhX = i;
+                }
+            }
+        }
+        if (countGood >= 1 && (countBad < 7 || (seventhX == -1 || firstO < seventhX))) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String args[]) {
+        Scanner stdin = new Scanner(System.in);
+        System.out.println("Please type...");
+
+        int num = stdin.nextInt();
+        String values = stdin.next();
+        List<String> value = new ArrayList();
+
+        for (int i = 0; i < num; i++){
+            String str = String.valueOf(values.charAt(i));
+            value.add(str);
+        }
+
+        int oc = 0, xc = 0;
+        for (String str : value) {
+            if (str.equals("o")) {
+                oc++;
+            }
+            if (str.equals("x")) {
+                xc++;
+            }
+        }
+
+        if (oc == 0 && xc == 0) {
+            System.out.println("No");
+        } else if (oc == xc) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: Please type...
+No
+

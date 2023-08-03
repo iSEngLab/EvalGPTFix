@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String args[]) {
+        ArrayList<Integer> numlist = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int count = sc.nextInt();
+        int distance = sc.nextInt();
+
+        for(int i = 0; i < count; i++) {
+            int num = sc.nextInt();
+            numlist.add(num);
+        }
+
+        int counter = 0;
+
+        // Fixed the loop to count until count-1
+        for(int i = 1; i < count-1; i++) {
+            int x1 = numlist.get(i - 1);
+            int x2 = numlist.get(i);
+            int dis = x2 - x1;
+
+            if(dis < distance) {
+                System.out.println(x2);
+                break;
+            }
+            counter++;
+        }
+
+        // Removed the count-- line, not necessary
+        if(counter == count-2) {
+            System.out.println(-1);
+        }
+    }
+}
+
+input: 1 1000000000
+1
+
+expect: -1
+
+actual: 

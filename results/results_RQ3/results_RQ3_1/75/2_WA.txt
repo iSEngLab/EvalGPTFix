@@ -1,0 +1,16 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String args[]) {
+		Scanner stdin = new Scanner(System.in);
+
+		int num = stdin.nextInt();
+		String values = stdin.next();
+
+		if (values.indexOf("o") != -1) {
+			System.out.println("Yes");
+		} else {
+			System.out.println("No");
+		}
+	}
+}

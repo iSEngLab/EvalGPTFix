@@ -1,0 +1,15 @@
+public static void main(String[] args) {
+    FastScanner sc = new FastScanner();
+    int N = sc.nextInt();
+    int D = sc.nextInt();
+    int bfTime = sc.nextInt();
+    for (int i = 0; i < N-1; i++) {
+        int time = sc.nextInt();
+        if (Math.abs(bfTime - time) < D) {
+            System.out.println(time);
+            return;
+        }
+        bfTime = time;
+    }
+    System.out.println(-1);
+}

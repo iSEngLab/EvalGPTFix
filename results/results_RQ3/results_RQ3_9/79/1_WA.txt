@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean flag = false;
+        for(int i=0;i<n;++i){
+            if(s.charAt(i) == 'o') {
+                flag = true;
+            }else if(s.charAt(i) == 'x'){
+                System.out.println("NO");
+                return;
+            }
+        }
+        if(flag) { //Added curly braces for if statement
+            int oCount = s.length() - s.replace("o", "").length(); //Counting number of 'o' characters
+            int xCount = s.length() - s.replace("x", "").length(); //Counting number of 'x' characters
+            if(oCount - xCount >= 0 && oCount - xCount <= 15){ //Checking if 'o' count is greater than or equal to 'x' count and less than or equal to 15
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        } else {
+            System.out.println("NO");
+        }
+    }
+}

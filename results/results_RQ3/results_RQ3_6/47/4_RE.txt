@@ -1,0 +1,29 @@
+package to.msn.wings.selflearn.chap01;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int d = scanner.nextInt();
+        int[] t = new int[n];
+        int ans = -1;
+        for (int i = 0; i < n; i++) {
+            t[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < n-1; i++) {
+            if (t[i+1]-t[i] >= d) {
+                ans = t[i] + d; // Fixed: changed ans to t[i] + d to get the correct result
+                break;
+            }
+        }
+        if(ans == -1) {
+            ans = t[n-1] + d; // Fixed: added a case when the loop through the elements doesn't return anything 
+        } else if(ans + d > t[n-1]) {
+            ans = t[n-1]; // Fixed: added a case when the value of ans is greater than the last element in the array
+        }
+        System.out.println(ans);
+    }
+}

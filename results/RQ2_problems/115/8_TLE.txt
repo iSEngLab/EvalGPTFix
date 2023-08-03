@@ -1,0 +1,23 @@
+import java.util.*;
+class Main {
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        int cnt = 0;
+        while(A!=B){
+            if(A>B){
+                A -= B;
+            }else{ // A<B
+                B -= A;
+            }
+            cnt++;
+        }
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

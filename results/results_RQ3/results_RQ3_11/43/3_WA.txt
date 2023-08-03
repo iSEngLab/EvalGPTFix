@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String args[]) {
+        ArrayList<Integer> numlist = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int count = sc.nextInt();
+        int distance = sc.nextInt();
+
+        for(int i = 0; i < count; i++) {
+            int num = sc.nextInt();
+            numlist.add(num);
+        }
+
+        int counter = 0;
+        int i;
+
+        if(numlist.get(1) - numlist.get(0) >= distance){
+            System.out.println(numlist.get(0));
+            return;
+        }
+
+        for(i = 1; i < count - 1; i++) {
+            int x1 = numlist.get(i - 1);
+            int x2 = numlist.get(i);
+            int dis = x2 - x1;
+
+            if(dis >= distance) {
+                counter++;
+                if(counter == 2) {
+                    System.out.println(numlist.get(i-1));
+                    return;
+                }
+            } else {
+                counter = 0;
+            }
+        }
+        
+        if(counter == 1 && numlist.get(i) - numlist.get(i-1) >= distance){
+            System.out.println(numlist.get(i));
+            return;
+        }
+
+        System.out.println("-1");
+    }
+}

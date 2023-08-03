@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        char[] S = sc.next().toCharArray(); // Convert the String to a char array
+        boolean hasGood = false;
+        boolean hasBad = false;
+        for (int i = 0; i < N; i++) {
+            if (S[i] == 'o') {
+                hasGood = true;
+            } else if (S[i] == 'x') {
+                hasBad = true;
+            }
+        }
+        if (hasGood && !hasBad) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        final int N = sc.nextInt();
+        sc.nextLine(); // consume the remaining newline character
+
+        String str = sc.nextLine();
+        boolean good = false;
+        boolean bad = false;
+
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c == 'o') {
+                good = true;
+            } else if (c == '-') {
+                bad = true;
+            } else if (!Character.isWhitespace(c)) { // exclude whitespace from valid characters
+                bad = true;
+            }
+        }
+
+        System.out.println(good && !bad ? "Yes" : "No");
+    }
+}

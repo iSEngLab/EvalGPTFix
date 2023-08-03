@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        String S = sc.next();
+
+        if (N == 0 || S.contains("x")) {
+            System.out.println("No");
+            return;
+        }
+
+        String replaced = S.replaceAll("-", "o");
+        if (replaced.chars().allMatch(c -> c == 'o')) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

@@ -1,0 +1,28 @@
+public void solve() throws Exception {
+    int h=nextInt(),w=nextInt(),k=nextInt();
+    long res=0;
+
+    int hw = h * w;
+    Comb c=new Comb(hw, M);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            // Compute combinations for the k-size subset of cells that are
+            // at most k cells away from the (i,j) cell:
+            for (int ii = Math.max(0, i-k+1); ii <= Math.min(h-1, i+k-1); ii++) {
+                for (int jj = Math.max(0, j-k+1); jj <= Math.min(w-1, j+k-1); jj++) {
+                    int d = Math.abs(i-ii) + Math.abs(j-jj);
+                    if (d<=k) {
+                        int ways = c.comb(h*w-k, hw-k-d);
+                        res += ways;
+                    }
+                }
+            }
+            res %= M;
+        }
+    }
+    // Divide the result by the total number of k-size subsets:
+    long totalWays = c.comb(hw, k);
+    long modinv = c.modinv(totalWays, M);
+    out.println(((res*modinv+M)%M));
+}

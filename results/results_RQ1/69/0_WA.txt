@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		final int N = sc.nextInt(); // unused variable (possibly meant for size of input string)
+		String input = sc.next(); // rename variable to be more descriptive
+		
+		boolean hasO = false; // rename variable to be more descriptive
+		boolean hasX = false; // rename variable to be more descriptive
+		
+		System.out.println("Input string: " + input); // add output statement to show input string 
+		
+		if(input.contains("o")) hasO = true;
+		if(input.contains("x")) hasX = true;
+		
+		if(hasO && !hasX) {
+			System.out.println("Input string is good."); // change output statement to be more descriptive
+		} else {
+			System.out.println("Input string is bad."); // change output statement to be more descriptive
+		}
+	}
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: Input string: ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+Input string is good.
+

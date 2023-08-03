@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong(); // use nextLong() instead of nextInt()
+        long b = sc.nextLong(); // use nextLong() instead of nextInt()
+        long cnt = 0; // use long data type for cnt
+        while (a != b) {
+            cnt ++;
+            if (a > b) {
+                long quotient = (a - 1) / b;
+                cnt += quotient;
+                a -= quotient * b;
+            } else {
+                long quotient = (b - 1) / a;
+                cnt += quotient;
+                b -= quotient * a;
+            }
+        }
+        System.out.println(cnt);
+    }
+}

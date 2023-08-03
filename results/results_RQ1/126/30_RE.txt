@@ -1,0 +1,38 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=0;
+        
+        while(a!=b) {
+            if(a<b) {
+                long dif=b-a;
+                ans+=(dif/a);
+                if(dif%a!=0) { // check for remainder after division
+                    ans++;
+                }
+                b %= a; // calculate remainder using modulo operator
+            } else {
+                long dif = a-b;
+                ans+=(dif/b);
+                if(dif%b!=0) { // check for remainder after division
+                    ans++;
+                }
+                a %= b; // calculate remainder using modulo operator
+            }
+        }
+        
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

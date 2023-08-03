@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean flag = false;
+        int dotCount = 0;
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == 'o') {
+                flag = true;
+            } else if (s.charAt(i) == '.') {
+                dotCount++;
+            } else {
+                System.out.println("NO");
+                return;
+            }
+        }
+        if (flag || dotCount == n) {
+            System.out.println("YES");
+        } else {
+            System.out.println("NO");
+        }
+    }
+}

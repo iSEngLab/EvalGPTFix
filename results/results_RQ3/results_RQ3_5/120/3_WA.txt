@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        long sum = 0;
+        if (A < B) {
+            long tmp = A;
+            A = B;
+            B = tmp;
+        }
+        while (B != 0) {
+            sum += A / B;
+            A %= B;
+            if (A < B) {
+                long tmp = A;
+                A = B;
+                B = tmp;
+            }
+        }
+        System.out.println(sum);
+    }
+}

@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        final int N = sc.nextInt();
+        // We need an extra sc.nextLine() to consume the newline character left in the buffer
+        sc.nextLine();
+        String str = sc.nextLine();
+		
+        boolean good = false;
+        boolean bad = false;
+
+        // Check that there are no 'x' in the input
+        if (str.contains("x")) {
+            System.out.println("No");
+            return;
+        }
+
+        // Check that there is at least one 'o' in the input
+        if(str.contains("o")) good = true;
+        else {
+            System.out.println("No");
+            return;
+        }
+
+        // Check that there is no '-' in the input
+        if(str.contains("-")) {
+            System.out.println("No");
+            return;
+        }
+		
+        System.out.println("Yes");
+    }
+}

@@ -1,0 +1,20 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        long cnt = 0;
+        while (A != 0 && B != 0) {
+            if (A < B) {
+                long tmp = A;
+                A = B;
+                B = tmp;
+            }
+            cnt += A / B;
+            A = A % B;
+        }
+        System.out.println(cnt);
+    }
+}

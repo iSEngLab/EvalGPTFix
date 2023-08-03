@@ -1,0 +1,60 @@
+class Comb {
+
+    long[] p;
+    long[] pi;
+    int mod; //fix: change type from long to int
+
+    public Comb(int n, int mod) { //fix: change type of second argument to int
+        this.mod=mod;
+        p=new long[n+1];
+        pi=new long[n+1];
+        p[0] = 1;
+        pi[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            p[i] = p[i - 1] * i % mod;
+        }
+        pi[n] = modinv(p[n], mod); //fix: pass mod as an int argument
+        for (int i = n; i > 1; i--) {
+            pi[i-1] = pi[i] * (long) i % mod;
+        }
+    }
+
+    public long comb(int n, int r) {
+        if (n < r) return 0;
+        return p[n] * pi[r] % mod * pi[n - r] % mod;
+    }
+
+    public long perm(int n, int r) {
+        if (n < r) return 0;
+        return p[n] * pi[n - r] % mod;
+    }
+
+    long modinv(long a, int m) { //fix: change type of second argument to int
+        int b = m; //fix: change type to int
+        long u = 1;
+        long v = 0;
+        long tmp = 0;
+
+        while (b > 0) {
+            int t = (int) (a / b); //fix: cast a/b to int
+            a -= t * b;
+            tmp = a;
+            a = b;
+            b = (int) tmp; //fix: cast tmp to int
+
+            u -= t * v;
+            tmp = u;
+            u = v;
+            v = tmp;
+        }
+
+        u %= m;
+        if (u < 0) u += m;
+        return u;
+    }
+}
+
+input: 1000 1000 522
+
+expect: 625692699
+

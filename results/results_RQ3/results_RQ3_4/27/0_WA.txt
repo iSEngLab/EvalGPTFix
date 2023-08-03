@@ -1,0 +1,66 @@
+import java.util.*;
+
+public class Main {
+
+	private static class Pair implements Comparable<Pair> {
+		int x;
+		long score;
+
+		public Pair(int x,long score) {
+			this.x=x;
+			this.score=score;
+		}
+
+		public String toString() {
+			return "["+this.x+","+this.score+"]";
+		}
+
+		@Override
+		public int compareTo(Pair other) {
+			if(this.score-other.score>0)
+				return -1;
+			if(this.score-other.score<0)
+				return 1;
+			return 0;
+		}
+
+	}
+    
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		HashMap<Integer, Long> rows=new HashMap<>();
+		HashMap<Integer, Long> cols=new HashMap<>();
+		HashMap<Integer, HashMap<Integer, Integer>> val=new HashMap<>();
+		for(int i=0;i<n;i++) {
+			int r=sc.nextInt();
+			int c=sc.nextInt();
+			int x=sc.nextInt();
+			rows.put(r,rows.getOrDefault(r,0L)+x);
+			cols.put(c,cols.getOrDefault(c,0L)+x);
+			HashMap<Integer, Integer> hm=val.getOrDefault(r,new HashMap<Integer, Integer>());
+			hm.put(c,x);
+			val.put(r,hm);
+		}
+		
+		
+		
+		ArrayList<Pair> lcols=new ArrayList<>();
+		for(Map.Entry<Integer, Long> entry : cols.entrySet()) {
+            lcols.add(new Pair(entry.getKey(), entry.getValue())); 
+        }
+		Collections.sort(lcols);
+		
+		long ans=lcols.get(0).score;
+		for(Map.Entry<Integer, Long> entry : rows.entrySet()) {
+			int i=0;
+            int x = entry.getKey();
+			while(i<lcols.size() && val.get(x).containsKey(lcols.get(i).x)) {				
+				i++;
+			}
+			if(i<lcols.size())
+				ans=Math.max(ans,lcols.get(i).score+rows.get(x));			
+		}
+		System.out.println(ans);
+	}
+}

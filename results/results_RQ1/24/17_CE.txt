@@ -1,0 +1,16 @@
+else if (t == 2) {
+    int p = q.poll();
+    ans -= binpow(10, k - 1, mod) * p % mod;
+    ans += mod;
+    ans %= mod;
+    k--;
+    if (q.isEmpty()) {
+        ans = 1;
+        k = 1;
+    } else {
+        int front = q.peek();
+        ans -= binpow(10, k - 1, mod) * front % mod;
+        ans += mod;
+        ans %= mod;
+    }
+}

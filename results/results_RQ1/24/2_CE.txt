@@ -1,0 +1,1 @@
+ans -= binpow(10, k - 1, mod) * p % mod;

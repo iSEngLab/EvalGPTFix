@@ -1,0 +1,37 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans = 0;
+
+        while(a != 0 && b != 0) {
+            if(a < b) {
+                long diff = b - a;
+                ans += (b / a);
+                b %= a;
+                if (b == 0) {
+                    break;  // FIX: Check if b is zero before performing final calculations
+                } else {
+                    a += diff;  // FIX: Add the difference if b is not zero
+                }
+            } else {
+                long diff = a - b;
+                ans += (a / b);
+                a %= b;
+                if (a == 0) {
+                    break;  // FIX: Check if a is zero before performing final calculations
+                } else {
+                    b += diff;  // FIX: Add the difference if a is not zero
+                }
+            }
+        }
+
+        System.out.println(ans);
+    }
+}

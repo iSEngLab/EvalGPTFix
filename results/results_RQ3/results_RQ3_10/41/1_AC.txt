@@ -1,0 +1,25 @@
+import java.util.*;
+
+class Main {
+  public static void main(String[] args) { //fix: added [] to args to make it an array
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int d = sc.nextInt();
+    int a[] = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int c = -1;
+    for (int i = 1; i < n; i++) {
+      if (a[i]-a[i-1] <= d) {
+        c = i;
+        i++; //fix: increment i again to check the next difference
+        while (i < n && a[i]-a[i-1] <= d) { //fix: added boundary check for i
+          i++;
+        }
+        break;
+      }
+    }
+    System.out.println(c == -1 ? -1 : a[c]); //fix: check if c is -1 before outputting a[c]
+  }
+}

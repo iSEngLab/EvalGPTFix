@@ -1,0 +1,20 @@
+void go() {
+    int n = nextInt();
+    long tot = nextLong();
+    long[] a = new long[n];
+    for (int i = 0; i < n; ++i) a[i] = nextLong();
+    Arrays.sort(a);
+    long l = 0;
+    long r = a[n - 1] * tot;
+    while (r - l > 1) {
+        long mid = (l + r) / 2;
+        long cnt = 0;
+        for (int i = 0; i < n; ++i) {
+            cnt += (a[i] + mid - 1) / mid;
+            if (cnt > tot) break;
+        }
+        if (cnt <= tot) r = mid;
+        else l = mid;
+    }
+    sl(r);
+}

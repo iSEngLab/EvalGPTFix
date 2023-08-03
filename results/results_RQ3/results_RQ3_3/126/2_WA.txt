@@ -1,0 +1,30 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        
+        String s1[] = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        long lcm = (a * b) / gcd(a, b); // find lcm
+        
+        // compute number of steps for each axis
+        long steps_a = lcm / a;
+        long steps_b = lcm / b;
+        
+        // calculate answer
+        long ans = (steps_a + steps_b - 2) * Math.min(a, b) / gcd(steps_a, steps_b);
+        
+        System.out.println(ans);
+    }
+    
+    static long gcd(long a, long b) { // compute gcd using Euclidean algorithm
+        if (a == 0) {
+            return b;
+        }
+        return gcd(b % a, a);
+    }
+}

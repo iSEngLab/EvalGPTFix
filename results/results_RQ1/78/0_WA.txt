@@ -1,0 +1,30 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int manCount = sc.nextInt();
+        String judge = sc.next();
+        boolean good = false;
+        boolean bad = false;
+        for (int count = 0; count<manCount;count++ ){
+            if(judge.charAt(count) == 'o'){
+                good = true;
+            }else if (judge.charAt(count) == 'x'){
+                bad = true;
+            }
+        }
+        if (good && !bad){
+            System.out.println("yes");
+        }else{
+            System.out.println("no");
+        }
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: yes
+

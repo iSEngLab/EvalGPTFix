@@ -1,0 +1,24 @@
+void go() {
+    int n = nextInt();
+    long tot = nextLong();
+    long[] f = new long[n];
+    for (int i = 0; i < f.length; ++i) f[i] = nextInt();
+    Arrays.sort(f);
+    if (f[0] == 1) {
+        sl(tot);
+        return;
+    } else if (n == 1) {
+        sl(n * f[0]);
+        return;
+    }
+    TreeSet<Long> a = new TreeSet<>();
+    for (int i = 0; i < f.length; ++i) a.add(f[i]);
+    TreeSet<Long> r = new TreeSet<>();
+    while (r.size() < tot) {
+        long x = a.first();
+        r.add(x);
+        a.remove(x);
+        for (long t : f) a.add(x + t);
+    }
+    sl(r.last());
+}

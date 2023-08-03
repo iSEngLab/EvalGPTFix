@@ -1,0 +1,124 @@
+import java.io.*;
+import java.util.*;
+import java.math.BigInteger;
+
+class Comb {
+
+    long[] p;
+    long[] pi;
+    long mod;
+
+    public Comb(int n, long mod) {
+        this.mod=mod;
+        p=new long[n+1];
+        pi=new long[n+1];
+        p[0] = 1;
+        pi[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            p[i] = p[i - 1] * i % mod;
+        }
+        pi[n] = modinv(p[n], (int) mod);
+        for (int i = n; i > 1; i--) {
+            pi[i-1] = pi[i] * (long) i % mod;
+        }
+    }
+
+    public long comb(int n, int r) {
+        if (n < r) return 0;
+        return p[n] * pi[r] % mod * pi[n - r] % mod;
+    }
+
+    public long perm(int n, int r) {
+        if (n < r) return 0;
+        return p[n] * pi[n - r] % mod;
+    }
+
+    long modinv(long a, long m) {
+        long b = m;
+        long u = 1;
+        long v = 0;
+        long tmp = 0;
+
+        while (b > 0) {
+            long t = a / b;
+            a -= t * b;
+            tmp = a;
+            a = b;
+            b = tmp;
+
+            u -= t * v;
+            tmp = u;
+            u = v;
+            v = tmp;
+        }
+
+        u %= m;
+        if (u < 0) u += m;
+        return u;
+    }
+}
+
+public class Main {
+
+    static long M=998244353;
+
+    public void solve() throws Exception {
+        int h=nextInt(),w=nextInt(),k=nextInt();
+        long res=0;
+
+        int hw = h * w;
+        Comb c=new Comb(hw, M);
+
+        for (int i = 0; i <= Math.min(k, h - 1); i++) {
+            for (int j = 0; j <= Math.min(k, w - 1); j++) {
+                int d1 = i, u1 = h - i, l1 = j, r1 = w - j;
+                int d2 = k - i, u2 = h - d2, l2 = k - j, r2 = w - l2;
+                if (d2 < 0 || l2 < 0) continue;
+                long w0 = c.comb(l1 * d1, k) * c.comb(r1 * d1, d2) % M * c.perm(u1 * l1, d2) % M;
+                long w1 = c.comb(l1 * k + r1 * d1, k) * c.perm(u1 * l1, d1) % M * c.perm(u1 * r1, d2) % M;
+                long w2 = c.comb(l1 * d2, k) * c.comb(r1 * d2, k - d2) % M * c.perm(u1 * l1, d2) % M;
+                long w3 = c.comb(l1 * k + r1 * d2, k) * c.perm(u1 * r1, d2) % M * c.perm(u1 * l1, k - d2) % M;
+                res += ((w0 - w1 - w2 + w3) % M + M) % M;
+                res %= M;
+            }
+        }
+        out.println((res * c.modinv(c.comb(hw, k), M)) % M);
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().solve();
+    }
+
+    static PrintWriter out = new PrintWriter(System.out, true);
+    static InputReader in = new InputReader(System.in);
+    static String next() { return in.next(); }
+    static int nextInt() { return Integer.parseInt(in.next()); }
+    static long nextLong() { return Long.parseLong(in.next()); }
+    static class InputReader {
+        public BufferedReader reader;
+        public StringTokenizer tokenizer;
+
+        public InputReader(InputStream stream) {
+            reader = new BufferedReader(new InputStreamReader(stream), 32768);
+            tokenizer = null;
+        }
+
+        public String next() {
+            while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+                try {
+                    tokenizer = new StringTokenizer(reader.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return tokenizer.nextToken();
+        }
+    }
+}
+
+input: 1000 1000 522
+
+expect: 625692699
+
+actual: 710490548
+

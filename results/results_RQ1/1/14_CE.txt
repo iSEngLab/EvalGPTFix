@@ -1,0 +1,9 @@
+int g = 0;
+for (int v : a) {
+    g ^= g(v, l, r);
+}
+if (g == 0) {
+    System.out.println("Second");
+} else {
+    System.out.println("First");
+}

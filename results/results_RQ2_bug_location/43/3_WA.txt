@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> numlist = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int count = sc.nextInt();
+        int distance = sc.nextInt();
+
+        for (int i = 0; i < count; i++) {
+            int num = sc.nextInt();
+            numlist.add(num);
+        }
+
+        int counter = 0;
+
+        for (int i = 1; i < count; i++) {
+            int x1 = numlist.get(i - 1);
+            int x2 = numlist.get(i);
+            int dis = Math.abs(x2 - x1); //fixed to find absolute difference
+
+            if (dis < distance) {
+                System.out.println(x2);
+                return; //fixed to immediately terminate method if condition is met
+            }
+            counter++;
+        }
+
+        count--;
+        if (counter == count) {
+            System.out.println(-1);
+        }
+    }
+}
+
+input: 4 500
+100 600 1100 1600
+
+expect: 600
+
+actual: -1
+

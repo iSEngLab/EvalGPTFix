@@ -1,0 +1,49 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=0;
+
+        if (a == b) { // check if a and b are already equal
+           System.out.println(ans); 
+           return; // exit main method
+        }
+
+        while(a!=b) { 
+            if(a<b) {
+                long dif=b-a;
+                ans+=(dif/a);
+                // check if dif/a is actually less than 1, not equal to 0
+                if(dif%a!=0) { 
+                    ans++;
+                    b-=((dif/a)*a);
+                } else {
+                    b-=a;
+                }
+            } else {
+                long dif = a-b;
+                ans+=(dif/b);
+                // check if dif/b is actually less than 1, not equal to 0
+                if(dif%b!=0) {
+                    ans++;
+                    a-=((dif/b)*b);
+                } else {
+                    a-=b;
+                }
+            }
+        }
+
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

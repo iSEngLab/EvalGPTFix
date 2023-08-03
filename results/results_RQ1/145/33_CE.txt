@@ -1,0 +1,2 @@
+while (set.size() > k) set.remove(set.last());
+if (k == 0) ans = 0; // fix for when k=0

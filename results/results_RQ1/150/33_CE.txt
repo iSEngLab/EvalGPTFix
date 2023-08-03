@@ -1,0 +1,22 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        long count = 1;
+        count *= c.comb((i + 1) * (j + 1) - 1, k - 1);
+        count %= M;
+        count *= c.comb(h * w - (i + 1) * (j + 1), k - 1);
+        count %= M;
+
+        res += c.comb(h * w, k);
+        res -= count * c.comb(j * h + i, k - 1) % M;
+        res -= count * c.comb((w - j - 1) * h + i, k - 1) % M;
+        res -= count * c.comb(j * h + (h - i - 1), k - 1) % M;
+        res -= count * c.comb((w - j - 1) * h + (h - i - 1), k - 1) % M;
+
+        res += count * c.comb(j * h + i, k);
+        res += count * c.comb((w - j - 1) * h + i, k);
+        res += count * c.comb(j * h + (h - i - 1), k);
+        res += count * c.comb((w - j - 1) * h + (h - i - 1), k);
+
+        res %= M;
+    }
+}

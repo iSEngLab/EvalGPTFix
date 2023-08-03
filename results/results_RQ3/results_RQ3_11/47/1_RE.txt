@@ -1,0 +1,25 @@
+package to.msn.wings.selflearn.chap01;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int d = scanner.nextInt();
+        int[] t = new int[n];
+        int ans = -1;
+        for (int i = 0; i < n; i++) {
+            t[i] = scanner.nextInt();
+        }
+        for (int i = 1; i < n; i++) { //Fixed the loop to start from index 1
+            if (t[i]-t[i-1] >= d) { //Fixed the condition: >= instead of <=
+                ans = t[i-d]; //Fixed the access issue: i-d instead of i+1-d
+                break;
+            }
+        }
+        System.out.println(ans);
+    }
+
+}

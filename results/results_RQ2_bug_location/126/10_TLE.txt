@@ -1,0 +1,40 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=1; //fix: initialize the answer to 1, since the loop will always execute at least once
+        
+        while(a!=b) {   
+            if(a<b) {
+                long dif=b-a;
+                ans+=(dif/a);
+                if(dif%a==0) { //fix: check if the remainder is 0 instead of if the division result is 0
+                    b-=a;
+                } else {
+                    b-=(dif/a)*a;
+                }
+            } else {
+                long dif = a-b;
+                ans+=(dif/b);
+                if(dif%b==0) { //fix: check if the remainder is 0 instead of if the division result is 0
+                    a-=b;
+                } else {
+                    a-=(dif/b)*b;
+                }
+            }
+        }
+            
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

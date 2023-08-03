@@ -1,0 +1,5 @@
+else if (op == 2) {
+    int y = deque.removeFirst();
+    int sz = deque.size() + 1;
+    res = (res - y * quickPow(10, sz) + MOD) % MOD;
+}

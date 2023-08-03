@@ -1,0 +1,33 @@
+import java.util.*;
+
+@SuppressWarnings("unused")
+public class Main {
+
+  private static void solve() {
+    int n = ni();
+    int l = ni();
+    int r = ni();
+    int[] a = na(n);
+
+    Set<Integer> gSet = new HashSet<>();
+    for (int v : a) {
+      int g = g(v, l, r);
+      gSet.add(g);
+    }
+    if (gSet.size() % 2 == 0) {
+      System.out.println("Second");
+    } else {
+      System.out.println("First");
+    }
+  }
+
+
+  private static int g(int v, int l, int r) {
+    long x = v % (long)(l + r);
+    if (x < 0) {
+        x += l + r; // make x non-negative
+    }
+    return (int)Math.max(0L, x - l);
+  }
+
+  public static

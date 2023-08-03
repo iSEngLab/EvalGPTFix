@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		String S = sc.next();
+
+		if (N != S.length()) {
+			System.out.println("Invalid input: length of string S should be equal to N");
+			return;
+		}
+
+		boolean hasGood = false;
+		boolean hasBad = false;
+
+		for (int i = 0; i < N; i++) {
+			char c = S.charAt(i);
+			if (c == 'o') {
+				hasGood = true;
+			} else if (c == 'x') {
+				hasBad = true;
+			} else {
+				System.out.println("Invalid input: string S should contain only 'o' or 'x'");
+				return;
+			}
+		}
+
+		if (hasGood && !hasBad) {
+			System.out.println("合格");
+		} else {
+			System.out.println("不合格");
+		}
+	}
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: 合格
+

@@ -1,0 +1,2 @@
+
+The bug in the program was that the Queue implementation was not able to delete the first element efficiently, leading to a time complexity issue. We have replaced the Queue implementation with Deque, which is more efficient when deleting the first element. Additionally, we have changed add() to addLast() and poll() to pollFirst() accordingly to get the correct order of elements in the Deque.

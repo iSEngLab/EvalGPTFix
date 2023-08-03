@@ -1,0 +1,26 @@
+public void solve() throws Exception {
+    int h=nextInt(),w=nextInt(),k=nextInt();
+    long res=0;
+
+    int hw = h * w;
+    Comb c=new Comb(hw, M);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            long cell = 0;
+            cell += c.comb(h * w - 1, k);
+            cell -= c.comb((h - i - 1) * w + j, k);
+            cell -= c.comb(i * w + (w - j - 1), k);
+            cell -= c.comb((h - i - 1) * w + (w - j - 1), k);
+            cell += c.comb((h - i - 1) * w + j, k);
+            cell += c.comb(i * w + (w - j - 1), k);
+            cell += c.comb(i * w + j, k);
+
+            res += cell;
+            res %= M;
+        }
+    }
+
+    long modinv = c.modinv(c.comb(h*w,k), M);
+    out.println((res * modinv) % M);
+}

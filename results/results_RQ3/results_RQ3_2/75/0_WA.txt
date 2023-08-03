@@ -1,0 +1,27 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String args[]) {
+		Scanner stdin = new Scanner(System.in);
+		System.out.println("Please type the number of characters followed by the string of characters...");
+				
+		int num = stdin.nextInt();
+		String values = stdin.next();
+		List<String> value = new ArrayList<String>(); // Add <String> after ArrayList to avoid warning
+		
+		for (int i = 0; i < values.length(); i++){ // Use values.length() instead of num to ensure all characters are processed
+			String str = String.valueOf(values.charAt(i));
+			value.add(str);
+		}
+		
+		if(value.contains("x")) {
+			System.out.println("No");
+		} else if (value.contains("o")) {
+			System.out.println("Yes");
+		} else {
+			System.out.println("No");
+		}		
+	}
+}

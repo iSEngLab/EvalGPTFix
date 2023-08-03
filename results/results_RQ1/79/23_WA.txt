@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean flag = true;
+        for(int i=0;i<n;++i){
+            if(s.charAt(i) != 'o' && s.charAt(i) != 'x'){
+                // if any character other than 'o' or 'x' is found,
+                // set flag to false and break the loop
+                flag = false;
+                break;
+            }
+        }
+        if(flag) System.out.println("YES");
+        else System.out.println("NO");
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: YES
+

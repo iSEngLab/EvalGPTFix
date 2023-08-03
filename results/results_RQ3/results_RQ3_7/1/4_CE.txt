@@ -1,0 +1,42 @@
+import java.util.*;
+
+@SuppressWarnings("unused")
+public class Main {
+  private static void solve() {
+    int n = ni();
+    int l = ni();
+    int r = ni();
+
+    int[] a = na(n);
+
+    int oddCount = 0;
+    for (int i = 0; i < n; i++) {
+      int x = a[i] % (l + r);
+      if (x >= l && x <= r && (x - l) % 2 == 1) {
+        oddCount++;
+      }
+    }
+
+    if (oddCount % 2 == 1) {
+      System.out.println("First");
+    } else {
+      System.out.println("Second");
+    }
+  }
+
+  /* the following methods are unchanged */
+
+  public static void main(String[] args) {
+    new Thread(null, new Runnable() {
+      @Override
+      public void run() {
+        long start = System.currentTimeMillis();
+        String debug = args.length > 0 ? args[0] : null;
+        if (debug != null) {
+          try {
+            is = java.nio.file.Files.newInputStream(java.nio.file.Paths.get(debug));
+          } catch (Exception e) {
+            throw new RuntimeException(e);
+          }
+        }
+        reader = new java.io.BufferedReader(new

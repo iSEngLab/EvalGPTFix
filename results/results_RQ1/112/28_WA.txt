@@ -1,0 +1,119 @@
+import java.util.*;
+ 
+public class Main {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong(); // changed to lower case "l" for consistency
+        long B = sc.nextLong(); // changed to lower case "l" for consistency
+        int ans = 0;
+        if(A>B){
+            if(A==1){
+                ans += (int)(B-1); // added type casting for consistency 
+            }
+            else if (B==1){
+                ans += (int)(A-1); // added type casting for consistency 
+            }
+            else{
+            ans += (int)(A/B); // added type casting for consistency 
+            A = A % B;
+            while(true){
+                if(A==B){
+                    break;
+                }
+                else if(A==0){
+                    ans -= 1;
+                    A=B;
+                }
+                else if(B==0){
+                    ans -= 1;
+                    B=A;
+                }
+                else{
+                    if(A ==1){
+                        ans += (int)(B-1); // added type casting for consistency 
+                        break;
+                    }
+                    else if (B==1){
+                        ans += (int)(A-1); // added type casting for consistency 
+                        break;
+                    }
+                    else if(A>B){
+                        ans += (int)(A/B); // added type casting for consistency 
+                        A = A % B;
+                        if(A==0){
+                            ans -= 1;
+                            A =B;
+                        }
+                    }
+                    else if(B>A){
+                        ans += (int)(B/A); // added type casting for consistency 
+                        B = B % A;
+                        if(B==0){
+                            ans -= 1;
+                            B=A;
+                        }
+                    }
+                }
+            }
+            }
+        }
+        else if(A<B){
+            if(A==1){
+                ans += (int)(B-1); // added type casting for consistency 
+            }
+            else if (B==1){
+                ans += (int)(A-1); // added type casting for consistency 
+            }
+            else {
+            ans += (int)(B/A); // added type casting for consistency 
+            B = B % A;
+            while(true){
+                if(A==B){
+                    break;
+                }
+                else if(A==0){
+                    ans -= 1;
+                    A=B;
+                }
+                else if(B==0){
+                    ans -= 1;
+                    B=A;
+                }
+                else{
+                    if(A ==1){
+                        ans += (int)(B-1); // added type casting for consistency 
+                        break;
+                    }
+                    else if (B==1){
+                        ans += (int)(A-1); // added type casting for consistency 
+                        break;
+                    }
+                    else if(A>B){
+                        ans += (int)(A/B); // added type casting for consistency 
+                        A = A % B;
+                        if(A==0){
+                            ans -= 1;
+                            A =B;
+                        }
+                    }
+                    else if(B>A){
+                        ans += (int)(B/A); // added type casting for consistency 
+                        B = B % A;
+                        if(B==0){
+                            ans -= 1;
+                            B=A;
+                        }
+                    }
+                }
+            }}
+        }
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275726
+

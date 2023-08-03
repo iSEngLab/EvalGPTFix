@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class Main {
+  public static void main(String args[]) {
+    Scanner sc = new Scanner(System.in);
+      String s = sc.next(); 
+      String ans = "YES";
+      int countr=0;
+      int x=-1; // fixed bug: initialize x to -1 to handle case when there are no B's.
+      int ii=0;
+      for (int i = 0; i < 8; i++) {
+        if(s.charAt(i)=='B'&&x==-1){ // fixed bug: initialize x to -1 to handle case when there are no B's.
+           ii=i;x=0; // fixed bug: set x=0 when B is found.
+        }
+        else if(s.charAt(i)=='B'&&x==0){
+             if((i%2==0&&ii%2==0)||(i%2==1&&ii%2==1)){
+              ans="NO";
+              break; // fixed bug: break from loop when ans is NO.
+             }
+             x=1; // fixed bug: set x=1 when second B is found.
+        }
+       }
+      countr=0;
+      for (int i = 0; i < 8; i++) {
+        if(s.charAt(i)=='K'){
+            if(countr!=0){ // fixed bug: check countr!=0 instead of countr!=1 as there can be only one king.
+              ans="NO";
+              break; // fixed bug: break from loop when ans is NO.
+            }
+            countr++; // fixed bug: increment countr after checking for king.
+        }
+        if(s.charAt(i)=='R'){
+          countr++;
+        }
+      }
+      System.out.println(ans);
+    
+  }
+}
+
+input: NQNRKBBR
+
+expect: Yes
+
+actual: NO
+

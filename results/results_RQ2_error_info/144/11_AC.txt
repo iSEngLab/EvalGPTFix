@@ -1,0 +1,52 @@
+import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        try (Scanner sc = new Scanner(System.in)) {
+
+            PrintWriter out = new PrintWriter(System.out);
+            StringBuilder sb = new StringBuilder();
+
+            int n = sc.nextInt();
+            int k = sc.nextInt();
+            long[] a = new long[n];
+
+            Set<Long> set = new HashSet<>();
+            TreeSet<Long> tree = new TreeSet<>();
+
+            for (int i = 0; i < n; i++) {
+                a[i] = sc.nextLong();
+                set.add(a[i]);
+                tree.add(a[i]);
+            }
+
+            long ans = 0;
+            for (int i = 0; i < k; i++) {
+                ans = tree.pollFirst();
+
+                for (int j = 0; j < n; j++) {
+                    long value = ans + a[j];
+                    if (set.contains(value)) continue;
+                    set.add(value);
+                    tree.add(value);
+                    if (tree.size() > k) {
+                        tree.pollLast();
+                    }
+                }
+            }
+
+            sb.append(ans);
+            out.println(sb.toString());
+            out.flush();
+
+        }
+
+    }
+
+}

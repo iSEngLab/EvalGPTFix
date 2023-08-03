@@ -1,0 +1,12 @@
+private static int g(int v, int l, int r) {
+    // Calculate the remainder of v/(l+r)
+    int mod = v % (l + r);
+    
+    // If mod lies in the range (l, r], return 1
+    if (mod > l && mod <= r) {
+        return 1;
+    }
+    
+    // Otherwise, return 0
+    return 0;
+}

@@ -1,0 +1,11 @@
+boolean hasNext() {
+    return (index < max);
+}
+
+String next() {
+    if (hasNext()) {
+        return inputLine.get(index++);
+    } else {
+        return null;
+    }
+}

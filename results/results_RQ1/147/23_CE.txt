@@ -1,0 +1,130 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    void go() {
+        int n = nextInt();
+        long tot = nextLong();
+        long[] f = new long[n];
+        for (int i = 0; i < f.length; ++i) f[i] = nextLong();
+        Arrays.sort(f);
+        if (f[0] == 1) {
+            sl(tot);
+            return;
+        } else if (n == 1) {
+            sl(n * f[0]);
+            return;
+        }
+        TreeSet<Long> a = new TreeSet<>();
+        for (int i = 0; i < f.length; ++i) a.add(f[i]);
+        TreeSet<Long> r = new TreeSet<>();
+        while (r.size() < tot) {
+            long x = a.first();
+            r.add(x);
+            a.remove(x);
+            for (long t : f) a.add(x + t);
+        }
+        sl(r.last());
+    }
+
+    boolean MULTI_CASE = false;
+    long M = 998244353L;
+
+    Reader inReader;
+    int inCursor = 0;
+
+    boolean isVisibleChar(int c) {
+        return Character.isDefined(c) && !Character.isISOControl(c) && !Character.isWhitespace(c);
+    }
+
+    boolean hasNextChar() throws IOException {
+        if (inCursor > 0 && inCursor < inReader.ready()) return true;
+        inCursor = 0;
+        return inReader.ready();
+    }
+
+    char readChar() throws IOException {
+        if (!hasNextChar()) throw new RuntimeException("no next.");
+        return (char) inReader.read();
+    }
+
+    String next() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        char c;
+        while (hasNextChar() && !isVisibleChar(c = readChar())) {}
+        if (!hasNextChar()) throw new RuntimeException("no next.");
+        sb.append(c);
+        while (hasNextChar() && isVisibleChar(c = readChar())) {
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    long nextLong() throws IOException {
+        long result = 0;
+        boolean negative = false;
+        char c = readChar();
+        if (c == '-') {
+            negative = true;
+            c = readChar();
+        } else if (c == '+') {
+            c = readChar();
+        }
+        while (isVisibleChar(c)) {
+            if (!Character.isDigit(c)) throw new RuntimeException("wrong digit in long:" + c);
+            result = result * 10 + (c - '0');
+            c = readChar();
+        }
+        return negative ? -result : result;
+    }
+
+    int nextInt() throws IOException {
+        long x = nextLong();
+        if (x < Integer.MIN_VALUE || x > Integer.MAX_VALUE)
+            throw new RuntimeException("int overflow:" + x);
+        return (int) x;
+    }
+
+    double nextDouble() throws IOException {
+        return Double.parseDouble(next());
+    }
+
+    PrintWriter printOut = new PrintWriter(System.out);
+
+    void so(Object obj) {
+        printOut.print(obj);
+    }
+
+    void sl(Object obj) {
+        printOut.println(obj);
+        printOut.flush();
+    }
+
+    void sl() {
+        printOut.println();
+        printOut.flush();
+    }
+
+    void mainGo() throws IOException {
+        try {
+            inReader = new FileReader("src/main.in");
+        } catch (Exception e) {
+            inReader = new InputStreamReader(System.in);
+        }
+        while (hasNextChar()) {
+            if (MULTI_CASE) {
+                int T = nextInt();
+                for (int i = 0; i < T; ++i) {
+                    go();
+                }
+            } else {
+                go();
+            }
+        }
+        printOut.flush();
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().mainGo();
+    }
+}

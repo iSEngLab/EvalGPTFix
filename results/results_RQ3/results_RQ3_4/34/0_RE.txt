@@ -1,0 +1,45 @@
+package onlinejudge;
+
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		try(Scanner sc = new Scanner(System.in)){
+			
+			PrintWriter out = new PrintWriter(System.out);
+			StringBuilder sb = new StringBuilder();
+			
+			
+			int n = sc.nextInt();
+			int d = sc.nextInt();
+			
+			int[] t = new int[n];
+			for(int i = 0; i < n; i++) {
+				t[i] = sc.nextInt();
+			}
+			
+			int ans = t[0];
+			for(int i = 1; i < n-1; i++) {
+				if(t[i] - t[i - 1] <= d && t[i+1] - t[i] <= d) {
+					ans = t[i];
+					break;
+				}
+			}
+			
+			if(t[n-1] - t[n-2] <= d) {
+				ans = t[n-1];
+			}
+			
+			sb.append(ans);
+			
+			out.println(sb.toString());
+			out.flush();
+			
+		}
+		
+	}
+	
+}

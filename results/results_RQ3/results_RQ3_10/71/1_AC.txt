@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String str = sc.nextLine(); // read the string before the integer
+		
+		final int N = Integer.parseInt(str); // parse the integer value from the string
+		str = sc.nextLine(); // read the next line (the actual string)
+		
+		boolean good = false;
+		boolean bad = false;
+		
+		// loop through all characters in the string
+		for(char c : str.toCharArray()) {
+			if(c == 'o') good = true;
+			else if(c != '-') { // if there's a character other than 'o' or '-', break the loop
+				bad = true;
+				break;
+			}
+		}
+
+		System.out.println(good && !bad ? "Yes" : "No");
+	}
+}

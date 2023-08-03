@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int A = sc.nextInt();
+        int B = sc.nextInt();
+        int sum = 0;
+        while (A != 0 && B != 0) {
+            if (A < B) {
+                int tmp = A;
+                A = B;
+                B = tmp;
+            }
+            sum += A / B;
+            A = A % B;
+        }
+        System.out.println(sum);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

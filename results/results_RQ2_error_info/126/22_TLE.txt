@@ -1,0 +1,46 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        
+            String[] s1 = br.readLine().split(" ");
+            long a = Long.parseLong(s1[0]);
+            long b = Long.parseLong(s1[1]);
+            long ans=0; //Change the type of ans to long
+            
+            while(a!=b) {
+                if(a<b) {
+                    long dif=b-a;
+                    ans+=(dif/a);
+                    if(dif%a==0) { //Change "/" to "%" to check for exact division
+                        b-=a*ans; //Perform the update before the continue statement
+                        ans++;
+                        continue;
+                    }
+                    b-=((dif/a)*a);
+                } else {
+                    long dif = a-b;
+                    ans+=(dif/b);
+                    if(dif%b==0) { //Change "/" to "%" to check for exact division
+                        a-=b*ans; //Perform the update before the continue statement
+                        ans++;
+                        continue;
+                    }
+                    a-=((dif/b)*b);
+                }
+                
+            }
+            
+            System.out.println(ans);
+        
+        
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        long lcm = lcm(A, B);
+        long sum = (lcm / A) + (lcm / B) - 1;
+        System.out.println(sum);
+    }
+
+    public static long gcd(long a, long b) {
+        if (b == 0) {
+            return a;
+        } else {
+            return gcd(b, a % b);
+        }
+    }
+
+    public static long lcm(long a, long b) {
+        return (a * b) / gcd(a, b);
+    }
+
+}

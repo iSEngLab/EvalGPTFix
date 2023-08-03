@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String args[]) {
+        ArrayList<Integer> numlist = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int count = sc.nextInt();
+        int distance = sc.nextInt();
+
+        for(int i = 0; i < count; i++) {
+            int num = sc.nextInt();
+            numlist.add(num);
+        }
+
+        int counter = 0;
+        int firstNum = Integer.MIN_VALUE;
+
+        for(int i = 1; i < count; i++) {
+            int x1 = numlist.get(i - 1);
+            int x2 = numlist.get(i);
+            int dis = x2 - x1;
+
+            if(dis >= distance) {
+                counter = 0;
+            } else {
+                counter++;
+            }
+
+            if(counter == 2 && firstNum == Integer.MIN_VALUE) {
+                if (i - 2 >= 0) { // added check to ensure firstNum is within range
+                    firstNum = numlist.get(i - 2);
+                }
+            }
+        }
+
+        if(firstNum != Integer.MIN_VALUE) {
+            System.out.println(firstNum);
+        } else {
+            System.out.println(-1);
+        }
+    }
+}

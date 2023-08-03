@@ -1,0 +1,15 @@
+private int[] nextIntArray(int size) {
+    int[] array = new int[size];
+    for (int i = 0; i < size; i++) {
+        array[i] = this.sc.nextInt();
+    }
+    return array;
+}
+
+private int[][] nextIntArray(int size1, int size2) {
+    int[][] array = new int[size1][size2];
+    for (int i = 0; i < size1; i++) {
+        array[i] = nextIntArray(size2);
+    }
+    return array;
+}

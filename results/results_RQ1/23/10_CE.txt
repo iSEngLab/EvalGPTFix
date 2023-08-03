@@ -1,0 +1,26 @@
+private static int Int() {
+    try {
+        if (!st.hasMoreTokens()) st.nextToken();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return (int) st.nval;
+}
+
+private static long Long() {
+    try {
+        if (!st.hasMoreTokens()) st.nextToken();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return (long) st.nval;
+}
+
+private static String str() {
+    try {
+        if (!st.hasMoreTokens()) st.nextToken();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return (String) st.sval;
+}

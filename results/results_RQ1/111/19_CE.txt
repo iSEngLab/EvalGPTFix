@@ -1,0 +1,17 @@
+while (a != b) {
+    if (a == 1 || b == 1) {      // add this check to exit loop early
+        cnt += Math.max(a, b) - 1;
+        break;
+    }
+    if (a > b) {
+        cnt += a / b;
+        a %= b;
+    } else {
+        cnt += b / a;
+        b %= a;
+    }
+    if (a == 0 || b == 0) {
+        --cnt;
+        break;
+    }
+}

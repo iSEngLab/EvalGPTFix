@@ -1,0 +1,4 @@
+boolean flag = true;
+for(int kaiten = 0; kaiten<4; kaiten++) {
+    flag = true; // reset flag to true
+    ...

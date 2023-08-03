@@ -1,0 +1,15 @@
+public static void main(String[] args) throws IOException {
+    BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+    PrintWriter pw = new PrintWriter(System.out);
+
+    int N = Integer.parseInt(r.readLine());
+    if (N == 1) {
+        pw.println("YES");
+        pw.close();
+        return;
+    }
+    
+    boolean[][] A = new boolean[N][N];
+    boolean[][] B = new boolean[N][N];
+    // rest of the code
+}

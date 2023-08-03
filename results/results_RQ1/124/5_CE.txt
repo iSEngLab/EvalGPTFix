@@ -1,0 +1,4 @@
+if (a[1] == 0) {
+    System.err.println("Error: Second element of array a is zero");
+    System.exit(1);
+}

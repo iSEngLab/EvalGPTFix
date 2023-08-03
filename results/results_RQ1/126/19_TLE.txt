@@ -1,0 +1,50 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=0;
+            
+        while(a!=0 && b!=0) { //fix #1: replace 'a!=b' with 'a!=0 && b!=0' to check for zero input
+            
+            if(a==b){ //fix #2: add condition for when a and b are equal
+                break;
+            }
+            
+            if(a<b) {
+                long dif=b-a;
+                ans+=(dif/a);
+                if(dif%a==0) { //fix #3: use modulo instead of division to check if remainder is zero
+                    b-=((dif/a)*a);
+                } else { //if not divisible, add one more
+                    ans++;
+                    b-=((dif/a)*a);
+                }
+            } else {
+                long dif = a-b;
+                ans+=(dif/b);
+                if(dif%b==0) { //fix #4: use modulo instead of division to check if remainder is zero
+                    a-=((dif/b)*b);
+                } else { //if not divisible, add one more
+                    ans++;
+                    a-=((dif/b)*b);
+                }
+            }
+                
+        }
+        
+        System.out.println(ans);
+        
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

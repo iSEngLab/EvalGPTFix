@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int A = sc.nextInt(); // changed data type from long to int
+        int B = sc.nextInt(); // changed data type from long to int
+        int sum = 0; // changed data type from long to int
+        while (A != 0 && B != 0) {
+            if (A < B) {
+                int tmp = A; // changed data type from long to int
+                A = B;
+                B = tmp;
+            }
+            sum += A / B;
+            A = A % B;
+        }
+        System.out.println(sum); // removed -1 from sum calculation
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

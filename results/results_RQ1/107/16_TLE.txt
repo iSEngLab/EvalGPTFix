@@ -1,0 +1,71 @@
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        PrintWriter out = new PrintWriter(System.out);
+        Output op = new Output(sc, out);
+
+        long a = op.nextLong();
+        long b = op.nextLong();
+
+        int count = 0;
+        if (a < b) {
+            while (a > 0) {
+                if (b % a == 0) {
+                    count += b / a - 1;
+                    break;
+                } else {
+                    count += b / a;
+                    b = b % a;
+                }
+            }
+        } else {
+            while (b > 0) {
+                if (a % b == 0) {
+                    count += a / b - 1;
+                    break;
+                } else {
+                    count += a / b;
+                    a = a % b;
+                }
+            }
+        }
+        op.intResult(count);
+    }
+}
+
+class Output {
+    private final Scanner sc;
+    private final PrintWriter out;
+
+    Output(Scanner sc, PrintWriter out) {
+        this.sc = sc;
+        this.out = out;
+    }
+
+    public void flush() {
+        this.out.flush();
+    }
+
+    public void intResult(int value) {
+        out.println(value);
+        out.flush();
+    }
+
+    public void strResult(String value) {
+        out.println(value);
+        out.flush();
+    }
+
+    public long nextLong() {
+        return Long.parseLong(sc.next());
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

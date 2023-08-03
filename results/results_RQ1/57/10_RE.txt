@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        // Prompt user for input
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the number of tests: ");
+        
+        // Get user input and validate it
+        int numTests = 0;
+        try {
+            numTests = sc.nextInt();
+            if (numTests <= 0) {
+                throw new IllegalArgumentException();
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter a positive integer.");
+            System.exit(0);
+        }
+        
+        // Loop through each test case
+        for (int i = 0; i < numTests; i++) {
+            System.out.print("Enter the test result for test #" + (i + 1) + ": ");
+            String result = sc.next();
+            
+            // Check if test result is valid and update flags accordingly
+            boolean hasGood = false; 
+            boolean hasBad = false; 
+            for (int j = 0; j < result.length(); j++) {
+                char c = result.charAt(j);
+                if (c == 'o') {
+                    hasGood = true; 
+                } else if (c == 'x') {
+                    hasBad = true; 
+                } else {
+                    System.out.println("Invalid test result. Please only enter 'o' or 'x'.");
+                    System.exit(0); // Terminate program if input is invalid
+                }
+            }
+            
+            // Print corresponding message based on test result
+            if (hasGood && !hasBad) {
+                System.out.println("Test #" + (i + 1) + ": Pass");
+            } else {
+                System.out.println("Test #" + (i + 1) + ": Fail");
+            }
+        }
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+

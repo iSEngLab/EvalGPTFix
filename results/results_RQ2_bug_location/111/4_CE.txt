@@ -1,0 +1,15 @@
+if (a > b) {
+    cnt += a / b;
+    if (a % b == 0) {
+        cnt--;
+        break;
+    }
+    a %= b;
+} else {
+    cnt += b / a;
+    if (b % a == 0) {
+        cnt--;
+        break;
+    }
+    b %= a;
+}

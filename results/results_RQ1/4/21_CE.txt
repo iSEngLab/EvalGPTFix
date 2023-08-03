@@ -1,0 +1,9 @@
+else if(t==2) {
+    long d=0;
+    if(!st.isEmpty()){
+        d=st.poll();
+        d=d*pow%mod;
+        pow=(pow*power(10,mod-2))%mod;
+    }
+    s=(s-d+mod)%mod;
+}

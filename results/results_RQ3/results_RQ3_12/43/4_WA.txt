@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String args[]) {
+        ArrayList<Integer> numlist = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int count = sc.nextInt();
+        int distance = sc.nextInt();
+
+        for(int i = 0; i < count; i++) {
+            int num = sc.nextInt();
+            numlist.add(num);
+        }
+
+        int temp = numlist.get(0);
+        int counter = 0;
+        boolean foundTwoNumbers = false;
+        for(int i = 1; i < count; i++) {
+            int diff = numlist.get(i) - temp;
+            if(diff >= distance) {
+                temp = numlist.get(i);
+                counter = 0;
+            } else {
+                counter++;
+                if(counter == 1 && i == count - 1 && numlist.get(i) - numlist.get(i - 1) < distance) {
+                    System.out.println(numlist.get(i));
+                    foundTwoNumbers = true;
+                }
+                if(counter == 2) {
+                    System.out.println(numlist.get(i));
+                    foundTwoNumbers = true;
+                    break;
+                }
+            }
+
+        }
+
+        if(!foundTwoNumbers) {
+            System.out.println("-1");
+        }
+    }
+}

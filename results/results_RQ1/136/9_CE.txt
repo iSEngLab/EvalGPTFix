@@ -1,0 +1,25 @@
+BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+PrintWriter pw = new PrintWriter(System.out);
+
+int N = Integer.parseInt(r.readLine());
+boolean[][] A = new boolean[N][N];
+boolean[][] B = new boolean[N][N];
+
+for (int i=0; i<N; i++) {
+    StringTokenizer st = new StringTokenizer(r.readLine());
+    for (int j=0; j<N; j++) {
+        A[i][j] = st.nextToken().equals("1");
+    }
+}
+
+// create a new buffered reader for the second array
+BufferedReader r2 = new BufferedReader(new InputStreamReader(System.in));
+
+for (int i=0; i<N; i++) {
+    StringTokenizer st = new StringTokenizer(r2.readLine());
+    for (int j=0; j<N; j++) {
+        B[i][j] = st.nextToken().equals("1");
+    }
+}
+
+// rest of the code remains the same

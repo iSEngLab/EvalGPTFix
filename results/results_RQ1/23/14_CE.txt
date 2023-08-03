@@ -1,0 +1,29 @@
+private static int Int() {
+    try {
+        st.nextToken();
+        return (int) st.nval;
+    } catch (IOException e) {
+        e.printStackTrace();
+        return -1;
+    }
+}
+
+private static long Long() {
+    try {
+        st.nextToken();
+        return (long) st.nval;
+    } catch (IOException e) {
+        e.printStackTrace();
+        return -1;
+    }
+}
+
+private static String str() {
+    try {
+        st.nextToken();
+        return st.sval;
+    } catch (IOException e) {
+        e.printStackTrace();
+        return null;
+    }
+}

@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    void go() {
+        int n = nextInt();
+        long tot = nextInt();
+        long[] f = new long[n]; //FIX: Initialize the f array with n instead of omitting the size.
+        for (int i = 0; i < f.length; ++i) f[i] = nextInt();
+        Arrays.sort(f);
+        if (f[0] == 1) {
+            sl(tot);
+            return;
+        } else if (n == 1) {
+            sl(n * f[0]);
+            return;
+        }
+        TreeSet<Long> a = new TreeSet<>();
+        for (int i = 0; i < n; ++i) a.add(f[i]); //FIX: Use n as the array size, not f.length
+        TreeSet<Long> r = new TreeSet<>();
+        while (r.size() < tot) {
+            long x = a.first();
+            r.add(x);
+            a.remove(x);
+            for (long t : f) a.add(x + t);
+        }
+        sl(r.last());
+    }
+    // ... Remaining code remains the same
+}

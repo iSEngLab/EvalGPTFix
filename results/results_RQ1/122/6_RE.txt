@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt(); // Changed from long to int
+        int b = sc.nextInt(); // Changed from long to int
+        int cnt = 0; // Changed from long to int
+        while (a != b) {
+            cnt++;
+            if (a > b) {
+                cnt += (a - 1) / b;
+                a -= (a - 1) / b * b;
+            } else {
+                cnt += (b - 1) / a;
+                b -= (b - 1) / a * a;
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

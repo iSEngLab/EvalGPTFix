@@ -1,0 +1,35 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+            String[] s1 = br.readLine().split(" ");
+            long a = Long.parseLong(s1[0]);
+            long b = Long.parseLong(s1[1]);
+            int ans=0;
+            
+            //Compute GCD using Euclidean Algorithm
+            while(a!=1 && b!=1) {
+                if(a<b) {
+                    long q = b/a;
+                    ans+=q;
+                    b-=q*a;
+                } else {
+                    long q = a/b;
+                    ans+=q;
+                    a-=q*b;
+                }
+            }
+            
+            //Handle remaining case where one of the values is 1
+            if(a==1 || b==1) {
+                long max = Math.max(a,b);
+                ans+=(max-1);
+            }
+            
+            System.out.println(ans);
+        
+    }
+}

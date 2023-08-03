@@ -1,0 +1,22 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        final int N = sc.nextInt();
+        String str = sc.next();
+        
+        boolean good = false;
+        boolean bad = false;
+        
+        for (int i = 0; i < N; i++) {
+            if (str.charAt(i) == 'o') good = true;
+            if (str.charAt(i) == 'x') bad = true;
+        }
+        
+        System.out.println(good && !bad ? "Yes" : "No");
+        
+        sc.close();
+    }
+}

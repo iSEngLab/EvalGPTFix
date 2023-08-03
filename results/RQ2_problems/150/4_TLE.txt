@@ -1,0 +1,248 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Comb {
+
+    long[] p;
+    long[] pi;
+    long mod;
+
+    public Comb(int n, long mod) {
+        this.mod=mod;
+        p=new long[n+1];
+        pi=new long[n+1];
+        p[0] = 1;
+        pi[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            p[i] = p[i - 1] * i % mod;
+        }
+        pi[n] = modinv(p[n], mod);
+        for (int i = n; i > 0; i--) {
+            pi[i-1] = pi[i] * (long) i % mod;
+        }
+    }
+
+    public long comb(int n, int r) {
+        if (n < r) return 0;
+        return p[n] * pi[r] % mod * pi[n - r] % mod;
+    }
+
+    public long perm(int n, int r) {
+        if (n < r) return 0;
+        return p[n] * pi[n - r] % mod;
+    }
+
+    long modinv(long a, long m) {
+        long b = m;
+        long u = 1;
+        long v = 0;
+        long tmp = 0;
+
+        while (b > 0) {
+            long t = a / b;
+            a -= t * b;
+            tmp = a;
+            a = b;
+            b = tmp;
+
+            u -= t * v;
+            tmp = u;
+            u = v;
+            v = tmp;
+        }
+
+        u %= m;
+        if (u < 0) u += m;
+        return u;
+    }
+}
+
+public class Main {
+
+    static long M=998244353;
+
+    public void solve() throws Exception {
+        int h=nextInt(),w=nextInt(),k=nextInt();
+        long res=0;
+
+        int hw = h * w;
+        Comb c=new Comb(hw, M);
+
+        for (int i = 0; i < (1 << (h * (w - 1))); i++) {
+            List<Integer> bitIndexes = new ArrayList<>();
+            boolean[][] v = new boolean[h][w - 1];
+
+            // extracting bit indexes for each bit of a 1 << (h * (w - 1)) mask
+            for (int j = 0; j < h * (w - 1); j++) {
+                if ((i & (1 << j)) != 0) {
+                    int row = j / (w - 1);
+                    int col = j % (w - 1);
+                    v[row][col] = true;
+                    bitIndexes.add(j);
+                }
+            }
+
+            Map<Integer, Integer> idMap = new HashMap<>();
+            int id = 0;
+            for (int j = 0; j < w; j++) {
+                idMap.put(j, id++);
+            }
+
+            if (bitIndexes.size() > k) {
+                continue;
+            }
+
+            int[] rIds = new int[h];
+            int lastId = -1;
+            for (int j = 0; j < h; j++) {
+                int cId = 0;
+                for (int jj = 1; jj < w; jj++) {
+                    if (v[j][jj - 1]) {
+                        cId = idMap.get(jj - 1) + 1;
+                        break;
+                    }
+                }
+
+                if (cId == 0) {
+                    cId = idMap.get(w - 1);
+                }
+
+                rIds[j] = cId;
+                if (lastId != -1 && cId < lastId) {
+                    // we have rows sorted differently so it's impossible to create a rectangle
+                    rIds = null;
+                    break;
+                }
+                lastId = cId;
+            }
+
+            if (rIds != null) {
+                int[][] groupCounts = new int[h + 1][];
+                groupCounts[0] = new int[c.perm(k, k) > 0 ? k : 0];
+
+                int[] localCount = new int[h];
+                int groupId = 0;
+                for (int bi : bitIndexes) {
+                    int row = bi / (w - 1);
+                    int col = bi % (w - 1);
+
+                    localCount[row]++;
+                    if (localCount[row] == 1 && col == 0) {
+                        groupId++;
+                    }
+                }
+
+                for (int rCount : localCount) {
+                    if (rCount == 0) {
+                        groupCounts[groupId][0]++;
+                    } else {
+                        if (groupCounts[groupId] == null) {
+                            groupCounts[groupId] = new int[c.perm(k, k - rCount) > 0 ? k - rCount: 0];
+                        }
+                        groupCounts[groupId][c.perm(k - 1, k - rCount) > 0 ? k - rCount - 1 : 0]++;
+                    }
+                }
+
+                // splitting into groups
+                int splitCount = groupCounts[0].length + Arrays.stream(groupCounts).filter(Objects::nonNull)
+                        .mapToInt(arr -> arr.length).sum();
+
+                if (splitCount > k) {
+                    continue;
+                }
+
+                List<Integer> counts = new ArrayList<>(splitCount + 1);
+                counts.add(rIds[0] == 0 ? w : 0);
+                int lastCId = -1;
+                groupId = 0;
+                for (int i1 = 0; i1 < h; i1++) {
+                    if (rIds[i1] != lastCId) {
+                        if (groupCounts[groupId] != null) {
+                            for (int count : groupCounts[groupId]) {
+                                counts.add(count);
+                            }
+                        }
+                        lastCId = rIds[i1];
+                        counts.add(rIds[i1] == 0 ? w : 0);
+                        groupId++;
+                    }
+                }
+
+                if (groupCounts[groupId] != null) {
+                    for (int count : groupCounts[groupId]) {
+                        counts.add(count);
+                    }
+                }
+
+                while (counts.size() <= k) {
+                    counts.add(0);
+                }
+
+                long pRes = 1;
+                int[] vCount = new int[hw + 1];
+                for (int cn : counts) {
+                    if (cn == 0) {
+                        continue;
+                    }
+
+                    pRes *= c.comb(vCount[cn] + cn, cn);
+                    pRes %= M;
+                    vCount[cn] += cn;
+                }
+
+                res += pRes;
+                res %= M;
+            }
+        }
+
+        out.println(res);
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().solve();
+    }
+
+    static PrintWriter out = new PrintWriter(System.out, true);
+    static InputReader in = new InputReader(System.in);
+
+    static String next() {
+        return in.next();
+    }
+
+    static int nextInt() {
+        return Integer.parseInt(in.next());
+    }
+
+    static long nextLong() {
+        return Long.parseLong(in.next());
+    }
+
+    static class InputReader {
+        public BufferedReader reader;
+        public StringTokenizer tokenizer;
+
+        public InputReader(InputStream stream) {
+            reader = new BufferedReader(new InputStreamReader(stream), 32768);
+            tokenizer = null;
+        }
+
+        public String next() {
+            while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+                try {
+                    tokenizer = new StringTokenizer(reader.readLine());
+                }
+                catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return tokenizer.nextToken();
+        }
+    }
+}
+
+input: 1000 1000 522
+
+expect: 625692699
+

@@ -1,0 +1,5 @@
+The bug in the program is causing the output of the program to be wrong for some input cases. The issue is with the logic in the while loop. The program is using the wrong formula while calculating the number of times division is required to change one number to another. 
+
+To fix the bug, we need to use the Euclidean algorithm to calculate the greatest common divisor (GCD) of the two numbers. The number of times the larger number can be divided by the GCD to change it to the smaller number is the answer to the problem.
+
+One possible fix for the code is as follows:

@@ -1,0 +1,13 @@
+void so(Object obj) {
+    printOut.print(obj);
+}
+
+void sl(Object obj) {
+    printOut.println(obj);
+    printOut.flush(); // fix: flush the output stream
+}
+
+void sl() {
+    printOut.println();
+    printOut.flush(); // fix: flush the output stream
+}

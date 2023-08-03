@@ -1,0 +1,14 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        res+=c.comb((i*w)+j,k); // use i and j to calculate the cell index
+        res-=c.comb(j*h,k);
+        res-=c.comb((w-j-1)*h,k);
+        res-=c.comb(i*w,k);
+        res-=c.comb((h-i-1)*w,k);
+        res+=c.comb(i*j,k);
+        res+=c.comb(i*(w-j-1),k);
+        res+=c.comb((h-i-1)*(w-j-1),k);
+        res+=c.comb((h-i-1)*j,k);
+        res%=M;
+    }
+}

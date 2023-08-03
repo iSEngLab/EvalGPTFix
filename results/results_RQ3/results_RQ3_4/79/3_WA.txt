@@ -1,0 +1,35 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean flag = false;
+        int oCount = 0;
+        int xCount = 0;
+        for(int i=0;i<n;++i){
+            if(s.charAt(i) == 'o') {
+                flag = true;
+                oCount++;
+            }else if(s.charAt(i) == 'x'){
+                xCount++;
+            }
+        }
+        
+        boolean output = false;
+        if(xCount <= 7){
+            for(int i=0; i<10000; i+=7){
+                if(xCount+i == oCount*3){
+                    output = true;
+                    break;
+                }
+            }
+        }
+        
+        if(flag && output){
+            System.out.println("Yes");
+        }else{
+            System.out.println("No");
+        }
+    }
+}

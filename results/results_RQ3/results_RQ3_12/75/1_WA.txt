@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String args[]) {
+		Scanner stdin = new Scanner(System.in);
+		System.out.println("Please enter the length of the string:");
+		
+		int num = stdin.nextInt();
+		System.out.println("Please enter the string:");
+		String values = stdin.next();
+		
+		if(values.indexOf("x") != -1) { //Fixed usage of contains() which doesn't work well with multiple occurrences
+			System.out.println("No");
+			return;
+		} else if (values.indexOf("o") != -1) {
+			System.out.println("Yes");
+			return;
+		} else {
+			System.out.println("No");
+			return;
+		}		
+	}
+}

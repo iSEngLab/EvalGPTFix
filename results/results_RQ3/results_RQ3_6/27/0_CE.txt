@@ -1,0 +1,4 @@
+@Override
+public int compareTo(Pair other) {
+    return Long.compare(other.score, this.score);
+}

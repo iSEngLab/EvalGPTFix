@@ -1,0 +1,110 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.StreamTokenizer;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
+    private static StreamTokenizer st = new StreamTokenizer(new BufferedReader(new InputStreamReader(System.in)));
+    static Scanner sc = new Scanner(System.in);
+
+    static {
+        st.eolIsSignificant(true);
+    }
+
+    private static int Int() {
+        try {
+            st.nextToken();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        return (int) st.nval;
+    }
+
+    private static long Long() {
+        try {
+            st.nextToken();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (long) st.nval;
+    }
+
+    private static String str() {
+        try {
+            st.nextToken();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return st.sval;
+    }
+
+    static long gcd(long a, long b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    static int[][] tu;
+    static int ans, n, m, b, chu;
+    static int[] dp, dp1, dp2, mx, down, pr, c, du;
+    static List<Integer> list;
+    static Map<Integer, List<Integer>> map, ziyinziweiz;
+
+    static int v1;
+    static long[] p;
+    static String s1[];
+    static long mod = (long) (998244353);
+    static long[] bs = new long[600001];
+
+    public static void main(String[] args) {
+
+        bs[1] = 1;
+        for (int i = 2; i < bs.length; i++) {
+            bs[i] = bs[i - 1] * 10;
+            bs[i] %= mod;
+        }
+
+        while (st.nextToken() != StreamTokenizer.TT_EOF) {
+            int q = (int) st.nval;
+            long ans = 1;
+            int chu = 0;
+            list = new ArrayList<Integer>();
+            list.add(1);
+            for (int i = 0; i < q; i++) {
+                st.nextToken();
+                int k = (int) st.nval;
+                if (k == 1) {
+                    st.nextToken();
+                    int x = (int) st.nval;
+                    list.add(x);
+                    ans *= 10;
+                    ans += x;
+                    ans %= mod;
+                } else if (k == 2) {
+                    int le = list.size() - chu;
+                    long jian = list.get(chu) * bs[le];
+                    jian %= mod;
+                    ans -= jian;
+                    ans += mod;
+                    ans %= mod;
+                    chu++;
+                } else {
+                    out.println(ans);
+                }
+
+            }
+        }
+
+        out.close();
+    }
+
+}

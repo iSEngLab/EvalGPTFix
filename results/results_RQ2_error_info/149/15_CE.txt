@@ -1,0 +1,31 @@
+public void solve() throws Exception {
+    int h = nextInt(), w = nextInt(), k = nextInt();
+    long res = 0;
+
+    int hw = h * w;
+    Comb c = new Comb(hw, M);
+
+    for (int i = 0; i < (1 << (h+w)); i++) { // iterate through all k-cell rectangles
+        int cnt = 0;
+        for (int j = 0; j < h+w; j++) {
+            if ((i & (1 << j)) != 0) {
+                cnt++;
+            }
+        }
+        if (cnt != k) continue;
+
+        long coef = 1;
+        int curx = 0, cury = 0;
+        for (int j = 0; j < h+w; j++) {
+            if ((i & (1 << j)) != 0) {
+                int nx = j < h ? j : curx;
+                int ny = j < h ? cury : j-h;
+                coef = coef * c.perm((nx-curx)+(ny-cury), (nx-curx)) % M;
+                curx = nx; cury = ny;
+            }
+        }
+        res = (res + coef) % M;
+    }
+    long modinv = c.modinv(c.comb(h*w,k), M);
+    out.println(((res*modinv+M)%M));
+}

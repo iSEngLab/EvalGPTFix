@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        String str = scan.next();
+        int[] p = new int[2];
+        int[] p2 = new int[2];
+
+        int cnt = 0, cnt2 = 0, k = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == 'B') {
+                p[cnt] = i + 1;
+                cnt++;
+            } else if (str.charAt(i) == 'R') { // fixed typo here, if should be "else if"
+                p2[cnt2] = i + 1;
+                cnt2++;
+            } else if (str.charAt(i) == 'K') { // no need to use "if" here, can use "else if"
+                k = i + 1;
+            }
+        }
+        // fixed condition, index of p should be 1, not 2
+        if (p[0] % 2 == p[1] % 2) {
+            System.out.print("No");
+            return;
+        }
+
+        // fixed condition, swapped p and p2 since p sort 'B' and p2 sort 'R'
+        if (!(p2[0] < k && k < p2[1])) {
+            System.out.print("No");
+            return;
+        }
+
+        System.out.print("Yes");
+    }
+}

@@ -1,0 +1,65 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        int[][] a = new int[n][n];
+        int[][] b = new int[n][n];
+        for (int i = 0; i < n * 2; i++) {
+            for (int k = 0; k < n; k++) {
+                if (i < n) {
+                    a[i][k] = scanner.nextInt();
+                } else {
+                    b[i - n][k] = scanner.nextInt();
+                }
+            }
+        }
+
+        int[][] tmp = new int[n][n];
+
+        boolean flag = false; // initialize flag as false
+        for (int kaiten = 0; kaiten < 4; kaiten++) {
+            for (int i = 0; i < n; i++) {
+                for (int k = 0; k < n; k++) {
+                    tmp[k][i] = a[n - 1 - i][k];
+                    // rotate a[][] matrix by 90 degrees counter-clockwise
+                }
+            }
+
+            for (int i = 0; i < n; i++) {
+                for (int k = 0; k < n; k++) {
+                    if (tmp[i][k] == 1 && b[i][k] == 0) {
+                        flag = true; // set flag as true if there is inconsistency
+                    }
+                }
+            }
+
+            if (flag) { // output "No" if flag is true and continue to the next iteration
+                flag = false;
+                continue;
+            } else { // output "Yes" if flag is still false after all iterations
+                System.out.println("Yes");
+                return;
+            }
+        }
+
+        System.out.println("No"); // output "No" if all iterations have been executed and flag is still false
+    }
+}
+
+input: 3
+0 1 1
+1 0 0
+0 1 0
+1 1 0
+0 0 1
+1 1 1
+
+expect: Yes
+
+actual: No
+

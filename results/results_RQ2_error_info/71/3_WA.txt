@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        final int N = sc.nextInt();
+        String str = sc.nextLine().trim(); // Fix: add trim() to remove leading whitespace
+
+        boolean good = false;
+        boolean bad = false;
+
+        if(str.contains("o")) good = true;
+        if(str.contains("-")) bad = true;
+
+        System.out.println(good && !bad ? "Yes" : "No");
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: No
+

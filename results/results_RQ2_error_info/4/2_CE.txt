@@ -1,0 +1,54 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+public class Main {
+
+    public static void main(String[] args) throws java.lang.Exception {
+        PrintWriter out = new PrintWriter(System.out);
+        FastReader sc = new FastReader();
+        int testCases = 1;
+
+        while (testCases-- > 0) {
+
+            long s = 1;
+            int q = sc.nextInt();
+            long mod = 998244353;
+            Queue<Integer> st = new LinkedList<>();
+            st.add(1);
+            long pow = 1;
+            for (int i = 0; i < q; i++) {
+                int t = sc.nextInt();
+                if (t == 1) {
+                    int d = sc.nextInt();
+                    s = s * 10 % mod;
+                    s = (s + d) % mod;
+                    pow = pow * 10 % mod;
+                    st.add(d);
+                } else if (t == 2) {
+                    long d = st.isEmpty() ? 0 : st.poll();
+                    d = d * pow % mod; // Fix: multiply "d" by "pow"
+                    pow = pow * power(10, mod - 2) % mod;
+                    s = (s - d + mod) % mod; // Fix: subtract "d" from "s"
+                } else if (t == 3) {
+                    out.println(s);
+                }
+            }
+
+        }
+        out.close();
+    }
+
+    public static long power(long a, long b) {
+        long res = 1;
+        int mod = 998244353;
+        while (b > 0) {
+            res = (res * a) % mod;
+            a = (a * a) % mod;
+            b /= 2;
+        }
+        return res;
+    }
+
+    // Rest of the code remains unchanged
+}

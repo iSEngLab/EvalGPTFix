@@ -1,0 +1,34 @@
+public void solve() throws Exception {
+    int h=nextInt(),w=nextInt(),k=nextInt();
+    long res=0;
+
+    int hw = h * w;
+    Comb c=new Comb(hw, M);
+
+    // Pre-calculate combinations for all values of k
+    long[] ck = new long[k+1];
+    for (int i = 0; i <= k; i++) {
+        ck[i] = c.comb(hw, i);
+    }
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            // Calculate contribution for current tile
+            long tile = 1;
+            tile *= ck[k];
+            tile -= j >= 1 ? ck[k] - ck[k - 1] * ck[w - j] % M : 0;
+            tile -= j < w - 1 ? ck[k] - ck[k - 1] * ck[j + 1] % M : 0;
+            tile -= i >= 1 ? ck[k] - ck[k - 1] * ck[h - i] % M : 0;
+            tile -= i < h - 1 ? ck[k] - ck[k - 1] * ck[i + 1] % M : 0;
+            tile += i >= 1 && j >= 1 ? ck[k] - ck[k - 1] * ck[w - j] % M * ck[h - i] % M : 0;
+            tile += i >= 1 && j < w - 1 ? ck[k] - ck[k - 1] * ck[j + 1] % M * ck[h - i] % M : 0;
+            tile += i < h - 1 && j >= 1 ? ck[k] - ck[k - 1] * ck[w - j] % M * ck[i + 1] % M : 0;
+            tile += i < h - 1 && j < w - 1 ? ck[k] - ck[k - 1] * ck[j + 1] % M * ck[i + 1] % M : 0;
+            res += tile % M;
+        }
+    }
+
+    // Calculate the inverse of comb(hw, k)
+    long modinv = c.modinv(c.comb(hw,k), M);
+    out.println((res*modinv%M));
+}

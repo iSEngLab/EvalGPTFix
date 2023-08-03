@@ -1,0 +1,12 @@
+long[] a = {fs.nextLong(), fs.nextLong()};
+swap(a);
+
+int count = 0;
+while (a[0] != a[1]) {
+    count += (a[0] - 1) / a[1];
+    a[0] -= (a[0] - 1) / a[1] * a[1];
+    swap(a);
+}
+
+out.println(count);
+out.close();

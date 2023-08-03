@@ -1,0 +1,22 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean hasX = false; // Updated the variable name flag to hasX to make it more descriptive
+        for(int i=0; i<n; ++i) {
+            if(s.charAt(i) == 'x') {
+                hasX = true; // Updated the boolean value to true
+                break; // Exit the loop when "x" is encountered
+            }
+        }
+        if(hasX) { // Check if "x" is present
+            System.out.println("No"); // Changed "NO" to "No"
+        }
+        else {
+            System.out.println("Yes"); // Capitalized "Yes" for clarity
+        }
+    }
+}

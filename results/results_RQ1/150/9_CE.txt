@@ -1,0 +1,20 @@
+public void solve() throws Exception {
+    int h=nextInt(),w=nextInt(),k=nextInt();
+    long res=0;
+
+    Comb c=new Comb(h*w, M);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            long cellCombs = 0;
+            cellCombs += c.comb(h*w-1, k-1); // combinations that involve this cell alone
+            cellCombs += c.comb(i*w+j, k-1); // combinations that involve this cell and the cells to the left and top
+            cellCombs += c.comb((h-i-1)*w+j, k-1); // combinations that involve this cell and the cells to the right and bottom
+            cellCombs += c.comb(i*w+w-j-1, k-1); // combinations that involve this cell and the cells to the right and top
+            cellCombs += c.comb((h-i-1)*w+(w-j-1), k-1); // combinations that involve this cell and the cells to the right and bottom
+            res += cellCombs % M;
+        }
+    }
+    long modinv = c.modinv(c.comb(h*w,k), M);
+    out.println((res*modinv%M));
+}

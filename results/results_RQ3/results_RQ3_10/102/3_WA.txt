@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int x = s.indexOf("B"), y = s.indexOf("B", x + 1);
+        if ((x + y) % 2 == 0) {
+            System.out.println("NO");
+            return;
+        }
+        x = s.indexOf("R"); y = s.indexOf("R", x + 1);
+        if ((x + y) % 2 == 0) {
+            System.out.println("NO");
+            return;
+        }
+        int z = s.indexOf("K");
+        if (z == -1) {
+            System.out.println("NO");
+            return;
+        }
+        if (((x + z) % 2 != 0 && (y + z) % 2 != 0) || ((x + z) % 2 == 0 && (y + z) % 2 == 0)) {
+            System.out.println("NO");
+            return;
+        }
+        System.out.println("YES");
+    }
+}

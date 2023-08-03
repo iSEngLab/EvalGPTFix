@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner stdin = new Scanner(System.in);
+    System.out.println("Please type...");
+
+    int num = stdin.nextInt();
+    String values = stdin.next();
+
+    boolean containsO = false;
+
+    for (int i = 0; i < num; i++) {
+      if (values.charAt(i) == 'o') {
+        containsO = true;
+        break;
+      }
+    }
+
+    if (containsO) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}

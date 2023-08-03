@@ -1,0 +1,68 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        HashMap<Integer, Long> rows = new HashMap<>();
+        HashMap<Integer, Long> cols = new HashMap<>();
+        HashMap<Integer, HashSet<Integer>> val = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            int r = sc.nextInt();
+            int c = sc.nextInt();
+            int x = sc.nextInt();
+            rows.put(r, rows.getOrDefault(r, 0L) + x);
+            cols.put(c, cols.getOrDefault(c, 0L) + x);
+            HashSet<Integer> hs = val.getOrDefault(r, new HashSet<>());
+            hs.add(c);
+            val.put(r, hs);
+        }
+
+        ArrayList<Long> lrows = new ArrayList<>(rows.values());
+        ArrayList<Long> lcols = new ArrayList<>(cols.values());
+
+        long[] rowSums = new long[lrows.size()];
+        long[] colSums = new long[lcols.size()];
+
+        long currSum = 0;
+        for (int i = 0; i < lrows.size(); i++) {
+            currSum += lrows.get(i);
+            rowSums[i] = currSum;
+        }
+        currSum = 0;
+        for (int i = 0; i < lcols.size(); i++) {
+            currSum += lcols.get(i);
+            colSums[i] = currSum;
+        }
+
+        long minScore = Long.MAX_VALUE;
+
+        for (int i = 0; i < lcols.size(); i++) {
+            long currScore = colSums[i];
+            int rowIdx = 0;
+            for (int j = 0; j < lrows.size(); j++) {
+                if (!val.containsKey(j + 1) || !val.get(j + 1).contains(i + 1)) {
+                    currScore += rowSums[j];
+                } else {
+                    rowIdx = j + 1;
+                }
+            }
+            if (val.containsKey(rowIdx) && val.get(rowIdx).contains(i + 1)) {
+                long scoreWithoutMedal = currScore - rows.get(rowIdx);
+                currScore = scoreWithoutMedal;
+                rowIdx = 0;
+                for (int j = 0; j < lrows.size(); j++) {
+                    if (j != rowIdx - 1) {
+                        currScore += rowSums[j];
+                    } else if (j == rowIdx - 1 && (!val.containsKey(j + 1) || !val.get(j + 1).contains(i + 1))) {
+                        currScore += rowSums[j];
+                    }
+                }
+            }
+            minScore = Math.min(minScore, currScore);
+        }
+
+        System.out.println(minScore);
+    }
+}

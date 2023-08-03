@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int x = s.indexOf('B'), y;
+        if (x != -1) { // Check if 'B' is present in the String
+            y = s.indexOf('B', x + 1); // Search for the second occurrence of 'B' after x
+            if(x % 2 == y % 2) { // Check if both indices have the same parity
+                System.out.println("NO");
+                return;
+            }
+        }
+        int r = s.indexOf('R'), k = s.indexOf('K');
+        if (r != -1 && k != -1) { // Check if both 'R' and 'K' are present in the String
+            if(r < k) { // Check if the index of 'R' is less than the index of 'K'
+                if(r % 2 != k % 2) { // Check if the indices have different parity
+                    System.out.println("YES");
+                    return;
+                }
+            } else if(k % 2 != r % 2) { // Check if the index of 'K' is less than the index of 'R', and if the indices have different parity
+                System.out.println("YES");
+                return;
+            }
+        }
+        System.out.println("NO");
+    }
+}
+
+input: NQNRKBBR
+
+expect: Yes
+
+actual: YES
+

@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		sc.nextLine(); // fix
+		String str = sc.nextLine();
+
+		boolean good = false;
+		boolean bad = false;
+
+		if(str.indexOf("o") >= 0) good = true; // fix
+		if(str.indexOf("-") >= 0) bad = true; // fix
+
+		System.out.println(good && !bad ? "Yes" : "No");
+		sc.close(); // fix
+	}
+}
+
+input: 100
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooxo
+
+expect: No
+
+actual: Yes
+

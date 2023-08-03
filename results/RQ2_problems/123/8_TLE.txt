@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong(); //fixed to nextLong() to handle large input
+        long b = sc.nextLong(); //fixed to nextLong() to handle large input
+        int cnt = 0;
+        while (a != b) {
+            cnt ++;
+            if (a > b) {
+                long temp = a; //added temporary variable to store original value of a
+                a = b;
+                b = temp - b; //fixed the formula to get correct value of b
+            } else {
+                long temp = b; //added temporary variable to store original value of b
+                b = a;
+                a = temp - a; //fixed the formula to get correct value of a
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

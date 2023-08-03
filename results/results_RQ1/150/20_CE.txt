@@ -1,0 +1,35 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        int n1 = i * w + j;
+        int r1 = k;
+        int n2 = hw - n1 - 1;
+        int r2 = k;
+        int n3 = i * w + (w - j - 1);
+        int r3 = k;
+        int n4 = (h - i - 1) * w + j;
+        int r4 = k;
+        int n5 = (h - i - 1) * w + (w - j - 1);
+        int r5 = k;
+        int n6 = i * j;
+        int r6 = k;
+        int n7 = i * (w - j - 1);
+        int r7 = k;
+        int n8 = (h - i - 1) * (w - j - 1);
+        int r8 = k;
+        int n9 = (h - i - 1) * j;
+        int r9 = k;
+        res += c.comb(n1, r1);
+        res -= c.comb(n2, r2);
+        res -= c.comb(n3, r3);
+        res -= c.comb(n4, r4);
+        res -= c.comb(n5, r5);
+        res += c.comb(n6, r6);
+        res += c.comb(n7, r7);
+        res += c.comb(n8, r8);
+        res += c.comb(n9, r9);
+        res %= M;
+    }
+}
+
+long modinv = c.modinv(c.comb(hw, k), M);
+out.println((res * modinv % M));

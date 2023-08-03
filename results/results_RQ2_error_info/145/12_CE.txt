@@ -1,0 +1,1 @@
+while (set.size() >= k) set.remove(set.last());

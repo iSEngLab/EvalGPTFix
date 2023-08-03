@@ -1,0 +1,42 @@
+package onlinejudge;
+
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        try (Scanner sc = new Scanner(System.in);) {
+
+            PrintWriter out = new PrintWriter(System.out);
+            StringBuilder sb = new StringBuilder();
+
+            int n = sc.hasNext() ? Integer.parseInt(sc.next()) : 0;
+            int d = sc.hasNext() ? Integer.parseInt(sc.next()) : 0;
+
+            List<Integer> tList = new ArrayList<>();
+            for (int i = 0; i < n && sc.hasNext(); i++) {
+                tList.add(Integer.parseInt(sc.next()));
+            }
+
+            int ans = -1;
+            for (int j = 1; j < tList.size(); j++) {
+                if (tList.get(j) - tList.get(j - 1) <= d) {
+                    ans = tList.get(j);
+                    break;
+                }
+            }
+
+            sb.append(ans);
+
+            out.println(sb.toString());
+            out.flush();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

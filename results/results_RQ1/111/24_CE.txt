@@ -1,0 +1,20 @@
+public static void main(String[] args) {
+    FastReader reader = new FastReader();
+    long a = reader.nextLong();
+    long b = reader.nextLong();
+    long cnt = 0;
+    while (a != b) {
+        if (a > b) {
+            cnt += a / b;
+            a %= b;
+        } else {
+            cnt += b / a;
+            b %= a;
+        }
+        if (a == 0 || b == 0) {
+            --cnt;
+            break;
+        }
+    }
+    System.out.println(cnt);
+}

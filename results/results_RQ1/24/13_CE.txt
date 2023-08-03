@@ -1,0 +1,7 @@
+else if (t==2 && !q.isEmpty()) {
+    int p = q.poll();
+    ans -= binpow(10,k-1,mod)*p%mod;
+    ans += mod;
+    ans%=mod;
+    k--;
+}

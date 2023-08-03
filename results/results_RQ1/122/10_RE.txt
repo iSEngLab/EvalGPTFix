@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextInt();
+        long b = sc.nextInt();
+        long cnt = 0;
+        while (a != b) {
+            cnt ++;
+            if (a > b) {
+                cnt += (long) Math.ceil((double) a / b) - 1;
+                a -= (long) Math.ceil((double) a / b) * b;
+            } else {
+                cnt += (long) Math.ceil((double) b / a) - 1;
+                b -= (long) Math.ceil((double) b / a) * a;
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

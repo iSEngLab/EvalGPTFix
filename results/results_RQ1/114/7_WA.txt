@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		long A = sc.nextLong();
+		long B = sc.nextLong();
+		long counter = 0;
+
+		while (A != B) {
+			if (A > 0 && B > 0) { // changed from A > 1 and B > 1 since it was leading to infinite loop when A or B is equal to 1
+				if (A > B * 2) {
+					long wari = A / B;
+					counter += wari;
+					A -= B * wari;
+				} else if (B > A * 2) {
+					long wari = B / A;
+					counter += wari;
+					B -= A * wari;
+				} else {
+                    // added else block to break the loop if A and B are not greater than each other by a factor of 2. 
+                    // also, added counter increment logic in the else block because the below if block exclusion would only update A and B values
+                    if(A > B) {
+                        counter++;
+                        A -= B;
+                    } else if(A < B) {
+                        counter++;
+                        B -= A;
+                    }
+                    break; // Break since there is no change in A and B values
+                }
+			} else {
+                // added a break block since A or B is negative or zero
+                System.out.println("A or B should not be negative or zero!");
+                break;
+            }
+		}
+
+		System.out.println(counter);
+	}
+
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 81970925269218247
+

@@ -1,0 +1,100 @@
+import java.util.*;
+
+public class Main {
+
+    private static class Pair implements Comparable<Pair> {
+        int x;
+        long score;
+
+        public Pair(int x,long score) {
+            this.x=x;
+            this.score=score;
+        }
+
+        public String toString() {
+            return "["+this.x+","+this.score+"]";
+        }
+
+        @Override
+        public int compareTo(Pair o) {
+            return Long.compare(this.score, o.score);
+        }
+    }
+
+    private static class Cell {
+        int r;
+        int c;
+        int x;
+
+        public Cell(int r, int c, int x) {
+            this.r = r;
+            this.c = c;
+            this.x = x;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        HashMap<Integer, Long> rows = new HashMap<>();
+        HashMap<Integer, Long> cols = new HashMap<>();
+        HashMap<Integer, HashMap<Integer, Integer>> val = new HashMap<>();
+        List<Cell> cells = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int r = sc.nextInt();
+            int c = sc.nextInt();
+            int x = sc.nextInt();
+            rows.put(r, rows.getOrDefault(r, 0L) + x);
+            cols.put(c, cols.getOrDefault(c, 0L) + x);
+            HashMap<Integer, Integer> hm = val.getOrDefault(r, new HashMap<Integer, Integer>());
+            hm.put(c, x);
+            val.put(r, hm);
+            cells.add(new Cell(r, c, x));
+        }
+
+        List<Pair> lrows = new ArrayList<>();
+        for (Map.Entry<Integer, Long> entry : rows.entrySet())
+            lrows.add(new Pair(entry.getKey(), entry.getValue()));
+        Collections.sort(lrows);
+
+        List<Pair> lcols = new ArrayList<>();
+        for (Map.Entry<Integer, Long> entry : cols.entrySet())
+            lcols.add(new Pair(entry.getKey(), entry.getValue()));
+        Collections.sort(lcols);
+
+        long ans = Long.MAX_VALUE;
+        Set<Integer> usedCols = new HashSet<>();
+
+        int idxR = 0, idxC = 0;
+        for (Pair p : lrows) {
+            int r = p.x;
+            long sumRow = p.score;
+            while (idxR < cells.size() && cells.get(idxR).r == r) {
+                Cell cell = cells.get(idxR);
+                int c = cell.c;
+                int x = cell.x;
+                if (!usedCols.contains(c)) {
+                    usedCols.add(c);
+                    sumRow -= lcols.get(0).score - lcols.get(getColsRank(lcols, c)).score;
+                }
+                idxR++;
+            }
+            ans = Math.min(ans, sumRow);
+        }
+
+        System.out.println(ans);
+    }
+
+    private static int getColsRank(List<Pair> lcols, int c) {
+        int lo = 0, hi = lcols.size() - 1;
+        while (lo < hi) {
+            int mid = lo + (hi - lo + 1) / 2;
+            if (lcols.get(mid).x <= c)
+                lo = mid;
+            else
+                hi = mid - 1;
+        }
+        return lo;
+    }
+}
+

@@ -1,0 +1,142 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Comb {
+
+    long[] p;
+    long[] pi;
+    long mod;
+
+    public Comb(int n, long mod) {
+        this.mod=mod;
+        p=new long[n+1];
+        pi=new long[n+1];
+        p[0] = 1;
+        pi[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            p[i] = p[i - 1] * i % mod;
+        }
+        pi[n] = modinv(p[n], (int) mod);
+        for (int i = n; i > 1; i--) {
+            pi[i-1] = pi[i] * (long) i % mod;
+        }
+    }
+
+    public long comb(int n, int r) {
+        if (n < r) return 0;
+        return p[n] * pi[r] % mod * pi[n - r] % mod;
+    }
+
+    public long perm(int n, int r) {
+        if (n < r) return 0;
+        return p[n] * pi[n - r] % mod;
+    }
+
+    long modinv(long a, long m) {
+        long b = m;
+        long u = 1;
+        long v = 0;
+        long tmp = 0;
+
+        while (b > 0) {
+            long t = a / b;
+            a -= t * b;
+            tmp = a;
+            a = b;
+            b = tmp;
+
+            u -= t * v;
+            tmp = u;
+            u = v;
+            v = tmp;
+        }
+
+        u %= m;
+        if (u < 0) u += m;
+        return u;
+    }
+}
+
+public class Main {
+
+    static long M=998244353;
+
+    public void solve() throws Exception {
+        int h=nextInt(),w=nextInt(),k=nextInt();
+
+        Comb c=new Comb(h*w, M);
+
+        long res = 0;
+        for (int i = 0; i < 1 << (h*w); i++) {
+            int cnt = Integer.bitCount(i);
+            if (cnt != k) {
+                continue;
+            }
+            int[] bits = new int[cnt];
+            for (int j = 0, b = 0; j < h*w; j++) {
+                if ((i & (1 << j)) != 0) {
+                    bits[b++] = j;
+                }
+            }
+            int minr = h, maxr = 0, minc = w, maxc = 0;
+            for (int j = 0; j < cnt; j++) {
+                int r = bits[j] / w, c = bits[j] % w;
+                minr = Math.min(minr, r);
+                maxr = Math.max(maxr, r);
+                minc = Math.min(minc, c);
+                maxc = Math.max(maxc, c);
+            }
+            long area = (long) (maxr - minr + 1) * (maxc - minc + 1);
+            long sum = 0;
+            for (int j1 = minr; j1 <= maxr; j1++) {
+                for (int j2 = minc; j2 <= maxc; j2++) {
+                    long curr = c.comb((j1 + 1) * (j2 + 1), k);
+                    for (int z = 0; z < cnt; z++) {
+                        int r = bits[z] / w, c = bits[z] % w;
+                        if (r > j1 || r < minr || c > j2 || c < minc) {
+                            curr = 0;
+                            break;
+                        }
+                    }
+                    sum += curr;
+                }
+            }
+            res += area * sum % M;
+            res %= M;
+        }
+        long modinv = c.modinv(c.comb(h*w,k), M);
+        out.println((res * modinv) % M);
+    }
+
+    public static void main(String[] args) throws Exception {
+        new Main().solve();
+    }
+
+    static PrintWriter out = new PrintWriter(System.out, true);
+    static InputReader in = new InputReader(System.in);
+    static String next() { return in.next(); }
+    static int nextInt() { return Integer.parseInt(in.next()); }
+    static long nextLong() { return Long.parseLong(in.next()); }
+    static class InputReader {
+        public BufferedReader reader;
+        public StringTokenizer tokenizer;
+
+        public InputReader(InputStream stream) {
+            reader = new BufferedReader(new InputStreamReader(stream), 32768);
+            tokenizer = null;
+        }
+
+        public String next() {
+            while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+                try {
+                    tokenizer = new StringTokenizer(reader.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return tokenizer.nextToken();
+        }
+    }
+}

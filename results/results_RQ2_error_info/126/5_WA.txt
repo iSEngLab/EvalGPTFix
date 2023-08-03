@@ -1,0 +1,50 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=0;
+        
+        while(a!=b) {
+            // Fix: add condition when remainder is 0
+            if (b % a == 0) {
+                ans += b / a;
+                break;
+            }
+            
+            if(a<b) {
+                long dif=b-a;
+                ans+=(dif/a);
+                if(dif%a==0) { // Fix: change condition to mod instead of div
+                    // Fix: remove redundant ans++ since already added in the previous line
+                    b-=a*(dif/a);
+                } else {
+                    b-=a*(dif/a+1);
+                }
+            } else {
+                long dif = a-b;
+                ans+=(dif/b);
+                if(dif%b==0) { // Fix: change condition to mod instead of div
+                    // Fix: remove redundant ans++ since already added in the previous line
+                    a-=b*(dif/b);
+                } else {
+                    a-=b*(dif/b+1);
+                }
+            }
+        }
+        
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275725
+

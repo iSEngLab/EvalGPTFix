@@ -1,0 +1,25 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        long temp = 0;
+        temp += c.comb(i * w + j, k);
+        temp -= c.comb(i * w + (j + 1), k);
+        if (j > 0) {
+            temp -= c.comb(i * w + (j - 1), k);
+        }
+        temp -= c.comb((i + 1) * w + j, k);
+        if (i > 0) {
+            temp -= c.comb((i - 1) * w + j, k);
+        }
+        temp += c.comb(i * (w - j - 1), k);
+        if (i > 0) {
+            temp += c.comb((i - 1) * (w - j), k);
+        }
+        temp += c.comb((h - i - 1) * (w - j - 1), k);
+        if (j > 0) {
+            temp += c.comb((h - i - 1) * (w - j), k);
+        }
+
+        temp %= M;
+        res = (res + temp) % M;
+    }
+}

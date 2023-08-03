@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int x = s.indexOf('B');
+        int y = s.indexOf('B', x + 1);
+        if((x - y) % 2 != 1) { // fixed the condition to check if x and y are on opposite sides of the board.
+            System.out.println("NO");
+            return;
+        }
+        x = s.indexOf('R');
+        y = s.indexOf('R', x + 1);
+        int z = s.indexOf('K');
+        if(x < z && z < y && (x - z) % 2 == (y - z) % 2) { // fixed the condition to check if the king is between the rooks and is on the same side as the rooks.
+            System.out.println("YES");
+            return;
+        }
+        System.out.println("NO");
+    }
+}
+
+input: NQNRKBBR
+
+expect: Yes
+
+actual: NO
+

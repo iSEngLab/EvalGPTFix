@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        long cnt = 0;
+        while (a != 0 && b != 0) {
+            long max = Math.max(a, b);
+            long min = Math.min(a, b);
+            cnt += max / min - 1; // count the number of full mod operations
+            max -= min * (max / min - 1); // compute the result of the last mod operation
+            if (a > b) {
+                a = max;
+                b = min;
+            } else {
+                a = min;
+                b = max;
+            }
+        }
+        System.out.println(cnt);
+    }
+}

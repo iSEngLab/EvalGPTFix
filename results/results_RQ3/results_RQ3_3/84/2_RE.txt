@@ -1,0 +1,55 @@
+package AtCoder;
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException{
+        br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter out = new PrintWriter(System.out);
+        String S = nextToken();
+        int R1 = -1;
+        int R2 = -1;
+        int B = -1;
+        boolean test = true;
+        for (int i = 0; i < S.length(); i++) {
+            if (S.charAt(i) == 'R') {
+                if (R1 == -1) R1 = i;
+                else R2 = i;
+            }
+            if (S.charAt(i) == 'B') {
+                if (B == -1) B = i;
+                
+                // additional check to avoid invalid placement of the yellow piece
+                else if(Math.abs(B - i) % 2 == 0) {
+                    test = false;
+                }
+            }
+            if (S.charAt(i) == 'K' && R1 >= 0 && R2 >= 0) {
+                test = false;
+            }
+        }
+        
+        // updated condition to check if reds are actually valid
+        if (test && R2 > R1 && B > R1 && B < R2) {
+            out.println("YES");
+        } else {
+            out.println("NO");
+        }
+        out.close();
+    }
+    
+    static BufferedReader br;
+    static PrintWriter out;
+    static StringTokenizer in = new StringTokenizer("");
+
+    public static String nextToken() throws IOException {
+        while (!in.hasMoreTokens()) {
+            in = new StringTokenizer(br.readLine());
+        }
+        return in.nextToken();
+    }
+
+    public static int nextInt() throws IOException {
+        return Integer.parseInt(nextToken());
+    }
+}

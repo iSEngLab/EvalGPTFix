@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean foundX = false;
+        for(int i=0;i<n;++i){
+            if(s.charAt(i) == 'x') { // checking for 'x' before 'o' to simplify the code
+                foundX = true;
+                break; // exit the loop if 'x' is found
+            } else if (s.charAt(i) == 'o') {
+                continue; // no need to set flag since 'o' is always good
+            } else {
+                System.out.println("NO"); // exit for invalid characters
+                return;
+            }
+        }
+        if(!foundX) System.out.println("YES"); // checking if 'x' was found and setting the correct output
+        else System.out.println("NO");
+    }
+}

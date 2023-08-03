@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class Main {
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    long A = sc.nextLong();
+    long B = sc.nextLong();
+    long counter = 0;
+
+    while (A != B) {
+      if (A > 1 && B > 1) {
+        if (A > B * 2) {
+          long wari = A / B;
+          counter += wari;
+          A -= B * wari;
+        } else if (B > A * 2) {
+          long wari = B / A;
+          counter += wari;
+          B -= A * wari;
+        } else {
+          // added else condition to handle A and B difference less than or equal to 2
+          // subtract minimum from maximum
+          counter += Math.max(A, B) / Math.min(A, B);
+          A = Math.max(A, B) % Math.min(A, B);
+          B = Math.min(A, B);
+        }
+      } else {
+        // added condition to handle A and B values less than or equal to 1
+        counter += Math.max(A, B) - 1;
+        A = 1;
+        B = 1;
+      }
+
+      if (A == B) {
+        break;
+      }
+
+      if (A > B) {
+        counter++;
+        A -= B;
+      } else if (A < B) {
+        counter++;
+        B -= A;
+      }
+    }
+    System.out.println(counter);
+    sc.close();
+  }
+}
+
+input: 701408733 433494437
+
+expect: 42
+
+actual: 1
+

@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // changed from long to int as the input is guaranteed to be within the range of an int
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        int cnt = 0;
+        while (a != b) {
+            cnt ++;
+            if (a > b) {
+                // changed here from (a-1)/b to (a-b)/b because it was returning wrong result in some cases
+                cnt += (a - b) / b; 
+                a -= (a - b) / b * b;
+            } else {
+                // changed here from (b-1)/a to (b-a)/a because it was returning wrong result in some cases
+                cnt += (b - a) / a; 
+                b -= (b - a) / a * a;
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

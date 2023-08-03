@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong(); // fix: use nextLong() instead of nextInt()
+        long b = sc.nextLong(); // fix: use nextLong() instead of nextInt()
+        long cnt = 0; // fix: use long instead of int
+        while (a != 0 && b != 0) { // fix: use logical AND instead of OR
+            if (a > b) {
+                cnt += a / b; // fix: use integer division
+                a = a % b;
+            } else {
+                cnt += b / a; // fix: use integer division
+                b = b % a;
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 81970925269218255
+

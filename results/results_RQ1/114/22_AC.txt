@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		long A = sc.nextLong();
+		long B = sc.nextLong();
+		long counter = 0;
+
+		while (A != B) {
+			if (A > B) {
+				counter += A/B;
+				A %= B;
+			} else {
+				counter += B/A;
+				B %= A;
+			}
+			if (A == 0 || B == 0) {
+				counter--;
+				break;
+			}
+		}
+
+		System.out.println(counter);
+	}
+
+}

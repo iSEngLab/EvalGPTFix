@@ -1,0 +1,40 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String args[]) {
+		Scanner stdin = new Scanner(System.in);
+		System.out.println("Please enter number of characters: ");
+		int num = stdin.nextInt();
+		System.out.println("Please enter string: ");
+		String values = stdin.next();
+		List<String> value = new ArrayList<>();
+		
+		for (int i = 0; i < num; i++){
+			String str = String.valueOf(values.charAt(i));
+			value.add(str);
+		}
+		
+		if(value.contains("x")) {
+			System.out.println("No");
+			return;
+		} else if (value.contains("o")) {
+			System.out.println("Yes");
+			return;
+		} else {
+			System.out.println("No");
+			return;
+		}		
+	}
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: Please enter number of characters: 
+Please enter string: 
+Yes
+

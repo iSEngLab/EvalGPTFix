@@ -1,0 +1,28 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans = 0;
+
+        while (a != 0 && b != 0) {
+            if (a < b) {
+                long dif = (b + a - 1) / a;
+                ans += dif;
+                b -= dif * a;
+            } else {
+                long dif = (a + b - 1) / b;
+                ans += dif;
+                a -= dif * b;
+            }
+        }
+
+        System.out.println(ans);
+
+    }
+}

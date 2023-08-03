@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int x = s.indexOf('B'), y = s.indexOf('B', x + 1);
+        if((x+y) % 2 != 1) {
+            System.out.println("NO");
+            return;
+        }
+        x = s.indexOf('R'); y = s.indexOf('R', x + 1);
+        int z = s.indexOf('K');
+        if(x < z && z < y){
+            System.out.println("YES");
+            return;
+        }
+        System.out.println("NO");
+    }
+}
+
+input: NQNRKBBR
+
+expect: Yes
+
+actual: YES
+

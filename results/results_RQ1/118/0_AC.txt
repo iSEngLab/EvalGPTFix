@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		long a = sc.nextLong(); //Fixed: Changed to nextLong() to handle large values
+		long b = sc.nextLong(); //Fixed: Changed to nextLong() to handle large values
+		long ans = 0;
+		
+		if(a == b) {
+			System.out.println(ans);
+		} else {
+			do {
+				if(a > b) {
+					ans += a/b;
+					a = a%b;
+				} else {
+					ans += b/a;
+					b = b%a;
+				}
+			} while(a != 0 && b != 0 && a != b);
+			System.out.println(ans-1);
+		}
+		
+		sc.close();
+	}
+
+}

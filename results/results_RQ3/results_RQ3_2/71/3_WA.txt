@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+      
+    final int N = sc.nextInt();
+    String str = sc.next(); // use next() instead of nextLine()
+      
+    boolean good = false;
+    int i = 0;
+    while (i < str.length()) { // iterate over the characters of str
+      if (str.charAt(i) == 'o') {  
+        int j = i+1;  
+        while (j < str.length() && str.charAt(j) == 'o') { // count consecutive o's
+          j++;  
+        }  
+        if (j-i >= 2 && (i == 0 || str.charAt(i-1) != '-') && (j == str.length() || str.charAt(j) != '-')) { // check consecutive o's without - before and after
+          good = true;  
+          break;
+        }  
+        i = j;  
+      }
+      else {
+        i++; // skip invalid characters
+      }  
+    }
+      
+    System.out.println(good ? "Yes" : "No"); // output condition
+  }
+}

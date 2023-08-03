@@ -1,0 +1,62 @@
+import java.math.BigInteger;
+// ...
+class Comb {
+
+    BigInteger[] p;
+    BigInteger[] pi;
+    BigInteger mod;
+
+    public Comb(int n, BigInteger mod) {
+        this.mod=mod;
+        p=new BigInteger[n+1];
+        pi=new BigInteger[n+1];
+        p[0] = BigInteger.ONE;
+        pi[0] = BigInteger.ONE;
+        for (int i = 1; i <= n; i++) {
+            p[i] = p[i - 1].multiply(BigInteger.valueOf(i)).mod(mod);
+        }
+        pi[n] = modinv(p[n], mod);
+        for (int i = n; i > 1; i--) {
+            pi[i-1] = pi[i].multiply(BigInteger.valueOf(i)).mod(mod);
+        }
+    }
+
+    public BigInteger comb(int n, int r) {
+        if (n < r) return BigInteger.ZERO;
+        return p[n].multiply(pi[r]).mod(mod).multiply(pi[n - r]).mod(mod);
+    }
+
+    public BigInteger perm(int n, int r) {
+        if (n < r) return BigInteger.ZERO;
+        return p[n].multiply(pi[n - r]).mod(mod);
+    }
+
+    BigInteger modinv(BigInteger a, BigInteger m) {
+        BigInteger b = m;
+        BigInteger u = BigInteger.ONE;
+        BigInteger v = BigInteger.ZERO;
+        BigInteger tmp = BigInteger.ZERO;
+
+        while (b.compareTo(BigInteger.ZERO) > 0) {
+            BigInteger[] t = a.divideAndRemainder(b);
+            a = t[1];
+            tmp = a;
+            a = b;
+            b = tmp;
+
+            u = u.subtract(t[0].multiply(v));
+            tmp = u;
+            u = v;
+            v = tmp;
+        }
+
+        u = u.mod(m);
+        if (u.compareTo(BigInteger.ZERO) < 0) u = u.add(m);
+        return u;
+    }
+}
+
+input: 1000 1000 522
+
+expect: 625692699
+

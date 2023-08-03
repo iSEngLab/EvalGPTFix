@@ -1,0 +1,29 @@
+public void solve() throws Exception {
+    int h = nextInt(), w = nextInt(), k = nextInt();
+    long res = 0;
+
+    int hw = h * w;
+    Comb c = new Comb(hw, M);
+
+    long comb_hw_k = c.comb(hw, k);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            long term1 = comb_hw_k;
+            long term2 = c.comb(j * h, k);
+            long term3 = c.comb((w - j - 1) * h, k);
+            long term4 = c.comb(i * w, k);
+            long term5 = c.comb((h - i - 1) * w, k);
+            long term6 = c.comb(i * j, k);
+            long term7 = c.comb(i * (w - j - 1), k);
+            long term8 = c.comb((h - i - 1) * (w - j - 1), k);
+            long term9 = c.comb((h - i - 1) * j, k);
+
+            res += term1 - term2 - term3 - term4 - term5 + term6 + term7 + term8 + term9;
+        }
+    }
+
+    res = (res % M + M) % M;
+    long modinv = c.modinv(comb_hw_k, M);
+    out.println(res * modinv % M);
+}

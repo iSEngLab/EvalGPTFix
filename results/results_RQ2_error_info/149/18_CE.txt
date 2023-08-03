@@ -1,0 +1,28 @@
+public void solve() throws Exception {
+    int h=nextInt(),w=nextInt(),k=nextInt();
+    long res=0;
+
+    int hw = h * w;
+    Comb c=new Comb(hw, M);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            // Calculate combinations involving cell (i, j)
+            long a = c.comb((i * w) + j, k);
+
+            // Subtract combinations not involving cell (i, j)
+            a = a - c.comb(j * h + i, k) - c.comb((w-j-1)*h+i,k) - c.comb(j*h+i,w-i-1,k) - c.comb(j*h+w-i-1,i,k);
+
+            // Add back combinations involving rows/columns without cell (i, j)
+            a = a + c.comb(j * h, k) + c.comb((w-j-1)*h, k) + c.comb(i * w, k) + c.comb((h-i-1) * w, k);
+
+            // Subtract combinations involving corners
+            a = a - c.comb(i * j, k) - c.comb(i * (w-j-1), k) - c.comb((h-i-1)*(w-j-1), k) - c.comb((h-i-1)*j, k);
+
+            a = (a % M + M) % M;
+            res = (res + a) % M;
+        }
+    }
+    long modinv = c.modinv(c.comb(h*w,k), M);
+    out.println(((res*modinv+M)%M));
+}

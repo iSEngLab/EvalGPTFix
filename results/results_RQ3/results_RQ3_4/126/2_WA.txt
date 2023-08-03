@@ -1,0 +1,25 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        long gcd = gcd(a,b);
+        long lcm = (a*b)/gcd;
+        System.out.println(lcm/a);
+        
+        
+    }
+    
+    static long gcd(long a,long b){
+        if(a==0) return b;
+        if(b==0) return a;
+        return gcd(b,a%b);
+    }
+}
+

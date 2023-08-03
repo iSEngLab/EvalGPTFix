@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong(); // Change to nextLong() to prevent overflow
+        long b = sc.nextLong(); // Change to nextLong() to prevent overflow
+        long cnt = 0; // Change type to long to match the answer
+        while (a != 0 && b != 0) { // Add a check to prevent division by zero
+            cnt += Math.max(a, b) / Math.min(a, b); // Replace conditional with a single line
+            if (a > b) {
+                a %= b; // Use modulo instead of a cumbersome formula
+            } else {
+                b %= a; // Use modulo instead of a cumbersome formula
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 81970925269218255
+

@@ -1,0 +1,49 @@
+import java.util.*;
+
+public class Main {
+    
+    private Scanner scanner = new Scanner(System.in);
+    
+    private void solve() {
+        int n = scanner.nextInt();
+        long tot = scanner.nextLong();
+        long[] coins = new long[n];
+        for (int i = 0; i < n; ++i) coins[i] = scanner.nextLong();
+        
+        Arrays.sort(coins);
+        
+        if (coins[0] == 1) {
+            System.out.println(tot);
+            return;
+        } else if (n == 1) {
+            System.out.println(n * coins[0]);
+            return;
+        }
+        
+        TreeSet<Long> sums = new TreeSet<>();
+        for (int i = 0; i < n; ++i) sums.add(coins[i]);
+        
+        while (sums.size() < tot) {
+            long smallest = sums.first();
+            sums.remove(smallest);
+            for (long coin : coins) sums.add(smallest + coin);
+        }
+        System.out.println(sums.last());
+    }
+
+    public static void main(String[] args) {
+        int t = 1;
+        Main solver = new Main();
+        for (int i = 1; i <= t; i++) {
+            solver.solve();
+        }
+    }
+}
+
+input: 10 200000
+554711317 806584789 280018632 62735624 328505817 16801479 685959884 161803065 709816353 611785786
+
+expect: 2271400318
+
+actual: 2557407192
+

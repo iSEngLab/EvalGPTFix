@@ -1,0 +1,55 @@
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter pw = new PrintWriter(System.out);
+
+        int N = Integer.parseInt(r.readLine());
+        boolean[][] A = new boolean[N][N];
+        boolean[][] B = new boolean[N][N];
+
+        for (int i=0; i<N; i++) {
+            String[] nums = r.readLine().split(" ");
+            for (int j=0; j<N; j++) {
+                A[i][j] = nums[j].equals("1");
+            }
+        }
+
+        for (int i=0; i<N; i++) {
+            String[] nums = r.readLine().split(" ");
+            for (int j=0; j<N; j++) {
+                B[i][j] = nums[j].equals("1");
+            }
+        }
+
+        boolean works = true;
+        for (int i=0; i<N; i++) {
+            for (int j=0; j<N; j++) {
+                if (A[i][j]){
+                    if (!B[i][j]) works = false;
+                    if (!B[N-j-1][i]) works = false;
+                    if (!B[N-i-1][N-j-1]) works = false;
+                    if (!B[j][N-i-1]) works = false;
+                }
+            }
+        }
+
+        pw.println(works?"Yes":"No");
+
+        pw.close();
+    }
+}
+
+input: 3
+0 1 1
+1 0 0
+0 1 0
+1 1 0
+0 0 1
+1 1 1
+
+expect: Yes
+
+actual: No
+

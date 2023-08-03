@@ -1,0 +1,8 @@
+private static int g(int v, int l, int r) {
+    int mod = (v % (l + r));
+    if (mod < l) {
+        return -1; // No choice is available for the next player.
+    } else {
+        return Math.min(mod - l, r); // Return the number of available choices.
+    }
+}

@@ -1,0 +1,30 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+    static Scanner scan = new Scanner(System.in);
+    static int ans = 0;
+
+    public static void main(String[] args) {
+        long a = scan.nextLong();
+        long b = scan.nextLong();
+        gcd(Math.min(a,b),Math.max(a,b)); //fix: change lmin(a,b) to Math.min(a,b) and lmax(a,b) to Math.max(a,b)
+        System.out.println(ans);
+    }
+
+    public static void gcd(long a,long b) {
+        if(a==b) return;
+        ans += b/a;
+        if(b%a==0) {
+            ans--;
+            return;
+        }
+        gcd(a,b%a); //fix: change gcd(b%a,a) to gcd(a,b%a)
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

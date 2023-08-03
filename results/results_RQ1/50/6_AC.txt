@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        if (n == 1) {
+            System.out.println(-1);
+            return;
+        }
+
+        int d = sc.nextInt();
+        int[] t = new int[n];
+        for (int i = 0; i < n; i++) {
+            t[i] = sc.nextInt();
+        }
+        
+        int res = -1;
+        // Changed loop condition to i < n-1 to avoid IndexOutOfBoundsException
+        for (int i = 0; i < n-1; i++) {
+            // Changed t[i] - t[i-1] to t[i+1] - t[i]
+            if (t[i+1] - t[i] <= d) {
+                res = t[i+1];
+                break;
+            }
+        }
+        System.out.println(res);
+    }
+}

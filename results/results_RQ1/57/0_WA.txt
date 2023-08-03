@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		
+		// Read input from user
+		Scanner scanner = new Scanner(System.in);
+		int numberOfItems = scanner.nextInt();
+		String itemString = scanner.next();
+
+		// Check if the item is good or bad
+		boolean hasGoodItem = false; 
+		boolean hasBadItem = false; 
+		
+		for (int i = 0; i < numberOfItems; i++) {
+			if (itemString.charAt(i) == 'o') {
+				hasGoodItem = true; 
+			} else if (itemString.charAt(i) == 'x') {
+				hasBadItem = true; 
+			}
+		}
+		
+		// Display the result
+		if (hasGoodItem && !hasBadItem) {
+			System.out.println("Qualifies");
+		} else {
+			System.out.println("Disqualifies");
+		}
+	}
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: Qualifies
+

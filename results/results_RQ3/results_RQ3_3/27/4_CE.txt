@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class Main {
+
+    private static class Pair implements Comparable<Pair> {
+        int x;
+        long score;
+
+        public Pair(int x,long score) {
+            this.x=x;
+            this.score=score;
+        }
+
+        public String toString() {
+            return "["+this.x+","+this.score+"]";
+        }
+
+        @Override
+        public int compareTo(Pair other) { 
+            if(this.score>other.score)
+                return -1;
+            else if(this.score<other.score)
+                return 1;
+            else if(this.x<other.x)
+                return -1;
+            else if(this.x>other.x

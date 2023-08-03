@@ -1,0 +1,19 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        long[] rows=new long[100001];
+        long ans = 0;
+        for(int i=0;i<n;i++) {
+            int r=sc.nextInt();
+            int c=sc.nextInt();
+            int x=sc.nextInt();
+            rows[r] = Math.max(rows[r], x);
+            ans = Math.max(ans, c + rows[r]);
+        }
+        System.out.println(ans);
+    }
+}

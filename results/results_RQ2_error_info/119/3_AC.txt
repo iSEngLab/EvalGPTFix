@@ -1,0 +1,26 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        long a = Long.parseLong(st.nextToken());
+        long b = Long.parseLong(st.nextToken());
+        long c = 0;
+        while (a != b && a > 0 && b > 0) {
+            if (a > b) {
+                c = c + a / b;
+                a = a % b;
+            } else {
+                c = c + b / a;
+                b = b % a;
+            }
+        }
+        if (a != b) {
+            c = c - 1;
+        }
+        System.out.println(c);
+    }
+}

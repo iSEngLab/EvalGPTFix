@@ -1,0 +1,14 @@
+@SuppressWarnings("unchecked")
+static String myconv(Object list, int no){
+    StringBuilder sb = new StringBuilder("");
+    String joinString = CONVSTR.get(no);
+    if (list instanceof String[]) {
+        return String.join(joinString, (String[])list);
+    } else if (list instanceof long[]) {
+        ...
+    } else if (list instanceof TreeSet) { // Add new case for TreeSet
+        return myconv(((TreeSet<Integer>)list).toArray(), no); // Convert to array and call existing method
+    } else {
+        throw new ClassCastException("Don't join");
+    }
+}

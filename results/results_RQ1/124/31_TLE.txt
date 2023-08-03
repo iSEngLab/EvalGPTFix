@@ -1,0 +1,75 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.StringTokenizer;
+
+public class Main {
+    public static void main(String[] args) {
+        FastScanner fs = new FastScanner();
+        PrintWriter out = new PrintWriter(System.out);
+
+        long[] a = {fs.nextLong(), fs.nextLong()};
+        swap(a);
+
+        // find least common multiple and use it in while loop condition
+        long lcm = LCM(a[0], a[1]);
+        int count = 0;
+        while (a[0] != a[1]) {
+            count += (lcm / a[1]) * a[0];
+            a[0] = lcm;
+            swap(a);
+        }
+        
+        out.println(count);
+        out.close();
+    }
+
+    static void swap(long[] a) {
+        if (a[0] < a[1]) {
+            long temp = a[0];
+            a[0] = a[1];
+            a[1] = temp;
+        }
+    }
+
+    // Euclidean algorithm to find greatest common divisor
+    static long GCD(long a, long b) {
+        if (b == 0) return a;
+        return GCD(b, a % b);
+    }
+
+    // least common multiple using gcd
+    static long LCM(long a, long b) {
+        return (a / GCD(a, b)) * b;
+    }
+
+    static class FastScanner {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        String next() {
+            while (st == null || !st.hasMoreTokens()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

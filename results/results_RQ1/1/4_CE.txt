@@ -1,0 +1,8 @@
+private static int g(int v, int l, int r) {
+  int x = v % (l + r);
+  int result = Math.max(0, x - l + 1);
+  if (result < 0) {
+    result += l;
+  }
+  return result;
+}

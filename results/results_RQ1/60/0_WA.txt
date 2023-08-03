@@ -1,0 +1,40 @@
+import java.util.*;
+public class Main {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    int N = sc.nextInt();
+    String S = sc.next();
+    String[] s = new String[N]; // fixed array size to N instead of N+1
+    
+    // loop starts at index 0
+    for(int i = 0; i < N; i++) {
+        s[i] = S.substring(i, i+1); // changed substring start index to i instead of i-1
+    }
+    
+    boolean ans = false;
+    
+    for(int i = 0; i < N; i++) { // loop starts at index 0
+      if(s[i].equals("x")) {
+        ans = false;
+        break; // added "break" to exit loop early when 'x' is found
+      } else if(s[i].equals("o")) {
+        ans = true;
+        break; // added "break" to exit loop early when 'o' is found
+      }
+    }
+    
+    if(ans) {
+      System.out.println("Yes");
+    } else {
+      System.out.println("No");
+    }
+  }
+}
+
+input: 100
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooxo
+
+expect: No
+
+actual: Yes
+

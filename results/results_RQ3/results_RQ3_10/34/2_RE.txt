@@ -1,0 +1,51 @@
+package onlinejudge;
+
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		
+		try(Scanner sc = new Scanner(System.in)){
+			
+			PrintWriter out = new PrintWriter(System.out);
+			StringBuilder sb = new StringBuilder();
+			
+			
+			long n = Long.parseLong(sc.next()); // Read n as a long data type
+			if(n > Integer.MAX_VALUE) { // Check whether n exceeds Integer.MAX_VALUE
+				throw new IllegalArgumentException("n is too large");
+			}
+			int d = Integer.parseInt(sc.next());
+			
+			int[] t = new int[(int)n]; // Cast n to int data type
+			for(int i = 0; i < n; i++) {
+				t[i] = Integer.parseInt(sc.next());
+			}
+			
+			int ans = Integer.MAX_VALUE; // Initialize ans to Integer.MAX_VALUE
+			
+			for(int i = 1; i < n; i++) {
+				if(t[i] - t[i - 1] <= d) {
+					ans = t[i];
+					break;
+				}
+			}
+			
+			if(ans == Integer.MAX_VALUE) {
+			    sb.append(t[0] + d);
+			} else {
+			    sb.append(ans);
+			}
+			
+			out.println(sb.toString());
+			out.flush();
+			
+		} catch(Exception e) {
+		    e.printStackTrace();
+		}
+		
+	}
+	
+}

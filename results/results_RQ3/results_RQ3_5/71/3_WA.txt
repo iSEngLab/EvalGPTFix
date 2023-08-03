@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        final int N = sc.nextInt();
+        sc.nextLine(); // consume the newline character left by sc.nextInt()
+        String str = sc.nextLine().trim(); // add .trim() to remove leading/trailing whitespaces
+
+        boolean good = false;
+
+        // to get a "Yes" answer there must be at least one "o"
+        // and no "-" should be appear after the last "o"
+        for (char c : str.toCharArray()) {
+            if (c == 'o') {
+                good = true;
+            } else if (c == '-') {
+                if (good == true) { // condition altered
+                    good = false;
+                }
+            }
+        }
+
+        System.out.println(good ? "Yes" : "No");
+    }
+}

@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner kbs = new Scanner(System.in);
+    int n1 = kbs.nextInt();
+    int n2 = kbs.nextInt();
+    int tmp1 =kbs.nextInt();
+    for (int i = 0; i < n1-1; i++) {
+      int tmp2 = kbs.nextInt(); // Declare variable inside loop
+      if(Math.abs(tmp1-tmp2)<=n2){
+        System.out.println(tmp2);
+        return; // Replace System.exit(0) with return
+      }
+      tmp1 = tmp2;
+    }
+    System.out.println(-1);
+  }
+}

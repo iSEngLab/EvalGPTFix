@@ -1,0 +1,41 @@
+import java.util.*;
+
+public class Main {
+
+    private static class Pair implements Comparable<Pair> {
+        int x;
+        long score;
+
+        public Pair(int x, long score) {
+            this.x = x;
+            this.score = score;
+        }
+
+        public String toString() {
+            return "[" + this.x + "," + this.score + "]";
+        }
+
+        @Override
+        public int compareTo(Pair other) {
+            if (other.score - this.score > 0)
+                return 1;
+            if (other.score - this.score < 0)
+                return -1;
+            return 0;
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        HashMap<Integer, Long> rows = new HashMap<Integer, Long>();
+        HashMap<Integer, Long> cols = new HashMap<Integer, Long>();
+        HashMap<Integer, HashMap<Integer, Integer>> val = new HashMap<Integer, HashMap<Integer, Integer>>();
+        for (int i = 0; i < n; i++) {
+            int r = sc.nextInt();
+            int c = sc.nextInt();
+            int x = sc.nextInt();
+            rows.put(r, rows.getOrDefault(r, 0L) + x);
+            cols.put(c, cols.getOrDefault(c, 0L) + x);
+           

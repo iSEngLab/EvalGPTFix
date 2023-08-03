@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int length = scan.nextInt();
+        String s = scan.next();
+        boolean containsO = false;
+        boolean containsX = false;
+        for(int i = 0; i < length; i++) {
+            if(s.charAt(i) == 'o') {
+                containsO = true;
+            }
+            if(s.charAt(i) == 'x') {
+                containsX = true;
+            }
+        }
+        if(containsO && !containsX) {
+                System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

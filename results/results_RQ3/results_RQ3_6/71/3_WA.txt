@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        final int N = sc.nextInt();
+        // We need an extra sc.nextLine() to consume the newline character left in the buffer
+        sc.nextLine();
+        String str = sc.nextLine();
+
+        int oCount = 0;
+        int dashCount = 0;
+
+        // Iterate over the input string and count the number of 'o's and '-'s
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == 'o') oCount++;
+            else if (str.charAt(i) == '-') dashCount++;
+        }
+
+        // Check for the special cases where the answer is "No"
+        if (oCount == 0) {
+            System.out.println("No");
+            return;
+        }
+        if (dashCount == 0) {
+            System.out.println("Yes");
+            return;
+        }
+        if (dashCount % oCount != 0) {
+            System.out.println("No");
+            return;
+        }
+
+        // Otherwise, the answer is "Yes"
+        System.out.println("Yes");
+    }
+}

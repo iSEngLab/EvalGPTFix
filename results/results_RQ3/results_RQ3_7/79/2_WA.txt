@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean flag = false;
+        int countX = 0, countO = 0;
+        for(int i=0;i<n;++i){
+            if(s.charAt(i) == 'o') {
+                flag = true;
+                countO++;
+            }else if(s.charAt(i) == 'x'){
+                countX++;
+            }
+        }
+        if(countO == 0) {
+            System.out.println("YES");
+        } else {
+            if(countX > 7) {
+                System.out.println("NO");
+                return;
+            }
+            if(countO > countX + 1) {
+                System.out.println("NO");
+                return;
+            }
+            System.out.println("YES");
+        }
+    }
+}

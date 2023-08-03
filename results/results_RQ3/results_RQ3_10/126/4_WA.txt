@@ -1,0 +1,34 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+    static long gcd(long a, long b) {
+        if (a == 0) {
+            return b;
+        }
+        return gcd(b % a, a);
+    }
+
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        long lcm = (a * b) / gcd(a, b);
+
+        long cycles = (lcm/a) - 1 + (lcm/b) - 1;
+
+        long remaining_a = lcm / a - 1 - (lcm / (a * b / gcd(a, b))) * (b / gcd(a, b));
+        long remaining_b = lcm / b - 1 - (lcm / (a * b / gcd(a, b))) * (a / gcd(a, b));
+
+        if (a > b) {
+            remaining_a += (a - b);
+        } else {
+            remaining_b += (b - a);
+        }
+
+        System.out.println(cycles * (a / gcd(a, b)) + Math.min(remaining_a, remaining_b) + 1);
+    }
+}

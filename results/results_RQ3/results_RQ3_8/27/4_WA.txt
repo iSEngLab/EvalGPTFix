@@ -1,0 +1,63 @@
+import java.util.*;
+
+public class Main {
+
+    private static class Pair implements Comparable<Pair> {
+        int x;
+        long score;
+
+        public Pair(int x,long score) {
+            this.x=x;
+            this.score=score;
+        }
+
+        public String toString() {
+            return "["+this.x+","+this.score+"]";
+        }
+
+        @Override
+        public int compareTo(Pair other) {
+            if(this.score>other.score)
+                return -1;
+            if(this.score<other.score)
+                return 1;
+            return 0;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        HashMap<Integer, Long> rows = new HashMap<Integer, Long>();
+        HashMap<Integer, Long> cols = new HashMap<Integer, Long>();
+        HashMap<Integer, HashMap<Integer, Long>> vals  = new HashMap<Integer, HashMap<Integer, Long>>();
+
+        for(int i=0;i<n;i++) {
+            int r=sc.nextInt();
+            int c=sc.nextInt();
+            long x=sc.nextLong();
+            rows.put(r,rows.getOrDefault(r,0L)+x);
+            cols.put(c,cols.getOrDefault(c,0L)+x);
+            HashMap<Integer, Long> data = vals.getOrDefault(r,new HashMap<Integer, Long>());
+            data.put(c, data.getOrDefault(c, 0L) + x);
+            vals.put(r, data);
+        }
+
+        long ans=0L;
+        for(Integer r:rows.keySet()) {
+            Long rSum = rows.get(r);
+            Long cMax = 0L;
+            if (vals.containsKey(r)) {
+                for (Integer c:cols.keySet()) {
+                    if (!vals.get(r).containsKey(c)) {
+                        cMax = Math.max(cMax, cols.get(c));
+                    }
+                }
+            } else {
+                cMax = Collections.max(cols.values());
+            }
+            ans = Math.max(ans, rSum + cMax);
+        }
+        System.out.println(ans);
+    }
+}

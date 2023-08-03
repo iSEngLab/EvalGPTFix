@@ -1,0 +1,30 @@
+public static void main(String[] args) {
+
+    try (Scanner sc = new Scanner(System.in);) {
+
+        PrintWriter out = new PrintWriter(System.out);
+        StringBuilder sb = new StringBuilder();
+
+        int n = sc.nextInt();
+        int d = sc.nextInt();
+
+        int[] t = new int[n];
+        for (int i = 0; i < n; i++) {
+            t[i] = sc.nextInt();
+        }
+
+        int ans = Integer.MAX_VALUE; // use very large value as initial value
+        for (int i = 1; i < n; i++) {
+            if (t[i] - t[i - 1] <= d) {
+                ans = Math.min(ans, t[i]); // update with minimum value
+            }
+        }
+
+        sb.append(ans);
+
+        out.println(sb.toString());
+        out.flush();
+
+    }
+
+}

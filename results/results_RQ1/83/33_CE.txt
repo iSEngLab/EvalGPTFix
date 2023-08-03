@@ -1,0 +1,4 @@
+if (S.charAt(i)=='R'){
+    if (R1==-1) R1 = i+1;
+    else R2 = i; 
+}

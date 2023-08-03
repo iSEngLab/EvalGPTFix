@@ -1,0 +1,15 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        res-=c.comb(j*h,k);
+        res-=c.comb((w-j-1)*h,k);
+        res-=c.comb(i*w,k);
+        res-=c.comb((h-i-1)*w,k);
+        res+=c.comb(i*j,k);
+        res+=c.comb(i*(w-j-1),k);
+        res+=c.comb((h-i-1)*(w-j-1),k);
+        res+=c.comb((h-i-1)*j,k);
+    }
+}
+res += c.comb(h*w,k);
+long modinv = c.modinv(c.comb(h*w,k), M);
+out.println(((res*modinv+M)%M));

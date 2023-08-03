@@ -1,0 +1,77 @@
+import java.util.*;
+
+public class Main {
+
+    private static class Pair implements Comparable<Pair> {
+        int x;
+        long score;
+
+        public Pair(int x, long score) {
+            this.x = x;
+            this.score = score;
+        }
+
+        public String toString() {
+            return "[" + this.x + "," + this.score + "]";
+        }
+
+        @Override
+        public int compareTo(Pair p) {
+            if (this.score > p.score)
+                return -1;
+            if (this.score < p.score)
+                return 1;
+            return Integer.compare(this.x, p.x);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        long ans = 0;
+        HashMap<Integer, Long> rows = new HashMap<Integer, Long>();
+        HashMap<Integer, Long> cols = new HashMap<Integer, Long>();
+        HashMap<Integer, HashMap<Integer, Integer>> val = new HashMap<Integer, HashMap<Integer, Integer>>();
+        for (int i = 0; i < n; i++) {
+            int r = sc.nextInt();
+            int c = sc.nextInt();
+            int x = sc.nextInt();
+            rows.put(r, rows.getOrDefault(r, 0L) + x);
+            cols.put(c, cols.getOrDefault(c, 0L) + x);
+            HashMap<Integer, Integer> hm = val.getOrDefault(r, new HashMap<Integer, Integer>());
+            hm.put(c, x);
+            val.put(r, hm);
+        }
+
+        ArrayList<Pair> lcols = new ArrayList<Pair>();
+        for (Integer x : cols.keySet())
+            lcols.add(new Pair(x, cols.get(x)));
+        Collections.sort(lcols);
+
+        ans = lcols.get(0).score;
+        long rowSum = 0;
+        long valCol = 0;
+        for (Integer x : rows.keySet()) {
+            if (x > lcols.get(0).x) {
+                rowSum += rows.get(x);
+                continue;
+            }
+
+            int i = 0;
+            valCol = 0;
+            while (i < lcols.size() && val.get(x).containsKey(lcols.get(i).x)) {
+                valCol += val.get(x).get(lcols.get(i).x);
+                i++;
+            }
+            if (i < lcols.size()) {
+                if (i == 0 && rows.containsKey(lcols.get(i).x)) {
+                    ans = Math.max(ans, lcols.get(i).score + rows.get(lcols.get(i).x));
+                } else {
+                    ans = Math.max(ans, lcols.get(i).score + rows.get(x) + valCol);
+                }
+            }
+        }
+        ans += rowSum;
+        System.out.println(ans);
+    }
+}

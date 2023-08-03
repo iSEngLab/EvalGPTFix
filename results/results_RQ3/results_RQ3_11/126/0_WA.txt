@@ -1,0 +1,26 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=0;
+
+        while(a!=b) {
+            if(a>b) {
+                long temp = a;
+                a = b;
+                b = temp;
+            }
+            long count = (b-1) / a;
+            ans += count;
+            b -= count * a;            
+        }
+            
+        System.out.println(ans);
+    }
+}

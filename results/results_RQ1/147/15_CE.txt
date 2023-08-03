@@ -1,0 +1,25 @@
+long nextLong() {
+    if (!hasNext()) throw new RuntimeException("no next.");
+    long result = 0;
+    boolean negative = false;
+    int b = nextByte();
+    if (b < '0') {
+        if (b == '-') negative = true;
+        else if (b != '+') throw new RuntimeException("long number must start with +/-.");
+        b = nextByte();
+    }
+    while (isVisibleChar(b)) {
+        if (b < '0' || b > '9') {
+            while (isVisibleChar(b)) {
+                b = nextByte();
+            }
+            if (!Character.isWhitespace(b)) {
+                throw new RuntimeException("wrong digit in long:" + (char) b);
+            }
+            break;
+        }
+        result = result * 10 + (b - '0');
+        b = nextByte();
+    }
+    return negative ? -result : result;
+}

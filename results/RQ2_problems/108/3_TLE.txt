@@ -1,0 +1,30 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+
+        int count = 0;
+
+        while (a != b) { // fix: change condition to a!=b instead of both a>0 and b>0
+            if (a > b) {
+                a -= b;
+            } else {
+                b -= a;
+            }
+            count++;
+        }
+
+        System.out.println(count);
+        sc.close();
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int num = scanner.nextInt();
+        String string = scanner.next();
+
+        boolean hasO = false;
+
+        for (char c : string.toCharArray()) {
+            if (c == 'o') {
+                hasO = true;
+            } else if (c == 'x') {
+                System.out.println("No");
+                return;
+            }
+        }
+
+        if (hasO) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

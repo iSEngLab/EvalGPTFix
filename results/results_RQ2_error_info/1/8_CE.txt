@@ -1,0 +1,4 @@
+private static int g(int v, int l, int r) {
+    int x = v % (r - l + 1) + l; // fixed bug
+    return Math.max(0, x - l + 1);
+}

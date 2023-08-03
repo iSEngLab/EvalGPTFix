@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String args[]) {
+        ArrayList<Integer> numlist = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int count = sc.nextInt();
+        int distance = sc.nextInt();
+
+        for(int i = 0; i < count; i++) {
+            int num = sc.nextInt();
+            numlist.add(num);
+        }
+
+        boolean found = false;
+
+        for(int i = 0; i < count - 1; i++) {
+            int x1 = numlist.get(i);
+            int x2 = numlist.get(i + 1);
+
+            if(x2 - x1 >= distance) {
+                // If the distance condition is satisfied, print the current number and end the loop
+                System.out.println(x1 + distance);
+                found = true;
+                break;
+            }
+        }
+
+        if(!found) {
+            System.out.println(-1);
+        }
+    }
+}

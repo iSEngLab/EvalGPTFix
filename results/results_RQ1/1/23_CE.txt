@@ -1,0 +1,3 @@
+if (tokenizer == null) {
+  tokenizer = new java.util.StringTokenizer("");
+}

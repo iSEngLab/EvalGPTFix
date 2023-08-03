@@ -1,0 +1,46 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        
+        int i = 0;
+        while (b % a == 0) {
+            b /= a;
+            i++;
+        }
+        long diff = gcd(a, b);
+        long lcm = lcm(a, b);
+        if (gcd(lcm, diff) != a) {
+            System.out.println("0");
+            return;
+        }
+        System.out.println(i + maxpower(lcm / a));
+    }
+    
+    public static long gcd(long a, long b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
+    
+    public static long lcm(long a, long b) {
+        return (a / gcd(a, b)) * b;
+    }
+    
+    public static int maxpower(long n) {
+        int power = 0;
+        while (n % 2 == 0) {
+            n /= 2;
+            power++;
+        }
+        return power;
+    }
+}
+

@@ -1,0 +1,59 @@
+package onlinejudge;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+
+			PrintWriter out = new PrintWriter(System.out);
+			StringBuilder sb = new StringBuilder();
+
+			String[] line1 = br.readLine().split(" ");
+			int n = Integer.parseInt(line1[0]);
+			long d = Long.parseLong(line1[1]);
+
+			long t1 = Long.parseLong(br.readLine());
+			long min = t1, max = t1;
+			long ans = -1;
+
+			for (int i = 1; i < n; i++) {
+				long t = Long.parseLong(br.readLine());
+				if (t - min <= d && max - t <= d) {
+					ans = t;
+					break;
+				}
+				if (t < min) {
+					min = t;
+				}
+				if (t > max) {
+					max = t;
+				}
+			}
+
+			if (ans == -1) {
+				if (max - t1 <= d) {
+					ans = t1;
+				} else if (t1 - min <= d) {
+					ans = t1;
+				}
+			}
+
+			if (ans != -1) {
+				sb.append(ans);
+			} else {
+				sb.append("NONE");
+			}
+
+			out.println(sb.toString());
+			out.flush();
+
+		}
+
+	}
+
+}

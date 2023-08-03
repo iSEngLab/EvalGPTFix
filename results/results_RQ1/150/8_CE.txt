@@ -1,0 +1,17 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        res += c.comb(hw-1, k-1);
+        res -= c.comb(j*h+i, k-1) * c.perm(j, k-1) % M;
+        res -= c.comb((w-j-1)*h+(i), k-1) * c.perm(w-j-1, k-1) % M;
+        res -= c.comb(i*w+j, k-1) * c.perm(i, k-1) % M;
+        res -= c.comb((h-i-1)*w+j, k-1) * c.perm(h-i-1, k-1) % M;
+
+        res += c.comb(i*(w-j-1)+(w-j-1)*h+j, k-1) * c.perm(i, k-1) % M * c.perm(w-j-1, k-1) % M;
+        res += c.comb((h-i-1)*j+i*w+w-j-1, k-1) * c.perm(h-i-1, k-1) % M * c.perm(j, k-1) % M;
+        res += c.comb(i*j, k-1) * c.perm(i, k-1) % M * c.perm(j, k-1) % M;
+        res += c.comb(i*(w-j-1)+(h-i-1)*(w-j-1)+(w-j-1)*j, k-1) * c.perm(i, k-1) % M * c.perm(h-i-1, k-1) % M *
+                c.perm(w-j-1, k-1) % M;
+
+        res %= M;
+    }
+}

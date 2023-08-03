@@ -1,0 +1,2 @@
+The bug is in the line `ans = t[i+1];` inside the loop that checks for the difference between adjacent elements of the `t` array. The variable `ans` should store the index of the second element in the pair, but it is storing the value of that element instead. To fix the bug, change that line to `ans = i + 1;`. This will store the correct index and allow the program to output the correct answer. The fixed code is shown below:
+

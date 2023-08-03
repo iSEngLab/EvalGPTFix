@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextInt();
+        long B = sc.nextInt();
+        int ans = 0;
+        while(A!=B){
+            if(A>B){
+                ans += A/B;
+                A = A%B;
+                if(A==0) A=B;
+            }
+            else{
+                ans += B/A;
+                B = B%A;
+                if(B==0) B=A;
+            }
+        }
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

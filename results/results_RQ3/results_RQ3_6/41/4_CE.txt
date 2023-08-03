@@ -1,0 +1,41 @@
+import java.util.*;
+class Main{
+  public static void main(String[] args){
+    Scanner sc=new Scanner(System.in); // Fixed to check if there's input available before reading
+    if (!sc.hasNextInt()) {
+        System.out.println("Invalid input");
+        return;
+    }
+    int n=sc.nextInt();
+    if (!sc.hasNextInt()) {
+        System.out.println("Invalid input");
+        return;
+    }
+    int d=sc.nextInt();
+    int a[]=new int[n];
+    for(int i=0;i<n;i++)
+    {
+      if (!sc.hasNextInt()) { // fixed to check if there's input available before reading
+        System.out.println("Invalid input");
+        return;
+      }
+      a[i]=sc.nextInt();
+    }
+    int c=-1;
+    for(int i=0;i<n;i++) 
+    {
+      int j = i;
+      while(j+1 < n && a[j+1]-a[i] <= d) {
+        j++;
+      }
+      if(j-i > c) {
+        c = j-i;
+      }
+    }
+    if(c == -1) {
+      System.out.println(c);
+    } else {
+      System.out.println(a[c-i]); // fixed to print a[c-i] instead of a[c]
+    }
+  }
+}

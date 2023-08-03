@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean found_x = false;
+        for (int i = 0; i < n; ++i) {
+            if (s.charAt(i) == 'x') {
+                found_x = true;
+                break;
+            } else if (s.charAt(i) != 'o') { // check for invalid character
+                System.out.println("NO");
+                return;
+            }
+        }
+        if (found_x) {
+            System.out.println("NO");
+        } else {
+            System.out.println("YES");
+        }
+    }
+}

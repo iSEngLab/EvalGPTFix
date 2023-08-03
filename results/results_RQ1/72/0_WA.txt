@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        int N = sc.nextInt();
+        String S = sc.next();
+
+        boolean f1 = false;
+        boolean f2 = true;
+
+        for(int i=0;i<N;i++){
+            if(S.charAt(i)=='o'){ // fixed: use charAt() instead of []
+              f1 = true;
+            }
+            if(S.charAt(i)=='x'){ // fixed: use charAt() instead of []
+              f2 = false;
+            }
+        }
+        if(f1 || !f2){ // fixed: change && to || and reverse f2 condition
+          System.out.println("Yes");
+        }else{
+          System.out.println("No");
+        }
+    }
+}
+
+input: 100
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooxo
+
+expect: No
+
+actual: Yes
+

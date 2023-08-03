@@ -1,0 +1,4 @@
+if (b == '-') {
+    minus = true;
+    b = readByte();
+}

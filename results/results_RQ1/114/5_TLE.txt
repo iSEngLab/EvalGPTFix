@@ -1,0 +1,40 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		long A = sc.nextLong();
+		long B = sc.nextLong();
+		long counter = 0;
+
+		while (A != B) {
+			if (A > 1 && B > 1) {
+				if (A >= 2 * B) {
+					long wari = A / (2 * B);
+					counter += wari;
+					A -= wari * 2 * B;
+				} else if (B >= 2 * A) {
+					long wari = B / (2 * A);
+					counter += wari;
+					B -= wari * 2 * A;
+				}
+			}
+			if (A > B && B != 0) {
+				counter += A / B;
+				A %= B;
+			} else if (A < B && A != 0) {
+				counter += B / A;
+				B %= A;
+			}
+		}
+
+		System.out.println(counter);
+	}
+
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

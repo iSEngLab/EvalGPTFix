@@ -1,0 +1,24 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=0;
+        while(a!=0 && b!=0) {
+            if(a<b) {
+                long factor=b/a;
+                ans+=factor;
+                b-=factor*a;
+            } else {
+                long factor=a/b;
+                ans+=factor;
+                a-=factor*b;
+            }
+        }
+        System.out.println(ans);
+    }
+}

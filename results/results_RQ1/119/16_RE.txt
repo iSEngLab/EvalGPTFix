@@ -1,0 +1,50 @@
+import java.io.File;
+import java.net.URLDecoder;
+import java.util.Scanner;
+
+public class Main {
+
+    private static final boolean test = true;
+
+    public static void main(String[] args) throws Exception {
+        Scanner sc;
+        
+        // Fix: Use File.separator instead of "/" to ensure portability across platforms
+        String inputFilePath = "input.txt".replace("/", File.separator);
+        
+        if (!test) {
+            sc = new Scanner(System.in);
+        } else {
+            // Fix: Use getResourceAsStream() to avoid URL decoding issues
+            sc = new Scanner(Main.class.getClassLoader().getResourceAsStream(inputFilePath), "utf-8");
+        }
+        StringBuilder sb = new StringBuilder();
+
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+
+        long c = 0;
+        while (a != b && a > 0 && b > 0) {
+
+            if (a > b) {
+                c = c + a / b;
+                a = a % b;
+            } else {
+                c = c + b / a;
+                b = b % a;
+            }
+
+        }
+
+        if (a != b) {
+            c = c - 1;
+        }
+
+        System.out.println(c);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

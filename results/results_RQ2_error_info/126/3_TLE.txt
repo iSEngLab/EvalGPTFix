@@ -1,0 +1,44 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=0;
+
+        while(a!=b) {
+            if(a<b) {
+                long dif=b-a;
+                ans+=(dif/a);
+                if(dif%a==0) { // fixed: use modulus instead of division for checking remainder
+                    ans--;
+                    b-=(ans*a); // fixed: use correct formula to update b
+                } else {
+                    ans++;
+                    b-=(ans*a); // fixed: use correct formula to update b
+                }
+            } else {
+                long dif = a-b;
+                ans+=(dif/b);
+                if(dif%b==0) { // fixed: use modulus instead of division for checking remainder
+                    ans--;
+                    a-=(ans*b); // fixed: use correct formula to update a
+                } else {
+                    ans++;
+                    a-=(ans*b); // fixed: use correct formula to update a
+                }
+            }
+        }
+            
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

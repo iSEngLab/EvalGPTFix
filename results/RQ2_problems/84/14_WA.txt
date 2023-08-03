@@ -1,0 +1,43 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String S = br.readLine();
+        int R1 = -1;
+        int R2 = -1;
+        int B1 = -1;
+        int B2 = -1;
+        int K = -1;
+
+        for (int i = 0; i < S.length(); i++) {
+            if (S.charAt(i) == 'R') {
+                if (R1 == -1) R1 = i;
+                else R2 = i;
+            }
+            if (S.charAt(i) == 'B') {
+                if (B1 == -1) B1 = i;
+                else B2 = i;
+            }
+            if (S.charAt(i) == 'K') K = i;
+        }
+
+        boolean test = true;
+
+        if (B1 % 2 == B2 % 2) test = false;
+        if (R1 > K || R2 < K) test = false;
+        if (B1 > K || B2 < K) test = false;
+
+        if (test) System.out.println("Yes");
+        else System.out.println("No");
+    }
+}
+
+input: NQNRKBBR
+
+expect: Yes
+
+actual: No
+

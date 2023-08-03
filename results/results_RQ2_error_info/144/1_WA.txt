@@ -1,0 +1,60 @@
+import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		try (Scanner sc = new Scanner(System.in);) {
+
+			PrintWriter out = new PrintWriter(System.out);
+			StringBuilder sb = new StringBuilder();
+
+			int n = Integer.parseInt(sc.next());
+			int k = Integer.parseInt(sc.next());
+			long[] a = new long[n];
+
+			Set<Long> set = new HashSet<Long>();
+			PriorityQueue<Long> que = new PriorityQueue<Long>();
+
+			for (int i = 0; i < n; i++) {
+				a[i] = Long.parseLong(sc.next());
+				set.add(a[i]);
+				que.add(a[i]);
+			}
+
+			long ans = 0;
+			for (int i = 0; i < k; i++) {
+				ans = que.poll();
+
+				for (int j = 0; j < n; j++) {
+					long sum = ans + a[j];
+					if (set.contains(sum))
+						continue;
+					set.add(sum);
+					que.add(sum);
+				}
+			}
+
+			sb.append(ans);
+			out.println(sb.toString());
+			out.flush();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}
+
+input: 10 200000
+1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000
+
+expect: 200000000000000
+
+actual: 199991000000000
+

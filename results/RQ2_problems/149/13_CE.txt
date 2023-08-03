@@ -1,0 +1,8 @@
+public long comb(int n, int r) {
+    if (n < r) return 0;
+    long res = 1;
+    for (int i = n; i >= n - r + 1; i--) {
+        res = res * i % mod;
+    }
+    return res * pi[r] % mod;
+}

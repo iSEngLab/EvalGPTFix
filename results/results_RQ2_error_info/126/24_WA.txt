@@ -1,0 +1,47 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=0;
+        
+        while(a!=0 && b!=0) { // Fix 1: Check if any number is zero
+            
+            if(a<b) {
+                long dif=b-a;
+                ans+=(dif/a);
+                if(dif%a==0) { // Fix 2: Change "==" to "%"
+                    ans--;
+                    b-=a;
+                    continue;
+                }
+                b%=a; // Fix 3: Use module operation
+            } else {
+                long dif = a-b;
+                ans+=(dif/b);
+                if(dif%b==0) { // Fix 4: Change "==" to "%"
+                    ans--;
+                    a-=b;
+                    continue;
+                }
+                a%=b; // Fix 5: Use module operation
+            }
+            
+        }
+        
+        System.out.println(ans);
+        
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275737
+

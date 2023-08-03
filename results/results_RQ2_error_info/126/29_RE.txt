@@ -1,0 +1,52 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        
+        // Fixed bug: swapped variables a and b to ensure a is always smaller than b
+        if (a > b) {
+            long temp = a;
+            a = b;
+            b = temp;
+        }
+        
+        int ans=0;
+        
+        while(a!=b) {
+            if(a<b) {
+                long dif=b-a;
+                // Fixed bug: updated the calculation for ans and dif to use modulo instead of division
+                ans+=(b/a);
+                b%=a;
+                if(b<a) {
+                    long temp = b;
+                    b = a;
+                    a = temp;
+                }
+            } else {
+                long dif = a-b;
+                // Fixed bug: updated the calculation for ans and dif to use modulo instead of division
+                ans+=(a/b);
+                a%=b;
+                if(a<b) {
+                    long temp = a;
+                    a = b;
+                    b = temp;
+                }
+            }
+        }
+        
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

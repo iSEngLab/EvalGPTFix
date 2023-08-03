@@ -1,0 +1,13 @@
+static void sysout(int[] a) {
+    sysout(Arrays.stream(a).mapToObj(e -> e + "").collect(Collectors.joining(" ")));
+}
+static void sysout(int[][] aa) {
+    for (int[] a : aa)
+        sysout(a);
+}
+static void sysout(Object[] a) {
+    sysout(Arrays.stream(a).map(e -> e + "").collect(Collectors.joining(" ")));
+}
+static void sysout(Object o) {
+    System.out.println(o);
+}

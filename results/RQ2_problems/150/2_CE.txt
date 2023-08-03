@@ -1,0 +1,34 @@
+public void solve() throws Exception {
+    int h=nextInt(),w=nextInt(),k=nextInt();
+    long res=0;
+
+    int hw = h * w;
+    Comb c=new Comb(hw, M);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            // compute contribution of each rectangle containing (i,j)
+            for (int p = 0; p < (1 << hw); p++) {
+                int xmin = w, xmax = 0, ymin = h, ymax = 0, cnt = 0;
+                for (int q = 0; q < hw; q++) {
+                    if (((p >> q) & 1) == 1) {
+                        int x = q % w, y = q / w;
+                        xmin = Math.min(xmin, x);
+                        xmax = Math.max(xmax, x + 1);
+                        ymin = Math.min(ymin, y);
+                        ymax = Math.max(ymax, y + 1);
+                        cnt++;
+                    }
+                }
+                if (cnt == k) {
+                    // add contribution of this rectangle
+                    long coef = (xmax - xmin) * (ymax - ymin) % M;
+                    res += coef * c.comb(cnt - 1, k - 1) % M;
+                    res %= M;
+                }
+            }
+        }
+    }
+    long modinv = c.modinv(c.comb(h*w,k), M);
+    out.println((res*modinv%M));
+}

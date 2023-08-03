@@ -1,0 +1,30 @@
+package to.msn.wings.selflearn.chap01;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int d = scanner.nextInt();
+        int[] t = new int[n];
+        int ans = -1;
+
+        if (n > 0) {
+            t[0] = scanner.nextInt();
+            ans = t[0];
+        }
+        for (int i = 1; i < n - 1; i++) {
+            t[i] = scanner.nextInt();
+            if (t[i] - t[i-1] >= d) {
+                ans = t[i-1] + d;
+                break;
+            }
+        }
+        if (ans == -1 || t[n-2] + d < t[n-1]) {
+            ans = t[n-2] + d;
+        }
+        System.out.println(ans);
+    }
+}

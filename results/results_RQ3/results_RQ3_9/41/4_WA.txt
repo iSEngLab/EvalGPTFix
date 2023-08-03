@@ -1,0 +1,34 @@
+import java.util.*;
+
+class Main{
+  public static void main(String[] args){
+    Scanner sc=new Scanner(System.in);
+    int n=sc.nextInt();
+    int d=sc.nextInt();
+    int a[]=new int[n];
+    for(int i=0;i<n;i++)
+    {
+      a[i]=sc.nextInt();
+    }
+    int c=-1;
+    for(int i=1;i<n;i++)
+    {
+      if(a[i]-a[i-1]>d){
+        c = -1; //fixed: set c to -1 if the difference is bigger than d
+      }
+      if(a[i]-a[i-1]<=d)
+      {
+        if (i > 1 && a[i]-a[i-2]<=d){
+          a[i-1] = a[i-2];
+        }else{
+          c=i;
+        }
+      }
+    }
+    if (c==-1){ //fixed: print -1 if c is -1
+      System.out.println(c);
+    }else{
+      System.out.println(a[c-1]); //fixed: print the value at index c-1, not c itself
+    }
+  }
+}

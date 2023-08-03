@@ -1,0 +1,27 @@
+public void solve() throws Exception {
+    int h=nextInt(),w=nextInt(),k=nextInt();
+    long res=0;
+
+    int hw = h * w;
+    Comb c=new Comb(hw, M);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            long tmp = 0;
+
+            // inclusion-exclusion principle
+            tmp += c.comb(i * w + j, k);
+            tmp -= c.comb(i * w + (j + 1), k);
+            tmp -= c.comb((i + 1) * w + j, k);
+            tmp += c.comb((i + 1) * w + (j + 1), k);
+            tmp += 2 * M;
+            tmp %= M;
+
+            res += tmp;
+            res %= M;
+        }
+    }
+
+    long modinv = c.modinv(c.comb(h*w,k), M);
+    out.println(((res * modinv) % M + M) % M);
+}

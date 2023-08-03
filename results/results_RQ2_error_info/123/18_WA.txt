@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        long cnt = 0;
+        while (a != 0 && b != 0) { // check that none of the inputs are zero
+            if (a > b) {
+                cnt += a/b;
+                a %= b;
+            } else {
+                cnt += b/a;
+                b %= a;
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 81970925269218255
+

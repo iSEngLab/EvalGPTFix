@@ -1,0 +1,20 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        long cur = 0;
+        cur += c.comb(h*w,k);
+        cur -= c.comb(j*h,k);
+        cur -= c.comb((w-j-1)*h,k);
+        cur -= c.comb(i*w,k);
+        cur -= c.comb((h-i-1)*w,k);
+        cur += c.comb(i*j,k);
+        cur += c.comb(i*(w-j-1),k);
+        cur += c.comb((h-i-1)*(w-j-1),k);
+        cur += c.comb((h-i-1)*j,k);
+
+        cur %= M;
+        if (cur < 0) cur += M;
+        res += cur;
+    }
+}
+long modinv = c.modinv(c.comb(h*w,k), M);
+out.println(((res*modinv)%M)); //fixed

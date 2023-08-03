@@ -1,0 +1,42 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans=0;
+            
+        while(a!=b) {
+            if(a<b) {
+                if(b%a==0) {
+                    ans += b/a;
+                    b = a;
+                } else {
+                    ans += b/a;
+                    b %= a;
+                }
+            } else {
+                if(a%b==0) {
+                    ans += a/b;
+                    a = b;
+                } else {
+                    ans += a/b;
+                    a %= b;
+                }
+            }
+        }
+            
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275727
+

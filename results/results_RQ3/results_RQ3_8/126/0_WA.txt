@@ -1,0 +1,27 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans = 0;
+
+        while(a != 0 && b != 0) {  //FIX: Terminate when either a or b becomes zero
+            if(a < b) {
+                long dif = b - a;
+                ans += (b / a);  //FIX: Add b/a to answer instead of dif/a, which may be zero
+                b %= a;  //FIX: Use modular division to calculate the remainder instead of dif/a
+            } else {
+                long dif = a - b;
+                ans += (a / b);  //FIX: Add a/b to answer instead of dif/b, which may be zero
+                a %= b;  //FIX: Use modular division to calculate the remainder instead of dif/b
+            }
+        }
+
+        System.out.println(ans);
+    }
+}

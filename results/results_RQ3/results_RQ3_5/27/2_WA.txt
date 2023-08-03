@@ -1,0 +1,69 @@
+import java.util.*;
+
+public class Main {
+
+	private static class Pair implements Comparable<Pair> {
+		int x;
+		long score;
+
+		public Pair(int x,long score) {
+			this.x=x;
+			this.score=score;
+		}
+
+		public String toString() {
+			return "["+this.x+","+this.score+"]";
+		}
+
+		@Override
+		public int compareTo(Pair other) {
+			if(this.score == other.score) {
+				return Integer.compare(this.x, other.x); // comparisons of x if scores are equal
+			}
+			return Long.compare(other.score, this.score); // compare scores otherwise
+		}
+
+	}
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		HashMap<Integer, Long> rows=new HashMap<Integer, Long>();
+		HashMap<Integer, Long> cols=new HashMap<Integer, Long>();
+		HashMap<Integer, HashMap<Integer, Integer>> val=new HashMap<Integer, HashMap<Integer, Integer>>();
+		for(int i=0;i<n;i++) {
+			int r=sc.nextInt();
+			int c=sc.nextInt();
+			int x=sc.nextInt();
+			rows.put(r,rows.getOrDefault(r,0L)+x);
+			cols.put(c,cols.getOrDefault(c,0L)+x);
+			HashMap<Integer, Integer> hm=val.getOrDefault(r,new HashMap<Integer, Integer>());
+			hm.put(c,x);
+			val.put(r,hm);
+		}
+
+		ArrayList<Pair> lcols=new ArrayList<Pair>();
+		for(Integer x:cols.keySet())
+			lcols.add(new Pair(x,cols.get(x)));
+		Collections.sort(lcols);
+
+		int l = 0;
+		long lhs_sum = 0, rhs_sum = 0, ans = Long.MIN_VALUE;
+		for(Integer x:rows.keySet()) {
+			while (l < lcols.size() && val.get(x).containsKey(lcols.get(l).x)) {
+				lhs_sum += val.get(x).get(lcols.get(l).x);
+				rhs_sum += lcols.get(l).score;
+				l++;
+			}
+			if (l < lcols.size()) {
+				long curr_ans = rows.get(x) + rhs_sum;
+				ans = Math.max(ans, curr_ans);
+				curr_ans += lcols.get(l).score - lhs_sum;
+				ans = Math.max(ans, curr_ans);
+			} else {
+				ans = Math.max(ans, rows.get(x) + rhs_sum);
+			}
+		}
+		System.out.println(ans);
+	}
+}

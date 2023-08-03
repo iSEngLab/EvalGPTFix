@@ -1,0 +1,42 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    static final long INF = 1l << 60;
+    static final int inf = 1 << 30;
+    static final int MOD = 998244353;
+    static final double EPS = 1e-9;
+
+    public static void main(String[] args) {
+        FastScanner sc = new FastScanner();
+        PrintWriter pw = new PrintWriter(System.out);
+        solve(sc, pw);
+        pw.close();
+    }
+
+    static void solve(FastScanner sc, PrintWriter pw) {
+        int n = sc.nextInt(), k = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) a[i] = sc.nextInt();
+
+        PriorityQueue<Long> pq = new PriorityQueue<>();
+        pq.add(0L);
+        for (int i = 0; i < n; i++) {
+            PriorityQueue<Long> nextPq = new PriorityQueue<>();
+            for (long sum : pq) {
+                for (int j = 0; j < k; j++) {
+                    long nextSum = sum + a[i] * (j + 1);
+                    nextPq.add(nextSum);
+                    if (nextPq.size() > k) nextPq.poll();
+                }
+            }
+            pq = nextPq;
+        }
+
+        pw.println(pq.peek());
+    }
+}
+
+class FastScanner {
+    // same as above
+}

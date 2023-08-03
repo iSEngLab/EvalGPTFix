@@ -1,0 +1,120 @@
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.NoSuchElementException;
+
+public class Main {
+
+	public static void main(String[] args) {
+		FastScanner sc = new FastScanner();
+		int N = sc.nextInt();
+		int D = sc.nextInt();
+		int bfTime = sc.nextInt();
+		for (int i = 0; i < N; i++) { // Fix: start the loop from index 0
+			int time = sc.nextInt();
+			if (i == 0 || Math.abs(bfTime - time) < D) { // Fix: check the first time as well
+				System.out.println(time);
+				return;
+			}
+			bfTime = time;
+		}
+		System.out.println(-1);
+	}
+}
+
+class FastScanner {
+	private final InputStream in = System.in;
+	private final byte[] buffer = new byte[1024];
+	private int ptr = 0;
+	private int buflen = 0;
+
+	private boolean hasNextByte() {
+		if (ptr < buflen) {
+			return true;
+		} else {
+			ptr = 0;
+			try {
+				buflen = in.read(buffer);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			if (buflen <= 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private int readByte() {
+		if (hasNextByte())
+			return buffer[ptr++];
+		else
+			return -1;
+	}
+
+	private static boolean isPrintableChar(int c) {
+		return 33 <= c && c <= 126;
+	}
+
+	public boolean hasNext() {
+		while (hasNextByte() && !isPrintableChar(buffer[ptr]))
+			ptr++;
+		return hasNextByte();
+	}
+
+	public String next() {
+		if (!hasNext())
+			throw new NoSuchElementException();
+		StringBuilder sb = new StringBuilder();
+		int b = readByte();
+		while (isPrintableChar(b)) {
+			sb.appendCodePoint(b);
+			b = readByte();
+		}
+		return sb.toString();
+	}
+
+	public long nextLong() {
+		if (!hasNext())
+			throw new NoSuchElementException();
+		long n = 0;
+		boolean minus = false;
+		int b = readByte();
+		if (b == '-') {
+			minus = true;
+			b = readByte();
+		}
+		if (b < '0' || '9' < b) {
+			throw new NumberFormatException();
+		}
+		while (true) {
+			if ('0' <= b && b <= '9') {
+				n *= 10;
+				n += b - '0';
+			} else if (b == -1 || !isPrintableChar(b)) {
+				return minus ? -n : n;
+			} else {
+				throw new NumberFormatException();
+			}
+			b = readByte();
+		}
+	}
+
+	public int nextInt() {
+		long nl = nextLong();
+		if (nl < Integer.MIN_VALUE || nl > Integer.MAX_VALUE)
+			throw new NumberFormatException();
+		return (int) nl;
+	}
+
+	public double nextDouble() {
+		return Double.parseDouble(next());
+	}
+}
+
+input: 100 110485
+3738343 9481571 15435716 20328889 21159482 21743494 26245031 27582200 28671482 50328243 56587897 58245803 61630738 63566813 89110505 98682046 119516868 125854640 129455008 130280285 133359480 148474128 154542566 172061630 190507829 204531919 217729147 218870396 253076321 261163475 284686372 291628548 310719670 311437429 326309874 348432791 349385045 350733874 361643185 362364164 370675265 371406235 375978421 428601004 431987704 436220965 442965516 450944352 452543203 459754787 467671315 473594716 487416455 520385610 551925398 553083513 553305038 562039284 563363236 570811927 580276971 609216132 656290945 658997606 659391968 669356683 690551300 691771638 698075217 740687309 741489797 758289285 758409813 788106199 791309472 793582156 805901623 811271082 822782128 826597537 831956603 836922190 842634124 843323782 845261046 847008558 848864041 852013860 866079979 874853832 884147173 894160417 911221464 921565239 967243452 967691655 988991681 991691681 991802167 995754792
+
+expect: -1
+
+actual: 9481571
+

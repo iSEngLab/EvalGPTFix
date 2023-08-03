@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        long A = scanner.nextLong();
+        long B = scanner.nextLong();
+
+        if (B > A) {
+            long temp = B;
+            B = A;
+            A = temp;
+        }
+
+        if (A == B) {
+            System.out.println(0);
+            return;
+        }
+
+        long p = A;
+        long q = B;
+        long res = 0;
+
+        while (p % q != 0) {
+            res += p / q;
+
+            long temp = q;
+            q = p % q;
+            p = temp;
+        }
+
+        res += p / q; // fix for calculating the final result
+        System.out.println(res);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 81970925269218255
+

@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = 0;
+        String S = "";
+        try {
+            N = sc.nextInt();
+            S = sc.next();
+            if (S.length() != N) {
+                throw new Exception("Invalid input");
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid input");
+            return;
+        }
+
+        boolean hasGood = false;
+        boolean hasBad = false;
+
+        for (int i = 0; i < N; i++) {
+            if (S.charAt(i) == 'o') {
+                hasGood = true;
+            } else if (S.charAt(i) == 'x') {
+                hasBad = true;
+            }
+        }
+        if (hasGood && !hasBad) {
+            System.out.println("合格");
+        } else {
+            System.out.println("不合格");
+        }
+    }
+}
+
+input: 99
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+
+expect: Yes
+
+actual: 合格
+

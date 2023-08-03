@@ -1,0 +1,94 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        boolean result = true;
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] a = new int[n][n];
+        int[][] b = new int[n][n];
+        for(int i = 0; i < n;i++) {
+            for(int j = 0; j < n; j++) {
+                a[i][j] = sc.nextInt();
+            }
+        }
+        for(int i = 0; i < n;i++) {
+            for(int j = 0; j < n; j++) {
+                b[i][j] = sc.nextInt();
+            }
+        }
+        
+        // Fix: Initialize result as false instead of true
+        result = false;
+        
+        // Check for four transformations
+        for(int k = 0; k < 4; k++) {
+            if(k > 0) {
+                b = transpose(b, n);
+                if(k == 2) {
+                    b = reverseRows(b, n);
+                }
+            }
+            for(int i = 0; i < n;i++) {
+                for(int j = 0; j < n; j++) {
+                    if(a[i][j] == 1 && b[i][j] == 1) {
+                        result = true;
+                    } else if(a[i][j] == 1 && b[i][j] == 0) {
+                        result = false;
+                        break;
+                    }
+                    if(!result) {
+                        break;
+                    }
+                }
+                if(!result) {
+                    break;
+                }
+            }
+            if(result) {
+                break;
+            }
+        }
+
+        if(result){
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+    
+    // Helper method to transpose a matrix
+    private static int[][] transpose(int[][] matrix, int n) {
+        int[][] result = new int[n][n];
+        for(int i = 0; i < n;i++) {
+            for(int j = 0; j < n; j++) {
+                result[i][j] = matrix[j][i];
+            }
+        }
+        return result;
+    }
+    
+    // Helper method to reverse the rows of a matrix
+    private static int[][] reverseRows(int[][] matrix, int n) {
+        int[][] result = new int[n][n];
+        for(int i = 0; i < n;i++) {
+            for(int j = 0; j < n; j++) {
+                result[i][j] = matrix[n - i - 1][j];
+            }
+        }
+        return result;
+    }
+}
+
+input: 3
+0 1 1
+1 0 0
+0 1 0
+1 1 0
+0 0 1
+1 1 1
+
+expect: Yes
+
+actual: No
+

@@ -1,0 +1,58 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int n = scanner.nextInt();
+        int[][] a = new int[n][n];
+        int[][] b = new int[n][n];
+        for (int i = 0; i < 2 * n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i < n) {
+                    a[i][j] = scanner.nextInt();
+                } else {
+                    b[i - n][j] = scanner.nextInt();
+                }
+            }
+        }
+
+        int[][] tmp = new int[n][n];
+
+        boolean flag = true;
+        for (int kaiten = 0; kaiten < 4; kaiten++) {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    tmp[j][i] = a[n - i - 1][j];  // fix indices in this line
+                }
+            }
+
+            flag = true;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (tmp[i][j] == 1 && b[i][j] == 0) {
+                        flag = false;
+                        break;  // terminate inner loop
+                    }
+                }
+                if (!flag) {
+                    break;  // terminate outer loop
+                }
+            }
+
+            if (flag) {
+                System.out.println("Yes");
+                return;
+            }
+
+            // not found yet, update a to tmp for the next iteration
+            for (int i = 0; i < n; i++) {
+                a[i] = Arrays.copyOf(tmp[i], n);
+            }
+        }
+
+        System.out.println("No");
+    }
+}

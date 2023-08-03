@@ -1,0 +1,20 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+        boolean flag = false;
+        for(int i=0;i<n;++i){
+            if(s.charAt(i) == 'o') {
+                flag = true;
+            }else if(s.charAt(i) == 'x'){
+                System.out.println("NO");
+                return;
+            }
+        }
+        if(flag || n == 0) System.out.println("Yes");
+        else System.out.println("NO"); // correct the case of "NO"
+    }
+}

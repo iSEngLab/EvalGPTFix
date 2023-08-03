@@ -1,0 +1,21 @@
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		BigInteger A = sc.nextBigInteger();
+		BigInteger B = sc.nextBigInteger();
+		BigInteger sum = BigInteger.ZERO;
+		while (!A.equals(BigInteger.ZERO) && !B.equals(BigInteger.ZERO)) {
+			if (A.compareTo(B) < 0) {
+				BigInteger tmp = A;
+				A = B;
+				B = tmp;
+			}
+			sum = sum.add(A.divide(B));
+			A = A.mod(B);
+		}
+		System.out.println(sum);
+	}
+}

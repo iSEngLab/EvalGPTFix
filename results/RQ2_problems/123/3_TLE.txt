@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        int cnt = 0;
+        while (a != b) {
+            cnt++;
+            if (a > b) {
+                long temp = a;
+                a = b;
+                b = temp - b;
+            } else {
+                long temp = b;
+                b = a;
+                a = temp - a;
+            }
+        }
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

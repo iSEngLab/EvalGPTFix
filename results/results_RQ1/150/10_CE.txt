@@ -1,0 +1,2 @@
+res += c.comb(hw - 1, k); // combinations that include the current cell (i,j)
+res -= c.comb((i*w + j) + (h*w - (i*w + j) - 1), k); // combinations that don't include the current cell (i,j)

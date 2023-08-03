@@ -1,0 +1,13 @@
+while (a != b) {
+    if (a > b) {
+        cnt += a / b;
+        a %= b;
+    } else {
+        cnt += b / a;
+        b %= a;
+    }
+    if (a == 0 || b == 0) {
+        --cnt;
+        break;
+    }
+}

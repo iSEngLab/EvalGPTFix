@@ -1,0 +1,23 @@
+public void solve() throws Exception {
+    int h=nextInt(),w=nextInt(),k=nextInt();
+    long res=0;
+
+    int hw = h * w;
+    Comb c=new Comb(hw, M);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            res+=c.comb(i*w+j*h,k);
+            res-=c.comb(i*w+(j+1)*h,k);
+            res-=c.comb((i+1)*w+j*h,k);
+            res-=c.comb((i+1)*w+(j+1)*h,k);
+            res+=2*c.comb(i*w,k);
+            res+=2*c.comb(j*h,k);
+            res-=4*c.comb(i,j)*c.comb(hw-i-1,j)*c.comb(hw-i-1,h-j-1);
+            res%=M;
+            if(res<0) res+=M;
+        }
+    }
+    long modinv = c.modinv(c.comb(hw,k), M);
+    out.println(((res*modinv+M)%M));
+}

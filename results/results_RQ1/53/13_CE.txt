@@ -1,0 +1,21 @@
+static void solve(){
+    int N = 0;
+    int Q = 0;
+    while(hasNext()){
+        // Read the next integer, ignoring any non-integer input
+        try{
+            int num = Integer.parseInt(next());
+            if(N == 0){
+                N = num;
+            }else if(Q == 0){
+                Q = num;
+            }else{
+                break;
+            }
+        }catch(NumberFormatException e){
+            continue;
+        }
+    }
+    
+    // Rest of the code here...
+}

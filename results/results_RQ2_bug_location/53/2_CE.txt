@@ -1,0 +1,31 @@
+static void solve(){
+    int N = nextInt();
+    int Q = nextInt();
+    HashMap<Integer, HashSet<Integer>> map = new HashMap<>();
+    ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+    int maxV = 0, maxU = 0;
+    for(int i = 0; i < Q; i++){
+        int t = nextInt();
+        if(t == 1){
+            int V = nextInt();
+            int U = nextInt();
+            maxV = Math.max(maxV, V);
+            maxU = Math.max(maxU, U);
+            while(list.size() <= U) list.add(new ArrayList<Integer>());
+            map.putIfAbsent(V, new HashSet<Integer>());
+            map.get(V).add(U);
+            list.get(U).add(V);
+        }else if(t == 2){
+            int V = nextInt();
+            ArrayList<Integer> output = V <= maxU ? list.get(V) : new ArrayList<>();
+            Collections.sort(output);
+            myout(myconv(output, 8));
+        }else{
+            int V = nextInt();
+            Set<Integer> outputSet = V <= maxV ? map.get(V) : new HashSet<>();
+            ArrayList<Integer> output = new ArrayList<>(outputSet);
+            Collections.sort(output);
+            myout(myconv(output, 8));
+        }
+    }
+}

@@ -1,0 +1,25 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        long c1 = c.comb(h*w,k);
+        long c2 = c.comb(j*h,k);
+        long c3 = c.comb((w-j-1)*h,k);
+        long c4 = c.comb(i*w,k);
+        long c5 = c.comb((h-i-1)*w,k);
+        long c6 = c.comb(i*j,k);
+        long c7 = c.comb(i*(w-j-1),k);
+        long c8 = c.comb((h-i-1)*(w-j-1),k);
+        long c9 = c.comb((h-i-1)*j,k);
+
+        res += c1;
+        res -= c2;
+        res -= c3;
+        res -= c4;
+        res -= c5;
+        res += c6;
+        res += c7;
+        res += c8;
+        res += c9;
+
+        res %= M;
+    }
+}

@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String args[]) {
+        Scanner stdin = new Scanner(System.in);
+        System.out.println("Please enter a string...");
+
+        String input = stdin.next();
+        boolean hasX = false;
+        boolean hasO = false;
+        
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (c == 'x' || c == 'X') {
+                hasX = true;
+            } else if (c == 'o' || c == 'O') {
+                hasO = true;
+            }
+        }
+
+        if (hasX && !hasO) {
+            System.out.println("No");
+        } else if (!hasX && hasO) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

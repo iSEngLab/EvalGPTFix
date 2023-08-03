@@ -1,0 +1,8 @@
+@Override
+public int compareTo(Pair x) {
+    if(x.score-this.score>0)
+        return 1;
+    if(x.score-this.score<0)
+        return -1;
+    return 0;
+}

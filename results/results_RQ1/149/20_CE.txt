@@ -1,0 +1,54 @@
+public void solve() throws Exception {
+    int h = nextInt(), w = nextInt(), k = nextInt();
+    long res = 0;
+
+    int hw = h * w;
+    Comb c = new Comb(hw, M);
+
+    for (int i = 0; i < (1 << (h - 1)); i++) {
+        for (int j = 0; j < (1 << (w - 1)); j++) {
+            int[][] blocks = getBlocks(i, j, h, w);
+            long sum = 0;
+            for (int b = 0; b < blocks.length; b++) {
+                int x = blocks[b][0], y = blocks[b][1], bh = blocks[b][2], bw = blocks[b][3];
+                int cells = bh * bw;
+                sum += c.comb(cells, k);
+            }
+            int sign = Integer.bitCount(i ^ (i >> 1) ^ j ^ (j >> 1)) % 2 == 0 ? 1 : -1;
+            res += sign * sum;
+            res = (res % M + M) % M;
+        }
+    }
+
+    long modinv = c.modinv(c.comb(hw, k), M);
+    out.println((res * modinv) % M);
+}
+
+int[][] getBlocks(int hMask, int wMask, int h, int w) {
+    List<Integer> hCuts = new ArrayList<>();
+    List<Integer> wCuts = new ArrayList<>();
+    hCuts.add(0);
+    wCuts.add(0);
+    for (int i = 0; i < h - 1; i++) {
+        if ((hMask & (1 << i)) > 0) {
+            hCuts.add(i + 1);
+        }
+    }
+    for (int i = 0; i < w - 1; i++) {
+        if ((wMask & (1 << i)) > 0) {
+            wCuts.add(i + 1);
+        }
+    }
+    hCuts.add(h);
+    wCuts.add(w);
+
+    int[][] blocks = new int[hCuts.size() - 1][4];
+    for (int i = 0; i < hCuts.size() - 1; i++) {
+        for (int j = 0; j < wCuts.size() - 1; j++) {
+            int bh = hCuts.get(i + 1) - hCuts.get(i);
+            int bw = wCuts.get(j + 1) - wCuts.get(j);
+            blocks[i * (wCuts.size() - 1) + j] = new int[]{hCuts.get(i), wCuts.get(j), bh, bw};
+        }
+    }
+    return blocks;
+}

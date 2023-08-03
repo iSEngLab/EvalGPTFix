@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double a = sc.nextDouble();
+        double b = sc.nextDouble();
+        double cnt = 0;
+        while (a != b) {
+            cnt ++;
+            if (a > b) {
+                cnt += (a - 1) / b;
+                a -= Math.floor((a - 1) / b) * b;
+            } else {
+                cnt += (b - 1) / a;
+                b -= Math.floor((b - 1) / a) * a;
+            }
+        }
+        System.out.println((int)cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

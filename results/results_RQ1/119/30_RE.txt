@@ -1,0 +1,45 @@
+import java.io.InputStream;
+import java.util.Scanner;
+
+public class Main {
+
+    private static final boolean test = true;
+
+    public static void main(String[] args) throws Exception {
+        Scanner sc;
+        if (!test) {
+            sc = new Scanner(System.in);
+        } else {
+            InputStream stream = Main.class.getClassLoader().getResourceAsStream("input.txt");
+            sc = new Scanner(stream);
+        }
+        StringBuilder sb = new StringBuilder();
+
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+
+        long c = 0;
+        while (a != b && a > 0 && b > 0) {
+
+            if (a > b) {
+                c += a / b;
+                a %= b;
+            } else {
+                c += b / a;
+                b %= a;
+            }
+
+        }
+
+        if (a != b) {
+            c--;
+        }
+
+        System.out.println(c);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

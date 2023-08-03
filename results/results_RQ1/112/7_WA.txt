@@ -1,0 +1,75 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        int ans = 0;
+        if (A > B) {
+            if (B == 1) {
+                ans = (int) (A - 1);
+            } else {
+                ans += A / B;
+                A %= B;
+                while (true) {
+                    if (A == 0) {
+                        break;
+                    } else {
+                        ans += B / A;
+                        B %= A;
+                        if (B == 0) {
+                            ans--;
+                            B = A;
+                            break;
+                        }
+                        ans += A / B;
+                        A %= B;
+                        if (A == 0) {
+                            ans--;
+                            A = B;
+                            break;
+                        }
+                    }
+                }
+            }
+        } else if (B > A) {
+            if (A == 1) {
+                ans = (int) (B - 1);
+            } else {
+                ans += B / A;
+                B %= A;
+                while (true) {
+                    if (B == 0) {
+                        break;
+                    } else {
+                        ans += A / B;
+                        A %= B;
+                        if (A == 0) {
+                            ans--;
+                            A = B;
+                            break;
+                        }
+                        ans += B / A;
+                        B %= A;
+                        if (B == 0) {
+                            ans--;
+                            B = A;
+                            break;
+                        }
+                    }
+                }
+            }
+        } else {
+            ans = 0;
+        }
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275726
+

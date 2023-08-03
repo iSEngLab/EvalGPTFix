@@ -1,0 +1,62 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.StringTokenizer;
+
+public class Main {
+    public static void main(String[] args) {
+        FastScanner fs = new FastScanner();
+        PrintWriter out = new PrintWriter(System.out);
+
+        long[] a = {fs.nextLong(), fs.nextLong()};
+        swap(a);
+
+        int count = 0;
+        while (a[0] != a[1]) {
+            if (a[0] < a[1]) {
+                swap(a);
+            }
+            count += a[0] / a[1];
+            a[0] = a[0] % a[1];
+        }
+        
+        out.println(count);
+        out.close();
+    }
+
+    static void swap(long[] a) {
+        long temp = a[0];
+        a[0] = a[1];
+        a[1] = temp;
+    }
+
+    static class FastScanner {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+
+        String next() {
+            while (st == null || !st.hasMoreTokens()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+
+        long nextLong() {
+            return Long.parseLong(next());
+        }
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

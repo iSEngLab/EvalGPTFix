@@ -1,0 +1,35 @@
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        PrintWriter out = new PrintWriter(System.out);
+
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+
+        int count = 0;
+        while (a > 0 && b > 0) {
+            if (a > b) {
+                count += a / b;
+                a %= b;
+            } else {
+                count += b / a;
+                b %= a;
+            }
+        }
+        out.println(count - 1);
+        out.flush();
+        sc.close();
+        out.close();
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275726
+

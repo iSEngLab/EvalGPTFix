@@ -1,0 +1,54 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        Long A = sc.nextLong();
+        Long B = sc.nextLong();
+        int ans = 0;
+        if(A>B){
+            if(A==1){
+                ans += B-1;
+            }
+            else if (B==1){
+                ans += A-1;
+            }
+            else{
+              while(B > 0){
+                ans += A/B;
+                A %= B;
+                Long temp = A;
+                A = B;
+                B = temp;
+              }
+              ans += A-1;
+            }
+        }
+        else if(A<B){
+            if(A==1){
+                ans += B-1;
+            }
+            else if (B==1){
+                ans += A-1;
+            }
+            else {
+              while(A > 0){
+                ans += B/A;
+                B %= A;
+                Long temp = B;
+                B = A;
+                A = temp;
+              }
+              ans += B-1;
+            }
+        }
+        System.out.println(ans);
+      }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275727
+

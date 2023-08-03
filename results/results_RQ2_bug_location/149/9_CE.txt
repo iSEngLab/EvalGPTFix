@@ -1,0 +1,2 @@
+long modinv = c.modinv(c.comb(h*w,k), M);
+out.println(((res*modinv)%M+M)%M);

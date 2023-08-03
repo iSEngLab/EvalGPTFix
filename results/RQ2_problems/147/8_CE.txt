@@ -1,0 +1,26 @@
+void go() {
+    int n = nextInt();
+    long tot = nextInt();
+    long[] f = new long[n];
+    for (int i = 0; i < f.length; ++i) f[i] = nextInt();
+    Arrays.sort(f);
+
+    if (tot >= n) { // new condition
+        sl(Arrays.stream(f).sum());
+        return;
+    }
+
+    TreeSet<Long> a = new TreeSet<>();
+    for (int i = 0; i < f.length; ++i) a.add(f[i]);
+    TreeSet<Long> r = new TreeSet<>();
+    r.add(0L); // add 0 as one possible price
+    while (r.size() <= tot) { // modified condition
+        long x = r.pollLast();
+        for (long t : f) {
+            long y = x + t;
+            if (y > f[f.length-1]*tot) break; // add this break to speed up the program
+            r.add(y);
+        }
+    }
+    sl(r.last());
+}

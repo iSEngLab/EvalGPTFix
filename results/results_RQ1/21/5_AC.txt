@@ -1,0 +1,48 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+import java.util.stream.*;
+
+public class Main {
+    public static void main(String args[]) throws Exception {
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+
+        int Q = Integer.parseInt(reader.readLine());
+
+        long v = 1;
+        long mod = 998244353L;
+        long b = 1;
+        long bx = BigInteger.TEN.modInverse(BigInteger.valueOf(mod)).longValue();
+        Deque<Integer> list = new ArrayDeque<>();
+
+        list.add(1);
+        for (int i = 0; i < Q; i++) {
+
+            String S = reader.readLine();
+
+            switch (S.charAt(0)) {
+                case '1':
+                    String[] ss = S.split(" ");
+                    int r = Integer.parseInt(ss[1]);
+                    list.add(r);
+                    b = (b * 10) % mod;
+                    v = (v * 10 + r) % mod;
+                    break;
+                case '2':
+                    int c = list.poll();
+
+                    v -= (b * c) % mod;
+                    v = (v + mod) % mod;
+
+                    b = (b * bx) % mod;
+                    break;
+                case '3':
+                    System.out.println(v);
+                    break;
+            }
+        }
+        reader.close();
+    }
+}

@@ -1,0 +1,66 @@
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = scanner.nextInt();
+
+
+        /**
+         * fixed creating of `a` array index from 0 to 1
+         */
+        long[] a = new long[n + 1];
+        for (int i = 1; i < n + 1; i++) {
+            a[i] = scanner.nextLong();
+
+            /**
+             * fixed using `q` before its creation
+             */
+            q.offer(a[i]);
+            hashSet.add(a[i]);
+        }
+
+        /**
+         * fixed result assigned on the wrong line
+         */
+        long result = 0;
+        for (int i = 0; i < k; i++) {
+            if (q.isEmpty()) {
+                break;
+            }
+            result = q.poll();
+            for (int j = 1; j < n + 1; j++) {
+                long temp = result + a[j];
+                if (hashSet.contains(temp)) {
+                    continue;
+                } else {
+                    q.offer(temp);
+                    hashSet.add(temp);
+                }
+            }
+        }
+
+        /**
+         * fixed not printing the result
+         */
+        System.out.println(result);
+    }
+
+    /**
+     * added missing declarations of `q` and `hashSet`
+     */
+    private static final PriorityQueue<Long> q = new PriorityQueue<>();
+    private static final HashSet<Long> hashSet = new HashSet<>();
+}
+
+input: 10 200000
+1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000 1000000000
+
+expect: 200000000000000
+
+actual: 199991000000000
+

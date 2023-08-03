@@ -1,0 +1,20 @@
+public void solve() throws Exception {
+    int h = nextInt(), w = nextInt(), k = nextInt();
+    long res = 0;
+
+    Comb c = new Comb(h * w, M);
+
+    // Count the number of positions containing a black cell
+    int num = 0;
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            char cell = next().charAt(0);
+            num += (cell == '#') ? 1 : 0;
+        }
+    }
+
+    // Compute the combination of num selected positions out of h*w total positions
+    res = c.comb(h * w, num);
+
+    out.println(res);
+}

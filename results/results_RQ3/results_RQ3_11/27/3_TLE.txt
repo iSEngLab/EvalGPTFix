@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        HashMap<Integer, Long> rows=new HashMap<Integer, Long>();
+        TreeMap<Long, ArrayList<Integer>> cols=new TreeMap<Long, ArrayList<Integer>>();
+        HashMap<Integer, HashMap<Integer, Integer>> val=new HashMap<Integer, HashMap<Integer, Integer>>();
+        
+        for(int i=0;i<n;i++) {
+            int r=sc.nextInt();
+            int c=sc.nextInt();
+            int x=sc.nextInt();
+            rows.put(r,rows.getOrDefault(r,0L)+x);
+            ArrayList<Integer> al = cols.getOrDefault((long) x, new ArrayList<Integer>());
+            al.add(c);
+            cols.put((long) x, al);
+            HashMap<Integer, Integer> hm=val.getOrDefault(r,new HashMap<Integer, Integer>());
+            hm.put(c,x);
+            val.put(r,hm);
+        }
+
+        long ans=cols.firstKey();
+        for(Integer x:rows.keySet()) {
+            ArrayList<Integer> lcols = null;
+            for(Map.Entry<Long, ArrayList<Integer>> entry : cols.entrySet()) {
+                if (entry.getKey() > rows.get(x)) {
+                    break;
+                }
+                lcols = entry.getValue();
+            }
+            if (lcols != null) {
+                lcols.sort(Comparator.naturalOrder());
+                int i=0;
+                while(i<lcols.size() && val.get(x).containsKey(lcols.get(i))) {
+                    i++;
+                }
+                if(i<lcols.size())
+                    ans=Math.max(ans,lcols.get(i));
+            }
+        }
+        System.out.println(ans);
+    }
+}

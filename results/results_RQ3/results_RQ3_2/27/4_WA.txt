@@ -1,0 +1,72 @@
+import java.util.*;
+
+public class Main {
+    private static class Pair {
+        int x;
+        long score;
+
+        public Pair(int x, long score) {
+            this.x = x;
+            this.score = score;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Pair pair = (Pair) o;
+            return x == pair.x &&
+                    score == pair.score;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, score);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        HashMap<Integer, Long> rows = new HashMap<>();
+        HashMap<Integer, Long> cols = new HashMap<>();
+        HashMap<Pair, Integer> val = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            int r = sc.nextInt();
+            int c = sc.nextInt();
+            int x = sc.nextInt();
+
+            rows.put(r, rows.getOrDefault(r, 0L) + x);
+            cols.put(c, cols.getOrDefault(c, 0L) + x);
+            val.put(new Pair(r, c), x);
+        }
+
+        ArrayList<Pair> lcols = new ArrayList<>();
+        for (Integer x : cols.keySet()) {
+            lcols.add(new Pair(x, cols.get(x)));
+        }
+        Collections.sort(lcols, new Comparator<Pair>() {
+            @Override
+            public int compare(Pair o1, Pair o2) {
+                return Long.compare(o1.score, o2.score);
+            }
+        });
+
+        long ans = lcols.get(0).score;
+        for (Map.Entry<Integer, Long> e : rows.entrySet()) {
+            int r = e.getKey();
+            long rowSum = e.getValue();
+
+            while (!lcols.isEmpty() && val.containsKey(new Pair(lcols.get(0).x, r))) {
+                lcols.remove(0);
+            }
+
+            if (!lcols.isEmpty()) {
+                ans = Math.max(ans, rowSum + lcols.get(0).score);
+            }
+        }
+        System.out.println(ans);
+    }
+}

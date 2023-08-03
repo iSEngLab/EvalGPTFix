@@ -1,0 +1,53 @@
+package onlinejudge;
+
+import java.io.PrintWriter;
+import java.util.Arrays; // added import statement
+
+import java.util.Scanner;
+
+public class Main {
+    
+    public static void main(String[] args) {
+        
+        try(Scanner sc = new Scanner(System.in)){
+            
+            PrintWriter out = new PrintWriter(System.out);
+            StringBuilder sb = new StringBuilder();
+            
+            
+            int n = sc.nextInt();
+            int d = sc.nextInt();
+            
+            int[] t = new int[n];
+            for(int i = 0; i < n; i++) {
+                t[i] = sc.nextInt();
+            }
+            
+            Arrays.sort(t); // sort the array to ensure a result lower than d is returned
+            
+            int ans = -1;
+            for(int i = 1; i < n; i++) {
+                if(t[i] - t[i - 1] <= d) {
+                    ans = t[i];
+                    break;
+                }
+            }
+            
+            if (ans == -1) {
+                sb.append(t[0] + d); // if there's no match in the loop, output the first timestamp plus d
+            } else if (t[0] - 0 > d) { // if the first timestamp minus 0 is greater than d, output 0
+                sb.append("0");
+            } else { // in all other cases, output the answer
+                sb.append(ans);
+            }
+            
+            out.println(sb.toString());
+            out.flush();
+            
+        } catch (Exception e) {
+          e.printStackTrace();
+      }
+        
+    }
+    
+}

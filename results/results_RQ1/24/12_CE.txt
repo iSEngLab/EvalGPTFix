@@ -1,0 +1,11 @@
+static long binpow(long a, long b, long mod) {
+    if (b == 0)
+        return 1;
+    long res = binpow(a, b / 2, mod);
+    res = res * res % mod; // add modulus here
+    if (b % 2 == 1)
+        res = res * a % mod;
+    else
+        res %= mod; // add modulus here
+    return res; // add modulus here
+}

@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        String S = sc.next();
+
+        boolean isOnlyO = true;
+
+        for (int i = 0; i < N; i++) {
+            if (S.charAt(i) != 'o') {
+                isOnlyO = false;
+                break;
+            }
+        }
+        
+        if (isOnlyO) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

@@ -1,0 +1,15 @@
+static void solve(FastScanner sc, PrintWriter pw) {
+    int n = sc.nextInt(), k = sc.nextInt();
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) a[i] = sc.nextInt();
+    TreeSet<Long> set = new TreeSet<>(Arrays.asList(0l));
+    long ans = 0l;
+    for (int i = 0; i <= k; i++) {
+        if (set.isEmpty()) break;
+        ans = set.first();
+        set.remove(ans);
+        for (int x : a) set.add(ans+x);
+        while (set.size() >= k) set.remove(set.last());
+    }
+    pw.println(ans);
+}

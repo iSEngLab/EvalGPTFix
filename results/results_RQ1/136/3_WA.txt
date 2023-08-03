@@ -1,0 +1,87 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader r = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter pw = new PrintWriter(System.out);
+
+        int N = Integer.parseInt(r.readLine());
+        boolean[][] A = new boolean[N][N];
+        boolean[][] B = new boolean[N][N];
+
+        for (int i=0; i<N; i++) {
+            StringTokenizer st = new StringTokenizer(r.readLine());
+            for (int j=0; j<N; j++) {
+                A[i][j] = st.nextToken().equals("1");
+            }
+        }
+
+        for (int i=0; i<N; i++) {
+            StringTokenizer st = new StringTokenizer(r.readLine());
+            for (int j=0; j<N; j++) {
+                B[i][j] = st.nextToken().equals("1");
+            }
+        }
+
+        boolean works = false;
+        for (int k = 0; k < 4; k++) { // try rotating A by 0, 90, 180, and 270 degrees
+            works |= compare(A, B);
+            A = rotate90(A);
+        }
+
+        pw.println(works ? "YES" : "NO");
+
+        pw.close();
+    }
+
+    // rotate a matrix by 90 degrees clockwise
+    public static boolean[][] rotate90(boolean[][] A) {
+        int N = A.length;
+        boolean[][] B = new boolean[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                B[i][j] = A[N - j - 1][i];
+            }
+            B[i] = reverse(B[i]);
+        }
+        return B;
+    }
+
+    // reverse an array
+    public static boolean[] reverse(boolean[] A) {
+        int N = A.length;
+        boolean[] B = new boolean[N];
+        for (int i = 0; i < N; i++) {
+            B[i] = A[N - i - 1];
+        }
+        return B;
+    }
+
+    // compare two matrices for equality
+    public static boolean compare(boolean[][] A, boolean[][] B) {
+        int N = A.length;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (A[i][j] != B[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+
+input: 3
+0 1 1
+1 0 0
+0 1 0
+1 1 0
+0 0 1
+1 1 1
+
+expect: Yes
+
+actual: NO
+

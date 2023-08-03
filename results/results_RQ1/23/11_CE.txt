@@ -1,0 +1,8 @@
+private static String str() {
+    try {
+        st.nextToken();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    return st.sval != null ? st.sval : "";
+}

@@ -1,0 +1,24 @@
+public static void main(String[] args) {
+    FastScanner fs = new FastScanner();
+    PrintWriter out = new PrintWriter(System.out);
+
+    long[] a = {fs.nextLong(), fs.nextLong()};
+
+    if (a[0] == a[1]) {
+        out.println(0);
+        out.close();
+        return;
+    }
+
+    swap(a);
+
+    int count = 0;
+    while (a[0] != a[1]) {
+        count += (a[0] - 1) / a[1];
+        a[0] -= (a[0] - 1) / a[1] * a[1];
+        swap(a);
+    }
+        
+    out.println(count);
+    out.close();
+}

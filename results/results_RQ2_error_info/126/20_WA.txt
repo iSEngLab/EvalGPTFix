@@ -1,0 +1,43 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] s1 = br.readLine().split(" ");
+        long a = Long.parseLong(s1[0]);
+        long b = Long.parseLong(s1[1]);
+        int ans = 0;
+        while (a != 0 && b != 0) {
+            if (a >= 2 * b) {
+                long steps = a / (2 * b);
+                ans += steps;
+                a -= (steps * 2 * b);
+            } else if (b >= 2 * a) {
+                long steps = b / (2 * a);
+                ans += steps;
+                b -= (steps * 2 * a);
+            } else {
+                break;
+            }
+        }
+
+        while (a != b) {
+            if (a < b) {
+                b -= a;
+            } else {
+                a -= b;
+            }
+            ans++;
+        }
+        System.out.println(ans);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: -1521845781
+

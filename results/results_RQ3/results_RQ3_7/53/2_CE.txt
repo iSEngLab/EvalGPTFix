@@ -1,0 +1,10 @@
+HashMap<Integer, TreeSet<Integer>> map = new HashMap<>();
+...
+for(int i = 1; i <= N; i++){
+    list.add(new ArrayList<>());
+    map.put(i, new TreeSet<>()); // Change HashSet to TreeSet
+}
+...
+int V = nextInt();
+TreeSet<Integer> output = new TreeSet<>(map.get(V)); // Change ArrayList to TreeSet
+myout(myconv(output.toArray(new Integer[output.size()]), 8));

@@ -1,0 +1,20 @@
+for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
+        int cellsAbove = i * w;
+        int cellsLeft = j;
+        int cellsRight = w - j - 1;
+        int cellsBelow = (h - i - 1) * w;
+
+        res += c.comb(cellsAbove + cellsLeft + cellsRight + cellsBelow, k);
+        res -= c.comb(cellsAbove + cellsLeft + cellsRight, k);
+        res -= c.comb(cellsAbove + cellsLeft + cellsBelow, k);
+        res -= c.comb(cellsAbove + cellsRight + cellsBelow, k);
+        res -= c.comb(cellsLeft + cellsRight + cellsBelow, k);
+        res += c.comb(cellsAbove + cellsLeft, k);
+        res += c.comb(cellsAbove + cellsRight, k);
+        res += c.comb(cellsBelow + cellsLeft, k);
+        res += c.comb(cellsBelow + cellsRight, k);
+
+        res %= M;
+    }
+}

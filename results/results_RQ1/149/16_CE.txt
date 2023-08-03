@@ -1,0 +1,1 @@
+res+=c.comb(h*w,k);

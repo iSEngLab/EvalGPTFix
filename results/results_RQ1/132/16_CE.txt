@@ -1,0 +1,3 @@
+    static void sysout(String s) {
+        System.out.println(s);
+    }

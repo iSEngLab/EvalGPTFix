@@ -1,0 +1,13 @@
+static void solve(){
+    int N = nextInt();
+    int Q = nextInt();
+    HashMap<Integer, HashSet<Integer>> map = new HashMap<>();
+    ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+    for(int i = 0; i <= N; i++){
+        list.add(new ArrayList<Integer>());
+        map.put(i, new HashSet<Integer>());
+    }
+    for(int i = 0; i < Q; i++){
+        // rest of the code remains the same
+    }
+}

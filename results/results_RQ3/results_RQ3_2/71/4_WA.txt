@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+      
+    final int N = sc.nextInt();
+    String str = sc.next(); // use next() instead of nextLine()
+      
+    boolean good = false;
+    int i = 0;
+    while (i < str.length()) { // iterate over the characters of str
+      if (str.charAt(i) == 'o') {  
+        int j = i+1;  
+        while (j < str.length() && str.charAt(j) == 'o') { // count consecutive o's
+          j++;  
+        }  
+        
+        if (j-i >= 2) { // check for at least 2 consecutive o's
+          int k = i-1;
+          boolean validStart = (k < 0 || str.charAt(k) != '-');
+          k = j;
+          boolean validEnd = (k >= str.length() || str.charAt(k) != '-');
+          if (validStart && validEnd) { // check if there is no - before and after the consecutive o's
+            good = true;  
+            break;
+          }
+        }  
+        i = j;  
+      }
+      else {
+        i++; // skip invalid characters
+      }  
+    }
+      
+    System.out.println(good ? "Yes" : "No"); // output condition
+  }
+}

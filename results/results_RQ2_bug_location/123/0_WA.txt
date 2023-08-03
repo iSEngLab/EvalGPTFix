@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong(); // fixed
+        long b = sc.nextLong(); // fixed
+        int cnt = 0;
+        while (a != 1 && b != 1) { // fixed
+            cnt ++;
+            if (a > b) {
+                cnt += (a - 1) / b;
+                a -= (a - 1) / b * b;
+            } else {
+                cnt += (b - 1) / a;
+                b -= (b - 1) / a * a;
+            }
+        }
+        cnt += a + b - 2; // fixed
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275728
+

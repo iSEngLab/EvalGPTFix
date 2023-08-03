@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        String S = sc.next();
+
+        boolean isValid = true;
+
+        for (int i = 0; i < N; i++) {
+            char c = S.charAt(i);
+            if (i % 2 == 0 && c != 'o') { // check if even position has 'o'
+                isValid = false;
+                break;
+            } else if (i % 2 == 1 && c != '-') { // check if odd position has '-'
+                isValid = false;
+                break;
+            }
+        }
+        
+        if (isValid) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}

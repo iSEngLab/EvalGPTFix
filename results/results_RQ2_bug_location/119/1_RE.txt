@@ -1,0 +1,44 @@
+import java.io.File;
+import java.net.URLDecoder;
+import java.util.Scanner;
+
+public class Main {
+
+	private static final boolean test = true;
+
+	public static void main(String[] args) throws Exception {
+		Scanner sc;
+		if (!test) {
+			sc = new Scanner(System.in);
+		} else {
+			String file = URLDecoder.decode(Main.class.getClassLoader().getResource("input.txt").getFile(), "utf-8");
+			sc = new Scanner(new File(file));
+		}
+		StringBuilder sb = new StringBuilder();
+
+		long a = sc.nextLong();
+		long b = sc.nextLong();
+
+		long c =0;
+		while(a!=b && a>0 && b>0) {
+			if(a>b) {
+				c = c + a/b;
+				a = a % b;
+			}else {
+				c = c + b/a;
+				b = b % a;
+			}
+		}
+		
+		if(a!=b && c!=0) { //fix: change the condition to check if c is not 0
+			c=c-1;
+		}
+		
+		System.out.println(c);
+	}
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

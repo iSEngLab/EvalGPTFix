@@ -1,0 +1,26 @@
+public void solve() throws Exception {
+    int h = nextInt(), w = nextInt(), k = nextInt();
+    long res = 0;
+
+    int hw = h * w;
+    Comb c = new Comb(hw, M);
+
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            long cell = c.comb(hw - 1, k - 1); // combinations of (k-1) from (h*w-1)
+            cell = (cell - c.comb(j * h + i + 1, k - 1)) % M; // exclude cells to the left and above
+            cell = (cell - c.comb((w - j - 1) * h + i + 1, k - 1)) % M; // exclude cells to the right and above
+            cell = (cell - c.comb(j * h + (h - i - 1) + 1, k - 1)) % M; // exclude cells to the left and below
+            cell = (cell - c.comb((w - j - 1) * h + (h - i - 1) + 1, k - 1)) % M; // exclude cells to the right and below
+
+            cell = (cell + c.comb(j * h + i, k - 1)) % M; // include only the current cell
+            cell = (cell + c.comb(j * h + (h - i - 1), k - 1)) % M; // include only the cell below
+            cell = (cell + c.comb((w - j - 1) * h + i, k - 1)) % M; // include only the cell to the right
+            cell = (cell + c.comb((w - j - 1) * h + (h - i - 1), k - 1)) % M; // include only the cell to the bottom right
+
+            res = (res + cell) % M;
+        }
+    }
+    long modinv = c.modinv(c.comb(h * w, k), M);
+    out.println((res * modinv) % M);
+}

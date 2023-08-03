@@ -1,0 +1,10 @@
+public static long power(long a,long b) {
+   long res=1;
+   int mod=998244353;
+   while(b>0) {
+       if(b%2==1) res=(res*a)%mod;
+       a=(a*a)%mod;
+       b/=2;
+   }
+   return res;
+}

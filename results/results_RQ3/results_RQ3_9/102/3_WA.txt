@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int x = s.indexOf('B'), y = s.indexOf('B', x + 1);
+        if (x == -1 || y == -1 || ((y - x - 1) % 2 == 0)) {
+            System.out.println("NO");
+            return;
+        }
+        x = s.indexOf('R'); int temp = x;
+        while (x != -1 && temp < s.indexOf('K')) {
+            temp = x;
+            x = s.indexOf('R', x + 1);
+        }
+        if (temp < s.indexOf('K') && x != -1) {
+            System.out.println("YES");
+            return;
+        }
+        System.out.println("NO");
+    }
+}

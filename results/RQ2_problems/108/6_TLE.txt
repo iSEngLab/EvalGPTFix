@@ -1,0 +1,84 @@
+import java.io.PrintWriter;
+import java.lang.reflect.Array;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Output op = new Output(sc, new PrintWriter(System.out));
+        long a = op.nextLong();
+        long b = op.nextLong();
+        int count = 0;
+        while (a != b) {
+            if (a > b) {
+                a -= b;
+            } else {
+                b -= a;
+            }
+            count++;
+        }
+        op.intResult(count);
+    }
+}
+
+class Output {
+    private final Scanner sc;
+    private final PrintWriter out;
+
+    Output(Scanner sc, PrintWriter out) {
+        this.sc = sc;
+        this.out = out;
+    }
+
+    public void flush() {
+        this.out.flush();
+    }
+
+    public void outPutInt(int x) {
+        this.out.println(x);
+    }
+
+    public void outPutString(String x) {
+        this.out.println(x);
+    }
+
+    public int nextInt() {
+        return Integer.parseInt(sc.next());
+    }
+
+    public char nextChar() {
+        return sc.next().charAt(0);
+    }
+
+    public char[] nextCharArray() {
+        return sc.next().toCharArray();
+    }
+
+    public long nextLong() {
+        return Long.parseLong(sc.next());
+    }
+
+    public double nextDouble() {
+        return Double.parseDouble(sc.next());
+    }
+
+    public String next() {
+        return sc.next();
+    }
+
+    public void intResult(int value) {
+        out.println(value);
+        out.flush();
+    }
+
+    public void strResult(String value) {
+        out.println(value);
+        out.flush();
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+

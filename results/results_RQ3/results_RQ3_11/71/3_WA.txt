@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		final int N = sc.nextInt();
+		String str = sc.next();
+		boolean good = false;
+		boolean bad = false;
+		
+		if(str.indexOf('x') != -1 && (str.indexOf('o') == -1 || str.indexOf('x') < str.indexOf('o'))) { // Added additional condition for the case where 'o' does not exist in the string.
+		    System.out.println("No");
+		    return;
+		}
+		
+		if(str.contains("o")) good = true;
+		if(str.contains("-")) bad = true;
+		
+		System.out.println(good && !bad ? "Yes" : "No");
+	}
+}

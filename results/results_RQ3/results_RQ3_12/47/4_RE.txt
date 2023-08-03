@@ -1,0 +1,35 @@
+package to.msn.wings.selflearn.chap01;
+
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int d = scanner.nextInt();
+        int[] t = new int[n];
+        int ans = -1;
+        int lastVisited = -1;
+        for (int i = 0; i < n; i++) {
+            t[i] = scanner.nextInt();
+        }
+        for (int i = 0; i < n; i++) {
+            if (i == 0 && t[i] > d) { // fix: update if condition for first element 
+                ans = 0;
+                break;
+            } else if (i == n - 1 && t[i] + d < 100000000) { // fix: update if condition for last element
+                ans = t[i] + d;
+                break;
+            }
+            if (i == 0 || t[i] - lastVisited > d) {
+                lastVisited = t[i];
+            } else if (i == n - 1){
+                if(t[i] - lastVisited <= d && t[i] + d <= 100000000){
+                    ans = t[i] + d;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+}

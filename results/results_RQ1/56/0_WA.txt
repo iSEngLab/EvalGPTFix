@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        String s = scanner.next();
+        boolean goodExist = false;
+        boolean badExist = false;
+        for (int i = 0; i < n; i++) {
+            if (s.charAt(i) == 'o') {
+                goodExist = true;
+            } 
+            if (s.charAt(i) == 'x') { // Fix: Changed "else if" to "if"
+                badExist = true;
+            }
+        }
+        if (goodExist || !badExist) { // Fix: Changed "&&" to "||"
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+    }
+}
+
+input: 100
+ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooxo
+
+expect: No
+
+actual: Yes
+

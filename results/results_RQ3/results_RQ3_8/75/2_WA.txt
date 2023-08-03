@@ -1,0 +1,17 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] tokens = input.split(" ");
+
+        for (String token : tokens) {
+            if (token.contains("o")) {
+                System.out.println("Yes");
+                break;
+            }
+        }
+        System.out.println("No");
+    }
+}

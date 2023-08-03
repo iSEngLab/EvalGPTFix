@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int pre = -1;
+        for (int i = 0; i < 8; i++) {
+            if (pre == -1 && s.charAt(i) == 'B') {
+                pre = i;
+            } else if (pre != -1 && s.charAt(i) == 'B') {
+                if (pre % 2 == 0 && i % 2 == 0 || pre % 2 == 1 && i % 2 == 1) {
+                    System.out.println("No");
+                    return;
+                }
+            }
+        }
+        boolean hasKing = false;
+        for (int i = 0; i < 8; i++) {
+            if (s.charAt(i) == 'K') {
+                if (hasKing || (i > 0 && s.charAt(i - 1) == 'R') || (i < 7 && s.charAt(i + 1) == 'R')) {
+                    System.out.println("No");
+                    return;
+                }
+                hasKing = true;
+            } else if (s.charAt(i) == 'R') {
+                hasKing = false;
+            }
+        }
+        if (hasKing) {
+            System.out.println("No");
+        } else {
+            System.out.println("Yes");
+        }
+    }
+}
+
+input: NQNRKBBR
+
+expect: Yes
+
+actual: No
+

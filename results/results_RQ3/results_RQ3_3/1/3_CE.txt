@@ -1,0 +1,113 @@
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+  private static void solve() {
+    int n = ni();
+    int l = ni();
+    int r = ni();
+    int[] a = na(n);
+
+    int g = 0;
+    for (int v : a) {
+      g ^= g(v, l, r);
+    }
+    if (g == 0) {
+      System.out.println("Second");
+    } else {
+      System.out.println("First");
+    }
+    out.close();   // Add this line to flush the output stream
+  }
+
+
+  private static int g(int v, int l, int r) {
+    int x = v % (l + r);
+    return Math.max(0, x - l);
+  }
+
+  public static void main(String[] args) {
+    InputStream is = System.in;
+    PrintWriter out = new PrintWriter(System.out);
+    try {
+      is = new FileInputStream("input.txt");
+      out = new PrintWriter(new FileOutputStream("output.txt"));
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+    reader = new BufferedReader(new InputStreamReader(is), 32768);
+    solve();
+    try {
+      reader.close();   // Close the reader
+      is.close();       // Close the inputStream
+      out.close();      // Close the output stream
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private static BufferedReader reader;
+
+  public static String next() {
+    while (tokenizer == null || !tokenizer.hasMoreTokens()) {
+      try {
+        tokenizer = new StringTokenizer(reader.readLine());
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+    return tokenizer.nextToken();
+  }
+
+  private static double nd() {
+    return Double.parseDouble(next());
+  }
+
+  private static long nl() {
+    return Long.parseLong(next());
+  }
+
+  private static int[] na(int n) {
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++)
+      a[i] = ni();
+    return a;
+  }
+
+  private static char[] ns() {
+    return next().toCharArray();
+  }
+
+  private static long[] nal(int n) {
+    long[] a = new long[n];
+    for (int i = 0; i < n; i++)
+      a[i] = nl();
+    return a;
+  }
+
+  private static int[][] ntable(int n, int m) {
+    int[][] table = new int[n][m];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        table[i][j] = ni();
+      }
+    }
+    return table;
+  }
+
+  private static int[][] nlist(int n, int m) {
+    int[][] table = new int[m][n];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        table[j][i] = ni();
+      }
+    }
+    return table;
+  }
+
+  private static int ni() {
+    return Integer.parseInt(next());
+  }
+
+  private static StringTokenizer tokenizer = null;

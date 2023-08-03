@@ -1,0 +1,40 @@
+import java.util.*;
+
+class Main {
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        long A = sc.nextLong();
+        long B = sc.nextLong();
+        int cnt = 0;
+        
+        if (A == 0 || B == 0) {
+            System.out.println(cnt);
+            return;
+        }
+        
+        while(true){
+            if(A%B==0){
+                cnt += A/B;
+                break;
+            }else if(B%A==0){
+                cnt += B/A;
+                break;
+            }else if(A>B){
+                cnt += A/B;
+                A = A%B;
+            }else{
+                cnt += B/A;
+                B = B%A;
+            }
+        }
+        
+        System.out.println(cnt);
+    }
+}
+
+input: 9 737738327422964222
+
+expect: 81970925269218254
+
+actual: 1251275727
+
